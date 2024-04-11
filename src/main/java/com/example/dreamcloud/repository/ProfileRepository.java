@@ -4,6 +4,7 @@ import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,9 +24,13 @@ public class ProfileRepository {
     }
 
     public Profile getProfileFromUsername(String profileUsername) {
-        String query = "SELECT * FROM profile WHERE profile_username = ?;";
+        String query = "SELECT * FROM profile WHERE profile_username = ?";
         RowMapper<Profile> rowMapper = new BeanPropertyRowMapper<>(Profile.class);
-        return jdbcTemplate.queryForObject(query, rowMapper, profileUsername);
+        try {
+            return jdbcTemplate.queryForObject(query, rowMapper, profileUsername);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }
