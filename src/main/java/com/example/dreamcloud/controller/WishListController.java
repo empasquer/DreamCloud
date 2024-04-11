@@ -26,14 +26,12 @@ public class WishListController {
 /*        String profileUsername = "john_doe";
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
-
         ArrayList<Wishlist> wishlists = profile.getWishlists();
 
         model.addAttribute("profile", profile);
         model.addAttribute("wishlists", wishlists);
-        model.addAttribute("wishlist", wishlistService.getWishlistFromProfileId(profileId));
+        model.addAttribute("wishlist", wishlistService.getWishlistFromWishlistId(wishlistId));
 
-        wishlistId = profiles.get(profileId);
         model.addAttribute("wishes", wishService.getWishesFromWishlistId()); */
 
         return ("/home/wishlist");
