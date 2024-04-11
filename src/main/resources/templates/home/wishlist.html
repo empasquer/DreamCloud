@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <title th:text="${wishlist.getWishlistTitle()}"></title>-->
+    <title>Title</title>
+</head>
+<body>
+<!--<ul th:each="wishlist : ${wishlists}">
+    <li></li>
+</ul>-->
+<p th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></p>
+<ul th:each="wishlist : ${wishlists}">
+    <li th:text="${wishlist.wishlistTitle}"></li>
+</ul>
+</body>
+</html>
