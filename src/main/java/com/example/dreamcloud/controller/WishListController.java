@@ -1,6 +1,7 @@
 package com.example.dreamcloud.controller;
 
 import com.example.dreamcloud.model.Profile;
+import com.example.dreamcloud.model.Wish;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
@@ -47,7 +48,14 @@ public class WishListController {
     @GetMapping("/wishlist/{wishlistId}")
     public String wishlist(@PathVariable int wishlistId, Model model) {
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
-            model.addAttribute("wishlist", wishlist);
+        model.addAttribute("wishlist", wishlist);
+
+
+        wishlist.setWishes((ArrayList<Wish>)wishService.getWishesFromWishListId(wishlistId));
+
+        ArrayList<Wish> wishes = (ArrayList<Wish>) wishService.getWishes();
+        model.addAttribute("wishes", wishes);
+
             return "home/wishlist";
 
     }
