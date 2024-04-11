@@ -175,29 +175,57 @@ main section {
 
 /* end index page*/
 
-/*Create profile components*/
+/*Create-profile components*/
 .create-class {
     width: 80vw;
     border-radius: 15px;
     background-color: #19A7CE;
     color: #E1F0F6;
+    margin: 300px;
+    padding: 40px;
 }
 
+/* Form rows to align groups horizontally */
+.form-row {
+    display: flex;
+    justify-content: space-between; /* Distribute space between groups */
+    margin-bottom: 20px;
+}
+
+/* Form group styling */
 .form-group {
-    margin-bottom: 20px; /* Add space between form groups */
+    flex: 0 0 calc(50% - 10px); /* Each group takes half of the space with margins */
+    padding: 10px;
+    background-color: #B0DAFF; /* Light blue background */
+    border-radius: 10px;
 }
 
-.form-group.inline {
-    display: inline-block; /* Display input and label in one line */
-    margin-right: 20px; /* Add space between inline form groups */
+/* Add margin between form groups */
+.form-group + .form-group {
+    margin-left: 20px;
+}
+
+/* Label styling */
+.form-group > label {
+    margin-bottom: 5px; /* Add space between label and input */
+}
+
+.form-group.upload {
+    float: right; /* Align upload field to the right */
+    width: calc(50% - 10px); /* Adjust width for upload field */
     background-color: #E1F0F6;
-    border-right: 15px;
 }
 
-/* Clearfix to ensure proper wrapping */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+.form-group-submit-button {
+    align: center;
+    text-align: center;
+    width: 130px;
+    height: 65px;
+    background-color: #B0DAFF;
+    color: #146C94;
+    border-radius: 15px;
+    border: none;
 }
-/*end create profile*/
+
+/*end create-profile*/
+

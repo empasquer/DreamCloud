@@ -24,7 +24,7 @@ public class ProfileRepository {
     public void createProfile(String profileFirstName, String profileLastName, String profileUsername, String profilePassword, Optional<byte[]> profilePicture) {
         String query = "INSERT INTO profile(profile_firstname, profile_lastname, profile_username, profile_password, profile_picture) VALUES (?,?,?,?,?)";
 
-        //Convert the profilePicture to a byte array
+        //Convert the profilePicture to a byte array if exists
         byte[] pictureData = profilePicture.orElse(null);
 
         jdbcTemplate.update(query, profileFirstName, profileLastName, profileUsername, profilePassword, pictureData);

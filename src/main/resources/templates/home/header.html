@@ -12,7 +12,7 @@
         <a th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
       </li>
       <li class="button" th:unless="${profile != null}">
-        <a th:href="@{/create-profile}">Profile</a>
+        <a th:href="@{/create_profile}">Profile</a>
       </li>
     </ul>
   </nav>

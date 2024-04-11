@@ -42,8 +42,13 @@ public class ProfileController {
         }
     }
 
+    @GetMapping("/create_profile")
+    public String newProfile() {
+        return "home/create_profile";
+    }
 
-    @PostMapping("/create_profile")
+
+    @PostMapping("/new_profile")
     public String createProfile(@RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profileUsername, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
         //Returns null if picture isn't there
         byte[] pictureData = profilePicture.map(p -> {
@@ -55,6 +60,6 @@ public class ProfileController {
         }).orElse(null);
 
         profileService.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, Optional.ofNullable(pictureData));
-        return "redirect:home/profile/{profileUsername}";
+        return "redirect:/profile/" + profileUsername;
     }
 }
