@@ -42,7 +42,6 @@ public class ProfileController {
             //Profile not found... should maybe be error page?
             return "home/index";
         }
-        return ("home/profile");
     }
 
 
