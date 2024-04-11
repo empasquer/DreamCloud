@@ -1,8 +1,10 @@
 package com.example.dreamcloud.controller;
 
+import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
 import com.example.dreamcloud.service.ProfileService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,13 @@ public class HomeController {
     @Autowired
     WishService wishService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, HttpSession session ){
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
         return "home/index";
     }
 
@@ -33,6 +39,7 @@ public class HomeController {
         model.addAttribute("profiles", profileService.getProfiles());
         model.addAttribute("wishlists", wishlistService.getWishlists());
         model.addAttribute("wishes", wishService.getWishes());
+
 
         return "home/tests";
     }

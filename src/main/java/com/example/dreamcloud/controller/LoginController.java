@@ -25,8 +25,7 @@ public class LoginController {
     public String login(HttpServletRequest request,  @RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes){
         if (authenticationService.authenticateUser(username, password)){
             request.getSession().setAttribute("username", username);
-            System.out.println("succes");
-            return "redirect:/";
+            return "redirect:/profile/" + username;
         } else
             // If authentication fails, redirect to login page with error message
             redirectAttributes.addFlashAttribute("error", "Invalid username or password");

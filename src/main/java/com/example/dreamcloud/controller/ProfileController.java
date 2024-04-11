@@ -2,9 +2,11 @@ package com.example.dreamcloud.controller;
 
 import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wishlist;
+import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +28,13 @@ public class ProfileController {
     @Autowired
     WishlistService wishlistService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping("/profile/{profileUsername}")
-    public String profile(Model model, @PathVariable String profileUsername) {
-        profileUsername = "john_doe";
+    public String profile(Model model, @PathVariable String profileUsername, HttpSession session) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         if (profile != null) {
@@ -58,5 +64,10 @@ public class ProfileController {
 
         profileService.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, Optional.ofNullable(pictureData));
         return "redirect:/profile{profileUsername}";
+    }
+
+    @GetMapping("/create_profile")
+    public String createProfile(){
+        return "home/create_profile";
     }
 }
