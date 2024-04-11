@@ -21,7 +21,7 @@ public class WishlistRepository {
         return jdbcTemplate.query(query, rowMapper);
     }
 
-    public Wishlist getWishlistFromId(int wishlistId) {
+    public Wishlist getWishlistFromWishlistId(int wishlistId) {
         String query = "SELECT * FROM wishlist WHERE wishlistId = ?";
         RowMapper<Wishlist> rowMapper = new BeanPropertyRowMapper<>(Wishlist.class);
         return jdbcTemplate.queryForObject(query, rowMapper, wishlistId);
