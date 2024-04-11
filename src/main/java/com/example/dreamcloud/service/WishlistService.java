@@ -15,4 +15,8 @@ public class WishlistService {
     public List<Wishlist> getWishlists() {
         return wishlistRepository.getWishlists();
     }
+
+    public Wishlist getWishlistFromProfileId(int wishlistId) {
+        return wishlistRepository.getWishlistFromId(wishlistId);
+    }
 }

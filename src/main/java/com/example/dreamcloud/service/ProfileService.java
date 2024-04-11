@@ -15,4 +15,8 @@ public class ProfileService {
     public List<Profile> getProfiles() {
         return profileRespository.getProfiles();
     }
+
+    public Profile getProfileFromUsername(String profileUsername) {
+        return profileRespository.getProfileFromUsername(profileUsername);
+    }
 }
