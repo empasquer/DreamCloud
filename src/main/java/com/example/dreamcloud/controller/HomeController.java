@@ -22,7 +22,7 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String index(){
+    public String index(Model model){
         return "home/index";
     }
 
@@ -36,5 +36,7 @@ public class HomeController {
 
         return "home/tests";
     }
+
+
 
 }

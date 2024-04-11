@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></title>
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div th:insert="~{home/header :: header}" th:with="profile=${profile}"></div>
+
+<h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></h1>
+<ul th:each="wishlist : ${wishlists}">
+    <li>
+        <span  th:text="${wishlist.wishlistTitle}"></span>
+        <span  th:text="${wishlist.wishlistDescription}"></span>
+    </li>
+</ul>
+</body>
+</html>

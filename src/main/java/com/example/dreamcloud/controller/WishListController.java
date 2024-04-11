@@ -23,6 +23,10 @@ public class WishListController {
 
     @GetMapping("/wishlist{wishlistId}")
     public String wishlist(@PathVariable int wishlistId, Model model) {
+
+        /* Confusing shit */
+
+
 /*        String profileUsername = "john_doe";
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
