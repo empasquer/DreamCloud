@@ -18,8 +18,13 @@ ul {
 }
 
 main {
-/*height is all height minus height of footer*/
-    min-height: calc(100vh - 20vh);
+/*height is all height minus height of footer and header*/
+    min-height: calc(100vh - 20vh - 30vh);
+
+}
+
+h1 {
+    font-size: xx-large;
 }
 
 /* Header component */
@@ -94,3 +99,49 @@ footer ul {
     width: 50vw;
 }
 /* Footer end */
+
+/* index page */
+
+main {
+    display: flex;
+    flex-direction: column;
+/*    justify-content: center;*/
+    align-items: center;
+    padding : 3rem 0;
+
+}
+main section {
+    width: 80vw;
+    border-radius: 15px;
+    background-color: #E1F0F6;
+}
+
+.profile-info-wrapper {
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+    display: flex;
+/*    justify-content: space-evenly;*/
+    gap: 3rem;
+    align-items: center;
+}
+
+.wishlists {
+    color: #0e3e54;
+    padding: 2rem;
+}
+
+.profile-picture {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center; /* Center the image within the container */
+}
+
+.h2-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+/* end index page*/
