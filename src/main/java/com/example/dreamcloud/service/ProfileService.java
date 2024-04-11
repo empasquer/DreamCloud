@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileService {
@@ -18,5 +19,9 @@ public class ProfileService {
 
     public Profile getProfileFromUsername(String profileUsername) {
         return profileRespository.getProfileFromUsername(profileUsername);
+    }
+
+    public void createProfile(String profileFirstname, String profileLastName, String profileUsername, String profilePassword, Optional<byte[]> profilePicture) {
+        profileRespository.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, profilePicture);
     }
 }
