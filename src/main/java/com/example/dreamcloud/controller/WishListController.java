@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WishListController {
@@ -48,13 +49,14 @@ public class WishListController {
     @GetMapping("/wishlist/{wishlistId}")
     public String wishlist(@PathVariable int wishlistId, Model model) {
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+
         model.addAttribute("wishlist", wishlist);
 
 
-        wishlist.setWishes((ArrayList<Wish>)wishService.getWishesFromWishListId(wishlistId));
+        List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
+        wishlist.setWishes((ArrayList<Wish>) wishes);
 
-        ArrayList<Wish> wishes = (ArrayList<Wish>) wishService.getWishes();
-        model.addAttribute("wishes", wishes);
+        model.addAttribute("wishes", wishlist.getWishes());
 
             return "home/wishlist";
 
