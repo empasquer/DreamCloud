@@ -20,17 +20,20 @@
 
 
         </article>
-        <article class="wishlists">
+        <article class="wishlists-wrapper">
             <div class="h2-wrapper">
                 <h2 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></h2>
-                <button><i class="fas fa-plus"></i></button>
+                <button class="button small"><i class="fas fa-plus"></i></button>
 
             </div>
 
-            <ul th:each="wishlist : ${wishlists}">
-                <li>
-                    <span th:text="${wishlist.wishlistTitle}"></span>
-                    <span th:text="${wishlist.wishlistDescription}"></span>
+            <ul class="wishlists" >
+                <li class="wishlist" th:each="wishlist : ${wishlists}">
+                    <a th:href="@{/wishlist/{wishlistId}(wishlistId=${wishlist.wishlistId})}">
+                        <h3 th:text="${wishlist.wishlistTitle}"></h3>
+                        <p th:text="${wishlist.wishlistDescription}"></p>
+                    </a>
+
                 </li>
             </ul>
         </article>
