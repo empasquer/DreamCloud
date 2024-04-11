@@ -20,7 +20,6 @@ ul {
 main {
 /*height is all height minus height of footer and header*/
     min-height: calc(100vh - 20vh - 30vh);
-
 }
 
 h1 {
@@ -28,8 +27,6 @@ h1 {
 }
 
 /* Header component */
-
-
 header {
     display: flex;
     justify-content: space-between;
@@ -64,11 +61,9 @@ header a {
 .button a {
     color: #146C94;
 }
-
 /* Header end */
 
 /* Footer component */
-
 footer {
     display: flex;
     justify-content: space-between;
@@ -101,7 +96,6 @@ footer ul {
 /* Footer end */
 
 /* index page */
-
 main {
     display: flex;
     flex-direction: column;
@@ -144,4 +138,31 @@ main section {
     display: flex;
     gap: 1rem;
 }
-/* end index page*/
+/*end index page*/
+
+/*Create profile components*/
+.create-class {
+    width: 80vw;
+    border-radius: 15px;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+}
+
+.form-group {
+    margin-bottom: 20px; /* Add space between form groups */
+}
+
+.form-group.inline {
+    display: inline-block; /* Display input and label in one line */
+    margin-right: 20px; /* Add space between inline form groups */
+    background-color: #E1F0F6;
+    border-right: 15px;
+}
+
+/* Clearfix to ensure proper wrapping */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/*end create profile*/

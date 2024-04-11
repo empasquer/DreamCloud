@@ -3,7 +3,6 @@ package com.example.dreamcloud.controller;
 import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.ProfileService;
-import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -39,7 +37,7 @@ public class ProfileController {
             model.addAttribute("wishlists", wishlists);
             return "home/profile";
         } else {
-            //Profile not found... should maybe be error page?
+            //Profile not found... should maybe be error page or something else? More for searching
             return "home/index";
         }
     }
@@ -57,6 +55,6 @@ public class ProfileController {
         }).orElse(null);
 
         profileService.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, Optional.ofNullable(pictureData));
-        return "redirect:/profile{profileUsername}";
+        return "redirect:home/profile/{profileUsername}";
     }
 }
