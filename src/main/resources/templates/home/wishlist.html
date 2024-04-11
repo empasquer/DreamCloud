@@ -9,9 +9,9 @@
 <!--<ul th:each="wishlist : ${wishlists}">
     <li></li>
 </ul>-->
-<p th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></p>
-<ul th:each="wishlist : ${wishlists}">
-    <li th:text="${wishlist.wishlistTitle}"></li>
-</ul>
+<p th:text="${wishlist.wishlistTitle}"></p>
+<!--<ul th:each="wish : ${wishes}">
+    <li th:text="${wish.wishName}"></li>
+</ul>-->
 </body>
 </html>
