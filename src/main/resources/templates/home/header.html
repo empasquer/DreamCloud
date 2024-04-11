@@ -1,0 +1,19 @@
+<header>
+  <a th:href="@{/}">
+    <img id="logo" src="/assets/logo.svg">
+  </a>
+
+  <nav>
+    <ul>
+      <li><a href="https://github.com/empasquer/DreamCloud" target="_blank">See project source</a></li>
+      <li><a href="https://www.ikea.com/" target="_blank">Get inspired</a></li>
+      <!-- Conditional : if profile is not null, and if profile is null -->
+      <li class="button" th:if="${profile != null}">
+        <a th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
+      </li>
+      <li class="button" th:unless="${profile != null}">
+        <a th:href="@{/create-profile}">Profile</a>
+      </li>
+    </ul>
+  </nav>
+</header>
