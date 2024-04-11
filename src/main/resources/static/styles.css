@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Rubik;
+    font-family: Rubik, sans-serif;
 }
 
 img {
@@ -59,7 +58,10 @@ header a {
     padding: 1rem;
     border-radius: 15px;
     background-color: #B0DAFF;
+    border:none;
 }
+
+
 
 .button a {
     color: #146C94;
@@ -125,13 +127,38 @@ main section {
 /*    justify-content: space-evenly;*/
     gap: 3rem;
     align-items: center;
+
 }
 
-.wishlists {
+.wishlists-wrapper {
     color: #0e3e54;
     padding: 2rem;
 }
 
+.wishlists {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlists a {
+    color: #E1F0F6;
+    text-decoration: none;
+}
+
+.wishlists h3 {
+    padding-bottom: 1rem;
+}
+
+.wishlist {
+    background-color: #146C94;
+    padding: 2rem;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 15px;
+}
 .profile-picture {
     width: 150px; /* Adjust the width and height as needed */
     height: 150px;
@@ -143,7 +170,15 @@ main section {
 .h2-wrapper {
     display: flex;
     gap: 1rem;
+    align-items: center;
+    padding-bottom: 2rem;
 }
+
+.small {
+    padding: .5rem;
+}
+
+
 /* end index page*/
 
 

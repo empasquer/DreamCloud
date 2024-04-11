@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<!--    <title th:text="${wishlist.getWishlistTitle()}"></title>-->
-    <title>Title</title>
+    <title th:text="${wishlist.getWishlistTitle()}"></title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<!--<ul th:each="wishlist : ${wishlists}">
-    <li></li>
-</ul>-->
-<p th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></p>
-<ul th:each="wishlist : ${wishlists}">
-    <li th:text="${wishlist.wishlistTitle}"></li>
+<div th:insert="~{home/header :: header}" th:with="profile=${profile}"></div>
+<main>
+<p th:text="${wishlist.wishlistTitle}"></p>
+<ul>
+    <li th:each="wish : ${wishes}" th:text="${wish.wishName}"></li>
 </ul>
+</main>
+
+<div th:insert="~{home/footer :: footer}"></div>
 </body>
 </html>
