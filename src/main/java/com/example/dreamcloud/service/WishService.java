@@ -20,4 +20,8 @@ public class WishService {
     public List<Wish> getWishesFromWishListId(int wishlistId) {
         return wishRepository.getWishesFromWishlistId(wishlistId);
     }
+
+    public Wish getWishFromWishId(int wishId) {
+        return wishRepository.getWishFromWishId(wishId);
+    }
 }

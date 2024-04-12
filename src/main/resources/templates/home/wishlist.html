@@ -10,7 +10,7 @@
 <main>
 <p th:text="${wishlist.wishlistTitle}"></p>
 <ul>
-    <li th:each="wish : ${wishes}" th:text="${wish.wishName}"></li>
+    <li th:each="wish : ${wishes}" ><a th:text="${wish.wishName}" th:href="@{/wish/{wishId}(wishId=${wish.wishId})}"></a></li>
 </ul>
 </main>
 

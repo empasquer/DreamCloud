@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${wish.getWishName()}"></title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:insert="~{home/header :: header}"></div>
+
+<main>
+    <section>
+        <article class="wish-banner-wrapper">
+          <div>
+              <button class="button small"><i class="fas fa-arrow-left"></i></button>
+          </div>
+            <div>
+                <button class="button small"><i class="fas fa-pen"></i></button>
+                <button class="button small"><i class="fas fa-times"></i></button>
+            </div>
+        </article>
+        <article class="wish-wrapper">
+            <div class="wish">
+                <img src="/assets/wish_dummy.png" class="wish-photo">
+                <h1 class="wish-name" th:text="${wish.wishName}"></h1>
+                <p class="wish-desc" th:text="${wish.wishDescription}"></p>
+                <p class="wish-price"  th:text="${wish.wishPrice}"></p>
+
+            </div>
+        </article>
+    </section>
+
+</main>
+<div th:insert="~{home/footer :: footer}"></div>
+
+</body>
+</html>
