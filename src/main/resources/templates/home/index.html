@@ -12,27 +12,30 @@
 
 <div th:insert="~{home/header :: header}"></div>
 
-<h1>Hello Im under construction</h1>
+<main>
+    <h1>Hello Im under construction</h1>
 
-<section class="index-button-bg">
-    <div>
-        <ul class="button-list">
-            <li class="button" th:if="${profile != null}">
-                <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Log In</a>
-            </li>
-            <li class="button" th:unless="${profile != null}">
-                <a class="button-link" th:href="@{/create_profile}">Log In</a>
-            </li>
+    <section class="index-button-bg">
+        <div>
+            <ul class="button-list">
+                <li class="button" th:if="${profile != null}">
+                    <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Log In</a>
+                </li>
+                <li class="button" th:unless="${profile != null}">
+                    <a class="button-link" th:href="@{/create_profile}">Log In</a>
+                </li>
 
-            <li class="button" th:if="${profile != null}">
-                <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">New Profile</a>
-            </li>
-            <li class="button" th:unless="${profile != null}">
-                <a class="button-link" th:href="@{/create_profile}">New Profile</a>
-            </li>
-        </ul>
-    </div>
-</section>
+                <li class="button" th:if="${profile != null}">
+                    <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">New Profile</a>
+                </li>
+                <li class="button" th:unless="${profile != null}">
+                    <a class="button-link" th:href="@{/create_profile}">New Profile</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</main>
 
 
 

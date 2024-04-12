@@ -17,8 +17,8 @@ ul {
 }
 
 main {
-/*height is all height minus height of footer and header*/
-    min-height: calc(100vh - 20vh - 30vh);
+/*height is all height minus height header*/
+    min-height: calc(50vh);
 }
 
 h1 {
@@ -69,10 +69,10 @@ header a {
 footer {
     display: flex;
     justify-content: space-between;
-
     padding: 1rem;
     background-color: #146C94;
     align-items: end;
+    height: 20vh;
 }
 
 footer section {
@@ -95,6 +95,11 @@ footer ul {
 
     width: 50vw;
 }
+
+footer p {
+    color: #E1F0F6;
+}
+
 /* Footer end */
 
 /* index page */
