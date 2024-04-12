@@ -21,9 +21,14 @@ main {
     min-height: calc(50vh);
 }
 
+.button:hover {
+    background-color: #FEFF86;
+}
+
 h1 {
     font-size: xx-large;
 }
+
 
 /* Header component */
 header {
@@ -210,9 +215,24 @@ main section {
     padding: .5rem;
 }
 
+.wishlist-forms-wrapper {
+    display: flex;
+    flex-direction: row;
+}
 
 /* end index page*/
+.wishlist-banner-wrapper {
+    display : flex;
+    justify-content: space-between;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+}
 
+#confirmDeleteButton, #confirmDeleteMessage {
+    display: none;
+}
 /* Login*/
 .login-form {
     display: flex;
@@ -483,7 +503,7 @@ textarea.description {
     padding :2rem;
     display: flex;
     gap: 3rem;
-    align-items: center;
+    justify-content: space-between;
 
 }
  /*wishes end*/
