@@ -28,7 +28,7 @@ public class WishController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/delete-wish/{wishId}")
-    public String deleteWish(@PathVariable int wishId) {
+    public String deleteWish(@PathVariable int wishId, HttpSession session) {
 
         // Retrieve wish information
         Wish wish = wishService.getWishFromWishId(wishId);
@@ -37,11 +37,13 @@ public class WishController {
         wishService.deleteWishFromWishId(wishId);
         System.out.println("Wish is now deleted");
 
-        return "redirect:/wishlist/" + wishlistId;
+        String profileUsername = String.valueOf(session.getAttribute("username"));
+        return "redirect:/profile/" + profileUsername + "/wishlist/" + wishlistId;
     }
 
-    @GetMapping("/wish/{wishId}")
-    public String wish(@PathVariable int wishId, Model model, HttpSession session){
+
+    @GetMapping("/profile/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}")
+    public String wish(@PathVariable String profileUsername, @PathVariable int wishlistId, @PathVariable int wishId, Model model, HttpSession session){
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
 
@@ -58,7 +60,7 @@ public class WishController {
 
 
 
-        int wishlistId = wish.getWishlistId();
+        //int wishlistId = wish.getWishlistId();
 
         if (wish != null) {
             // Check if the wish belongs to any of the user's wishlists

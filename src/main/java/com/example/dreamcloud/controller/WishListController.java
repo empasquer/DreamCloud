@@ -33,8 +33,8 @@ public class WishListController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/wishlist/{wishlistId}")
-    public String wishlist(@PathVariable int wishlistId, Model model, HttpSession session) {
+    @GetMapping("/profile/{profileUsername}/wishlist/{wishlistId}")
+    public String wishlist(@PathVariable String profileUsername, @PathVariable int wishlistId, Model model, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
 

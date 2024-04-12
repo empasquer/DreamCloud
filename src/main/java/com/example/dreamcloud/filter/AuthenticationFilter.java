@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Arrays;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
@@ -42,6 +44,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
     }
 
+    /* doesn't work if the url is longer
     // Basically gets the username from the URL
     private String getUsernameFromProfileRequest(HttpServletRequest request) {
         // retrieve the URL
@@ -55,4 +58,25 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
+     */
+    private String getUsernameFromProfileRequest(HttpServletRequest request) {
+        // Get the request URL
+        String url = request.getRequestURL().toString();
+
+        // Get an array of all the individually segments of the path:
+        String[] segments = url.split("/");
+
+        // Find the index of the "profile" segment
+        int profileIndex = Arrays.asList(segments).indexOf("profile");
+
+        // We need the username that usually comes after profile/:
+        // Boundaries: Check that profileIndex is not negative and that the profile/ index is not the last index:
+        if (profileIndex != -1 && profileIndex < segments.length - 1) {
+            // Return the segment next to "profile"
+            return segments[profileIndex + 1];
+        }else return null;
+        //no handling if it returns null. Betting on the URL being good
+    }
+
 }
