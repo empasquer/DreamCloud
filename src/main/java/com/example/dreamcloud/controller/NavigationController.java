@@ -15,7 +15,8 @@ public class NavigationController {
     private AuthenticationService authenticationService;
 
     @GetMapping("/header")
-    public String renderNavbar(Model model, HttpSession session, Profile profile) {
+    public String renderNavbar(Model model, HttpSession session) {
+        Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
