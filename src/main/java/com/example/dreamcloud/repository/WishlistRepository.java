@@ -34,4 +34,8 @@ public class WishlistRepository {
         return jdbcTemplate.query(query, rowMapper, profileUsername);
     }
 
+    public void createWishlist(String title, String description, String profileUsername) {
+        String query = "INSERT INTO wishlist(wishlist_title, wishlist_description, profile_username) VALUES (?,?,?)";
+        jdbcTemplate.update(query, title, description, profileUsername);
+    }
 }
