@@ -25,6 +25,11 @@ h1 {
     font-size: xx-large;
 }
 
+.button:hover {
+    background-color: #FEFF86;
+}
+
+
 /* Header component */
 header {
     display: flex;

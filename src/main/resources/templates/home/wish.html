@@ -12,9 +12,10 @@
 <main>
     <section>
         <article class="wish-banner-wrapper">
-          <div>
-              <button class="button small"><i class="fas fa-arrow-left"></i></button>
-          </div>
+            <div>
+                <a th:href="@{'/wishlist/' + ${wish.getWishlistId()}}" class="button small"><i class="fas fa-arrow-left"></i></a>
+            </div>
+
             <div>
                 <button class="button small"><i class="fas fa-pen"></i></button>
                 <button class="button small"><i class="fas fa-times"></i></button>
