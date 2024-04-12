@@ -2,6 +2,7 @@ package com.example.dreamcloud.repository;
 
 import com.example.dreamcloud.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,16 +22,24 @@ public class ProfileRepository {
         return jdbcTemplate.query(query, rowMapper);
     }
 
-    public void createProfile(String profileFirstName, String profileLastName, String profileUsername, String profilePassword, Optional<byte[]> profilePicture) {
-        String query = "INSERT INTO profile(profile_firstname, profile_lastname, profile_username, profile_password, profile_picture) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(query, profileFirstName, profileLastName, profileUsername, profilePassword, profilePicture);
+    public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
+
+        //Convert the profilePicture to a byte array if exists
+        byte[] pictureData = profilePicture.orElse(null);
+
+        jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
     }
 
 
     public Profile getProfileFromUsername(String profileUsername) {
-        String query = "SELECT * FROM profile WHERE profile_username = ?;";
+        String query = "SELECT * FROM profile WHERE profile_username = ?";
         RowMapper<Profile> rowMapper = new BeanPropertyRowMapper<>(Profile.class);
-        return jdbcTemplate.queryForObject(query, rowMapper, profileUsername);
+        try {
+            return jdbcTemplate.queryForObject(query, rowMapper, profileUsername);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

@@ -57,4 +57,6 @@ INSERT INTO wish (wish_name, wish_description, wish_price, wishlist_id) VALUES
                                                                             ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, 4),
                                                                             ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
 
+ALTER TABLE profile MODIFY COLUMN profile_picture LONGBLOB;
+
 select * from wishlist where profile_username = 'john_doe';

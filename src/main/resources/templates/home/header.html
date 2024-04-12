@@ -8,12 +8,22 @@
       <li><a href="https://github.com/empasquer/DreamCloud" target="_blank">See project source</a></li>
       <li><a href="https://www.ikea.com/" target="_blank">Get inspired</a></li>
       <!-- Conditional : if profile is not null, and if profile is null -->
-      <li class="button" th:if="${profile != null}">
+      <li class="button" th:if="${loggedIn}">
         <a th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
       </li>
-      <li class="button" th:unless="${profile != null}">
-        <a th:href="@{/create-profile}">Profile</a>
+      <li class="button" th:unless="${profile}">
+        <a th:href="@{/create_profile}">Profile</a>
       </li>
+      <!-- Login/Logout button -->
+      <li class="button" >
+        <span th:if="${loggedIn}" action="/logout" method="post">
+        <a th:href="@{/logout}">Logout</a>
+        </span>
+        <span th:unless="${loggedIn}" action="/login" method="get">
+        <a th:href="@{/login}">Login</a>
+        </span>
+      </li>
+
     </ul>
   </nav>
 </header>

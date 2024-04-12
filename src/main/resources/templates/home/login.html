@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body>
+<div th:insert="~{home/header :: header}"></div>
+
+<main>
+<section class="login-form">
+    <h1>Login</h1>
+
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button class ="button" type="submit">Login</button>
+        </div>
+    </form>
+
+    <!--if login fails:  -->
+    <div th:if="${error}">
+        <p > Invalid username or password</p>
+    </div>
+
+</section>
+</main>
+<div th:insert="~{home/footer :: footer}"></div>
+</body>
+</html>
