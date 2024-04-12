@@ -4,7 +4,6 @@ import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
-import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -45,14 +43,19 @@ public class ProfileController {
             model.addAttribute("wishlists", wishlists);
             return "home/profile";
         } else {
-            //Profile not found... should maybe be error page?
+            //Profile not found... should maybe be error page or something else? More for searching
             return "home/index";
         }
     }
 
+    @GetMapping("/create_profile")
+    public String newProfile() {
+        return "home/create_profile";
+    }
 
-    @PostMapping("/create_profile")
-    public String createProfile(@RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profileUsername, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
+
+    @PostMapping("/new_profile")
+    public String createProfile(@RequestParam String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
         //Returns null if picture isn't there
         byte[] pictureData = profilePicture.map(p -> {
             try {
@@ -62,12 +65,9 @@ public class ProfileController {
             }
         }).orElse(null);
 
-        profileService.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, Optional.ofNullable(pictureData));
-        return "redirect:/profile{profileUsername}";
+        profileService.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, Optional.ofNullable(pictureData));
+        return "redirect:/profile/" + profileUsername;
     }
 
-    @GetMapping("/create_profile")
-    public String createProfile(){
-        return "home/create_profile";
-    }
+
 }

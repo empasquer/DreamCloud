@@ -21,7 +21,7 @@ public class ProfileService {
         return profileRespository.getProfileFromUsername(profileUsername);
     }
 
-    public void createProfile(String profileFirstname, String profileLastName, String profileUsername, String profilePassword, Optional<byte[]> profilePicture) {
-        profileRespository.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, profilePicture);
+    public void createProfile(String profileUsername, String profileFirstname, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        profileRespository.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, profilePicture);
     }
 }
