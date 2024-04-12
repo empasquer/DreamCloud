@@ -28,4 +28,8 @@ public class WishlistService {
     public void createWishlist(String title, String description, String profileUsername) {
          wishlistRepository.createWishlist( title,  description,  profileUsername);
     }
+
+    public void deleteWishlist(int wishlistId) {
+         wishlistRepository.deleteWishlist(wishlistId);
+    }
 }

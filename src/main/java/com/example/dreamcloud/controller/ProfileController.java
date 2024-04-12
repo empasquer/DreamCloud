@@ -50,7 +50,11 @@ public class ProfileController {
     }
 
     @GetMapping("/create_profile")
-    public String newProfile() {
+    public String newProfile(Model model, HttpSession session) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
         return "home/create_profile";
     }
 

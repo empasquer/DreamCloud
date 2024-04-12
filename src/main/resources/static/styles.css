@@ -530,9 +530,6 @@ textarea.description {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-    justify-content: center;
-    align-items: center;
-
 }
 
 .wishes a {
@@ -551,8 +548,14 @@ textarea.description {
     height: 20vw;
     border-radius: 15px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.wish h3 {
+    margin-bottom: 1rem;
+}
+
 .wishlist-info-wrapper {
     background-color: #19A7CE;
     color: #E1F0F6;

@@ -13,11 +13,11 @@ public class AuthenticationService {
     private ProfileRepository profileRepository;
 
     @Autowired
-    private HttpSession session; // Inject HttpSession
+    private HttpSession session;
 
+    // basically just checks if the info matches the database
     public boolean authenticateUser(String username, String password) {
         Profile profile = profileRepository.getProfileFromUsername(username);
-        System.out.println("profile: " + profile);
         if (profile != null) {
             if (password.equals(profile.getProfilePassword())) {
                 session.setAttribute("loggedIn", true); // Set "loggedIn" attribute in session
@@ -32,8 +32,16 @@ public class AuthenticationService {
 
 
     public boolean isUserLoggedIn(HttpSession session) {
+        // returns true if session attribute loggedIn is not null and loggedIn == true.
+        // Combinations: loggedIn is not null and true - returns true. User have logged in
+        //               loggedIn is not null and false - returns false. User have logged out
+        //               loggedIn is null - returns false. User have not logged in
+        // We cast loggedIn as boolean because session can return attributes as Objects.
+
         return session.getAttribute("loggedIn") != null && (boolean) session.getAttribute("loggedIn");
     }
+
+    //Gets profile from session. Username is set in login-controller
     public Profile getLoggedInUserProfile() {
         String username = (String) session.getAttribute("username");
         if (username != null) {
