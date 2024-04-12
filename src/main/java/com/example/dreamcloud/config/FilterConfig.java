@@ -14,7 +14,7 @@ public class FilterConfig {
 
         registrationBean.setFilter(new AuthenticationFilter());
         registrationBean.addUrlPatterns("/profile/*"); // Apply the filter only to profile-related endpoints
-        registrationBean.setOrder(1); // Set the order of the filter - wow
+        registrationBean.setOrder(1); // Set the order of the filter - wow this is beautiful
 
         return registrationBean;
     }
