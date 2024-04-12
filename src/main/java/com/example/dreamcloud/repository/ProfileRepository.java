@@ -21,13 +21,13 @@ public class ProfileRepository {
         return jdbcTemplate.query(query, rowMapper);
     }
 
-    public void createProfile(String profileFirstName, String profileLastName, String profileUsername, String profilePassword, Optional<byte[]> profilePicture) {
-        String query = "INSERT INTO profile(profile_firstname, profile_lastname, profile_username, profile_password, profile_picture) VALUES (?,?,?,?,?)";
+    public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
 
         //Convert the profilePicture to a byte array if exists
         byte[] pictureData = profilePicture.orElse(null);
 
-        jdbcTemplate.update(query, profileFirstName, profileLastName, profileUsername, profilePassword, pictureData);
+        jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
     }
 
 

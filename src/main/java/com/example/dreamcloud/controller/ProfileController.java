@@ -26,7 +26,6 @@ public class ProfileController {
 
     @GetMapping("/profile/{profileUsername}")
     public String profile(Model model, @PathVariable String profileUsername) {
-        profileUsername = "john_doe";
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         if (profile != null) {
@@ -49,7 +48,7 @@ public class ProfileController {
 
 
     @PostMapping("/new_profile")
-    public String createProfile(@RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profileUsername, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
+    public String createProfile(@RequestParam String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
         //Returns null if picture isn't there
         byte[] pictureData = profilePicture.map(p -> {
             try {
@@ -59,7 +58,7 @@ public class ProfileController {
             }
         }).orElse(null);
 
-        profileService.createProfile(profileFirstname, profileLastName, profileUsername, profilePassword, Optional.ofNullable(pictureData));
+        profileService.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, Optional.ofNullable(pictureData));
         return "redirect:/profile/" + profileUsername;
     }
 }

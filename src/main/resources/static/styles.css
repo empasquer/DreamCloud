@@ -56,13 +56,13 @@ header a {
     border-radius: 15px;
     background-color: #B0DAFF;
     border:none;
+    cursor: pointer;
 }
-
-
 
 .button a {
     color: #146C94;
 }
+
 /* Header end */
 
 /* Footer component */
@@ -104,12 +104,45 @@ main {
 /*    justify-content: center;*/
     align-items: center;
     padding : 3rem 0;
-
 }
+
+.index-button-bg {
+    width: 60vw;
+    border-radius: 15px;
+    background-color: #19A7CE;
+    margin: 80px 100px;
+    padding: 40px;
+}
+
 main section {
     width: 80vw;
     border-radius: 15px;
     background-color: #E1F0F6;
+}
+
+.button-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.button {
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin between buttons */
+}
+
+.button-link {
+    padding: 10px 20px; /* Adjust padding */
+    border-radius: 15px;
+    background-color: #B0DAFF;
+    border: none;
+    text-decoration: none;
+    color: #146C94;
+    font-weight: bold; /* Optionally make the font bold */
+}
+
+.button-link:hover {
+    background-color: #8BC9FF; /* Change background color on hover */
 }
 
 .profile-info-wrapper {
@@ -176,28 +209,52 @@ main section {
 /* end index page*/
 
 /*Create-profile components*/
-.create-class {
-    width: 80vw;
+.create-profile {
+    width: 60vw;
     border-radius: 15px;
     background-color: #19A7CE;
-    color: #E1F0F6;
-    margin: 300px;
+    margin: 80px 100px;
     padding: 40px;
 }
+
+.profile-heading {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    color: white;
+    font-size: medium;
+}
+
+input {
+    background-color: #E1F0F6;
+    border-radius: 3px;
+    border-color: #E1F0F6;
+    height: 50px;
+    width: 290px;
+}
+
+input.picture {
+    background-color: #19A7CE;
+}
+
 
 /* Form rows to align groups horizontally */
 .form-row {
     display: flex;
     justify-content: space-between; /* Distribute space between groups */
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    align-items: center;
 }
 
 /* Form group styling */
 .form-group {
     flex: 0 0 calc(50% - 10px); /* Each group takes half of the space with margins */
     padding: 10px;
-    background-color: #B0DAFF; /* Light blue background */
     border-radius: 10px;
+    align-items: center;
 }
 
 /* Add margin between form groups */
@@ -210,22 +267,32 @@ main section {
     margin-bottom: 5px; /* Add space between label and input */
 }
 
+
 .form-group.upload {
-    float: right; /* Align upload field to the right */
+    float: left; /* Align upload field to the right */
     width: calc(50% - 10px); /* Adjust width for upload field */
-    background-color: #E1F0F6;
+    color: white;
+    background-color: #19A7CE;
 }
 
-.form-group-submit-button {
-    align: center;
+.create-profile-button {
+    display: flex; /* Add display flex for centering */
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 20px;
+}
+
+.submit-button {
     text-align: center;
-    width: 130px;
-    height: 65px;
+    text-decoration: none;
+    color: #19A7CE;
+    font-size: medium;
+    font-family: Rubik, sans-serif;
+    width: 120px;
+    height: 50px;
     background-color: #B0DAFF;
-    color: #146C94;
     border-radius: 15px;
     border: none;
+    cursor: pointer;
 }
-
 /*end create-profile*/
 

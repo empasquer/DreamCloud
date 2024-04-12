@@ -9,8 +9,44 @@
     <!-- slut -->
 </head>
 <body>
-<div th:insert="~{home/header :: header}" th:with="profile=${profile}"></div>
+<div>
+<header>
+    <a th:href="@{/}">
+        <img id="logo" src="/assets/logo.svg">
+    </a>
+
+    <nav>
+        <ul>
+            <li><a href="https://github.com/empasquer/DreamCloud" target="_blank">See project source</a></li>
+            <li><a href="https://www.ikea.com/" target="_blank">Get inspired</a></li>
+        </ul>
+    </nav>
+</header>
+</div>
 <h1>Hello Im under construction</h1>
+
+<section class="index-button-bg">
+    <div>
+        <ul class="button-list">
+            <li class="button" th:if="${profile != null}">
+                <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Log In</a>
+            </li>
+            <li class="button" th:unless="${profile != null}">
+                <a class="button-link" th:href="@{/create_profile}">Log In</a>
+            </li>
+
+            <li class="button" th:if="${profile != null}">
+                <a class="button-link" th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">New Profile</a>
+            </li>
+            <li class="button" th:unless="${profile != null}">
+                <a class="button-link" th:href="@{/create_profile}">New Profile</a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
 <div th:insert="~{home/footer :: footer}"></div>
 
 </body>
