@@ -42,9 +42,7 @@ public class WishListController {
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
-
         model.addAttribute("wishlist", wishlist);
 
 
