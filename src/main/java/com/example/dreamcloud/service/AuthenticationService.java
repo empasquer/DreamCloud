@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
     @Autowired
     private ProfileRepository profileRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private HttpSession session; // Inject HttpSession
@@ -21,7 +19,7 @@ public class AuthenticationService {
         Profile profile = profileRepository.getProfileFromUsername(username);
         System.out.println("profile: " + profile);
         if (profile != null) {
-            if (passwordEncoder.matches(password, profile.getProfilePassword())) {
+            if (password.equals(profile.getProfilePassword())) {
                 session.setAttribute("loggedIn", true); // Set "loggedIn" attribute in session
                 return true; // Authentication successful
             } else {
