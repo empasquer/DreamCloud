@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${wish.getWishName()}"></title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:insert="~{home/header :: header}"></div>
+
+<main>
+    <section>
+        <article class="wish-banner-wrapper">
+            <div>
+                <a th:href="@{'/wishlist/' + ${wish.getWishlistId()}}" class="button small"><i
+                        class="fas fa-arrow-left"></i></a>
+            </div>
+
+            <div class="wish-forms-wrapper">
+                <form  method="post">
+                    <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
+                </form>
+
+                <form th:action="@{'/delete-wish/' + ${wish.getWishId()}}" method="post">
+                    <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
+                    <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
+                    <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
+                </form>
+
+            </div>
+        </article>
+        <article class="wish-wrapper">
+            <div class="wish">
+                <img src="/assets/wish_dummy.png" class="wish-photo">
+                <h1 class="wish-name" th:text="${wish.wishName}"></h1>
+                <p class="wish-desc" th:text="${wish.wishDescription}"></p>
+                <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
+
+            </div>
+        </article>
+    </section>
+
+</main>
+<div th:insert="~{home/footer :: footer}"></div>
+
+<script>
+    function showDeleteConfirmation() {
+        let confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        let confirmDeleteMessage = document.getElementById("confirmDeleteMessage");
+        let actualDeleteButton = document.getElementById("actualDeleteButton");
+
+        if (confirmDeleteButton.style.display === "none") {
+            confirmDeleteButton.style.display = "inline-block";
+            confirmDeleteMessage.style.display = "inline-block";
+            actualDeleteButton.style.display = "none";
+        } else {
+            confirmDeleteButton.style.display = "none";
+            confirmDeleteMessage.style.display = "none";
+            actualDeleteButton.style.display = "inline-block";
+        }
+    }
+</script>
+
+</body>
+</html>

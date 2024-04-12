@@ -25,4 +25,17 @@ public class WishRepository {
         RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
         return jdbcTemplate.query(query, rowMapper, wishlistId);
     }
+
+    public Wish getWishFromWishId(int wishId) {
+        String query = "SELECT * FROM wish WHERE wish_id = ?;";
+        RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
+        return jdbcTemplate.queryForObject(query, rowMapper, wishId);
+    }
+
+    public void deleteWishFromWishId(int wishId) {
+        String query = "DELETE FROM wish WHERE wish_id = ?;";
+        jdbcTemplate.update(query, wishId);
+    }
+
+
 }

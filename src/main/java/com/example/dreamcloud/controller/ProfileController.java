@@ -33,6 +33,7 @@ public class ProfileController {
     public String profile(Model model, @PathVariable String profileUsername, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
+
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         if (profile != null) {

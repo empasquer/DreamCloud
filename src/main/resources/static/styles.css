@@ -230,9 +230,66 @@ main section {
     padding :2rem;
 }
 
+
+
+/* wish page */
+
+.wish-banner-wrapper {
+    display : flex;
+    justify-content: space-between;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+}
+
+.wish-wrapper {
+    color: #0e3e54;
+    padding: 2rem;
+}
+
+
+.wish {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 3fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 2rem;
+}
+
+.wish-photo {
+    grid-area: 1 / 1 / 4 / 2;
+    width: 300px; /* Adjust the width and height as needed */
+    height: 300px;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center; /* Center the image within the container */
+}
+.wish-name { grid-area: 1 / 2 / 2 / 3; }
+.wish-desc {
+    grid-area: 2 / 2 / 3 / 3;
+    background-color: #146C94;
+    border-radius: 15px;
+    color: #E1F0F6;
+    padding: 2rem;
+}
+.wish-price {
+    grid-area: 3 / 2 / 4 / 3;
+    font-size: x-large;
+}
+
+.wish-forms-wrapper {
+    display: flex;
+}
+
+
 #confirmDeleteButton, #confirmDeleteMessage {
     display: none;
 }
+
+/* end wish page */
+
+
 /* Login*/
 .login-form {
     display: flex;
