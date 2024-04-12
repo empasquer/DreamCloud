@@ -52,4 +52,5 @@ public class Wishlist {
     public void setWishes(ArrayList<Wish> wishes) {
         this.wishes = wishes;
     }
+
 }

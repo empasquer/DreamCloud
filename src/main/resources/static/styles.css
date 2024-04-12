@@ -264,6 +264,10 @@ main section {
     font-size: x-large;
 }
 
+.wish-forms-wrapper {
+    display: flex;
+}
+
 /* end wish page */
 
 

@@ -24,4 +24,8 @@ public class WishService {
     public Wish getWishFromWishId(int wishId) {
         return wishRepository.getWishFromWishId(wishId);
     }
+
+    public void deleteWishFromWishId(int wishId) {
+        wishRepository.deleteWishFromWishId(wishId);
+    }
 }

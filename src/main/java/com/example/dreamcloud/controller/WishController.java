@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,19 @@ public class WishController {
     WishService wishService;
     @Autowired
     private AuthenticationService authenticationService;
+
+    @PostMapping("/delete-wish/{wishId}")
+    public String deleteWish(@PathVariable int wishId) {
+
+        // Retrieve wish information
+        Wish wish = wishService.getWishFromWishId(wishId);
+        int wishlistId = wish.getWishlistId();
+
+        wishService.deleteWishFromWishId(wishId);
+        System.out.println("Wish is now deleted");
+
+        return "redirect:/wishlist/" + wishlistId;
+    }
 
     @GetMapping("/wish/{wishId}")
     public String wish(@PathVariable int wishId, Model model, HttpSession session){
@@ -43,7 +58,7 @@ public class WishController {
 
 
 
-        int wishlistId = 0;
+        int wishlistId = wish.getWishlistId();
 
         if (wish != null) {
             // Check if the wish belongs to any of the user's wishlists

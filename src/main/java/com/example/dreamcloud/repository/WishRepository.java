@@ -31,4 +31,11 @@ public class WishRepository {
         RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
         return jdbcTemplate.queryForObject(query, rowMapper, wishId);
     }
+
+    public void deleteWishFromWishId(int wishId) {
+        String query = "DELETE FROM wish WHERE wish_id = ?;";
+        jdbcTemplate.update(query, wishId);
+    }
+
+
 }
