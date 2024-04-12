@@ -17,8 +17,13 @@
             </div>
 
             <div>
-                <button class="button small"><i class="fas fa-pen"></i></button>
-                <button class="button small"><i class="fas fa-times"></i></button>
+
+                    <button class="button small"><i class="fas fa-pen"></i></button>
+
+                <form th:action="@{'/delete-wish/' + ${wish.getWishId()}}" method="post">
+                <button type="submit" class="button small"><i class="fas fa-trash"></i></button>
+                </form>
+
             </div>
         </article>
         <article class="wish-wrapper">
