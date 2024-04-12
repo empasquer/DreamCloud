@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></title>
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:insert="~{home/header :: header}" th:with="profile=${profile}"></div>
+<main>
+    <section>
+        <article class="profile-info-wrapper">
+            <img class="profile-picture" src="/assets/default_user.jpg" alt="designed by freepik">
+            <div class="profile-info">
+                <h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></h1>
+                <p th:text="'@' + ${profile.profileUsername}"></p>
+            </div>
+
+
+        </article>
+        <article class="wishlists-wrapper">
+            <div class="h2-wrapper">
+                <h2 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></h2>
+                <button class="button small"><i class="fas fa-plus"></i></button>
+
+            </div>
+
+            <ul class="wishlists" >
+                <li class="wishlist" th:each="wishlist : ${wishlists}">
+                    <a th:href="@{/wishlist/{wishlistId}(wishlistId=${wishlist.wishlistId})}">
+                        <h3 th:text="${wishlist.wishlistTitle}"></h3>
+                        <p th:text="${wishlist.wishlistDescription}"></p>
+                    </a>
+
+                </li>
+            </ul>
+        </article>
+
+
+    </section>
+
+</main>
+
+<div th:insert="~{home/footer :: footer}"></div>
+</body>
+</html>

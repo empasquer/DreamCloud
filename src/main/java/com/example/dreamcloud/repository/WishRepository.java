@@ -19,4 +19,10 @@ public class WishRepository {
         RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
         return jdbcTemplate.query(query, rowMapper);
     }
+
+    public List<Wish> getWishesFromWishlistId(int wishlistId) {
+        String query = "SELECT * FROM wish WHERE wishlist_id = ?;";
+        RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
+        return jdbcTemplate.query(query, rowMapper, wishlistId);
+    }
 }

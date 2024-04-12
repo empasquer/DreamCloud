@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,8 +23,15 @@ public class WishlistRepository {
     }
 
     public Wishlist getWishlistFromWishlistId(int wishlistId) {
-        String query = "SELECT * FROM wishlist WHERE wishlistId = ?";
+        String query = "SELECT * FROM wishlist WHERE wishlist_id = ?";
         RowMapper<Wishlist> rowMapper = new BeanPropertyRowMapper<>(Wishlist.class);
         return jdbcTemplate.queryForObject(query, rowMapper, wishlistId);
     }
+
+    public List<Wishlist> geWishlistsFromProfileUsername(String profileUsername) {
+        String query = "SELECT * FROM wishlist WHERE profile_username = ?;";
+        RowMapper<Wishlist> rowMapper = new BeanPropertyRowMapper<>(Wishlist.class);
+        return jdbcTemplate.query(query, rowMapper, profileUsername);
+    }
+
 }
