@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class WishListController {
@@ -26,27 +29,6 @@ public class WishListController {
     WishService wishService;
     @Autowired
     ProfileService profileService;
-
-/*    @GetMapping("/wishlist{wishlistId}")
-    public String wishlist(@PathVariable int wishlistId, Model model) {
-
-
-        *//* Confusing shit *//*
-
-
-     *//*        String profileUsername = "john_doe";
-        Profile profile = profileService.getProfileFromUsername(profileUsername);
-
-        ArrayList<Wishlist> wishlists = profile.getWishlists();
-
-        model.addAttribute("profile", profile);
-        model.addAttribute("wishlists", wishlists);
-        model.addAttribute("wishlist", wishlistService.getWishlistFromWishlistId(wishlistId));
-
-        model.addAttribute("wishes", wishService.getWishesFromWishlistId()); *//*
-
-        return ("/home/wishlist");
-    }*/
 
     @Autowired
     private AuthenticationService authenticationService;
@@ -60,9 +42,7 @@ public class WishListController {
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
-
         model.addAttribute("wishlist", wishlist);
 
 
@@ -74,4 +54,22 @@ public class WishListController {
         return "home/wishlist";
 
     }
+
+    @GetMapping("/create_wishlist")
+    public String createWishlist(Model model, HttpSession session) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
+        // Retrieve profile information
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+        return "home/create_wishlist";
+    }
+
+    @PostMapping("/create_wishlist")
+    public String createWishlist(@RequestParam String title, @RequestParam String description, HttpSession session){
+        String profileUsername = String.valueOf(session.getAttribute("username"));
+        wishlistService.createWishlist(title,description, profileUsername);
+        return "redirect:/profile/" + profileUsername;
+}
+
 }

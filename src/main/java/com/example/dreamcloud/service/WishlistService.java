@@ -25,4 +25,7 @@ public class WishlistService {
         return wishlistRepository.geWishlistsFromProfileUsername(profileUsername);
     }
 
+    public void createWishlist(String title, String description, String profileUsername) {
+         wishlistRepository.createWishlist( title,  description,  profileUsername);
+    }
 }
