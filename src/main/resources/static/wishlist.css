@@ -45,6 +45,13 @@
     justify-content: space-between;
 
 }
+.wishlist-forms-wrapper {
+    display: flex;
+}
+.wishlist-forms-wrapper > * {
+    margin: 5px;
+}
+
 
 .h2-wrapper {
     display: flex;
