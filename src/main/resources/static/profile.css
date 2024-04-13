@@ -1,0 +1,56 @@
+
+.profile-info-wrapper {
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+    display: flex;
+    /*    justify-content: space-evenly;*/
+    gap: 3rem;
+    align-items: center;
+
+}
+
+.wishlists-wrapper {
+    color: #0e3e54;
+    padding: 2rem;
+}
+
+.wishlists {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlists a {
+    color: #E1F0F6;
+    text-decoration: none;
+}
+
+.wishlists h3 {
+    padding-bottom: 1rem;
+}
+
+.wishlist {
+    background-color: #146C94;
+    padding: 2rem;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 15px;
+}
+.profile-picture {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center; /* Center the image within the container */
+}
+
+.h2-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 2rem;
+}
