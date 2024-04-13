@@ -1,5 +1,5 @@
 package com.example.dreamcloud.config;
-
+/*
 import com.example.dreamcloud.filter.AuthenticationFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,3 +19,4 @@ public class FilterConfig {
         return registrationBean;
     }
 }
+*/

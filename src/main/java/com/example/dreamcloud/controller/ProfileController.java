@@ -5,6 +5,7 @@ import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -29,25 +32,37 @@ public class ProfileController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/profile/{profileUsername}")
-    public String profile(Model model, @PathVariable String profileUsername, HttpSession session) {
+    @GetMapping("/{profileUsername}/profile")
+    public String profile(Model model, @PathVariable String profileUsername, HttpSession session, HttpServletRequest request) {
+        // Check if user is logged in
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        if (!loggedIn) {
+            return "redirect:/login";
+        }
+
+        // Check if the user is authorized
+        boolean isAuthorized = authenticationService.isAuthorized(request);
         model.addAttribute("loggedIn", loggedIn);
+        model.addAttribute("isAuthorized", isAuthorized);
 
+        // Get the profile
         Profile profile = profileService.getProfileFromUsername(profileUsername);
-
-        if (profile != null) {
-            profile.setWishlists((ArrayList<Wishlist>)wishlistService.getWishlistsFromProfileUsername(profileUsername));
-            ArrayList<Wishlist> wishlists = profile.getWishlists();
-
-            model.addAttribute("profile", profile);
-            model.addAttribute("wishlists", wishlists);
-            return "home/profile";
-        } else {
-            //Profile not found... should maybe be error page or something else? More for searching
+        if (profile == null) {
+            // Profile not found... should maybe be error page or something else? More for searching
             return "home/index";
         }
+
+        // Set wishlists for the profile
+        profile.setWishlists((ArrayList<Wishlist>) wishlistService.getWishlistsFromProfileUsername(profileUsername));
+        ArrayList<Wishlist> wishlists = profile.getWishlists();
+
+        // Add profile and wishlists to the model
+        model.addAttribute("profile", profile);
+        model.addAttribute("wishlists", wishlists);
+
+        return "home/profile";
     }
+
 
     @GetMapping("/create_profile")
     public String newProfile(Model model, HttpSession session) {

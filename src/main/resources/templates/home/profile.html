@@ -23,14 +23,16 @@
         <article class="wishlists-wrapper">
             <div class="h2-wrapper">
                 <h2 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></h2>
-                <a th:href="@{/create_wishlist}">
-                    <button class="button small"><i class="fas fa-plus"></i></button>
-                </a>
+                <th:block th:if="${isAuthorized}">
+                    <a th:href="@{/create_wishlist}">
+                        <button class="button small"><i class="fas fa-plus"></i></button>
+                    </a>
+                </th:block>
             </div>
 
             <ul class="wishlists" >
                 <li class="wishlist" th:each="wishlist : ${wishlists}">
-                    <a th:href="@{/wishlist/{wishlistId}(wishlistId=${wishlist.wishlistId})}">
+                    <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(profileUsername=${profileUsername}, wishlistId=${wishlist.wishlistId})}">
                         <h3 th:text="${wishlist.wishlistTitle}"></h3>
                         <p th:text="${wishlist.wishlistDescription}"></p>
                     </a>

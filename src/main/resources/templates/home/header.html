@@ -10,7 +10,7 @@
       <li><a href="https://www.ikea.com/" target="_blank">Get inspired</a></li>
       <!-- Conditional : if profile is not null, and if profile is null -->
       <li class="button" th:if="${loggedIn}">
-        <a th:href="@{/profile/{username}(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
+        <a th:href="@{/{username}/profile(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
       </li>
       <li class="button" th:unless="${profile}">
         <a th:href="@{/create_profile}">Profile</a>
