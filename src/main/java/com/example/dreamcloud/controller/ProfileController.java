@@ -33,6 +33,7 @@ public class ProfileController {
     public String profile(Model model, @PathVariable String profileUsername, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
+
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         if (profile != null) {
@@ -49,13 +50,18 @@ public class ProfileController {
     }
 
     @GetMapping("/create_profile")
-    public String newProfile() {
+    public String newProfile(Model model, HttpSession session) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
         return "home/create_profile";
     }
 
 
     @PostMapping("/new_profile")
     public String createProfile(@RequestParam String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
+
         //Returns null if picture isn't there
         byte[] pictureData = profilePicture.map(p -> {
             try {

@@ -23,15 +23,17 @@ public class LoginController {
     // @RequestParam String username, @RequestParam String password:  Containers that hold the username and password that someone types into the login form.
     @PostMapping("/login")
     public String login(HttpServletRequest request,  @RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes){
+        // authenticateUser --> service --> repository, checks for matching info in database
         if (authenticationService.authenticateUser(username, password)){
+            // sets attribute username to session, which we use in our header
             request.getSession().setAttribute("username", username);
             return "redirect:/profile/" + username;
         } else
             // If authentication fails, redirect to login page with error message
             redirectAttributes.addFlashAttribute("error", "Invalid username or password");
         System.out.println("invalid password");
-            return "redirect:/login";
+        return "redirect:/login";
 
-        }
     }
+}
 

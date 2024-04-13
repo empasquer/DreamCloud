@@ -41,7 +41,7 @@ public class WishController {
     }
 
     @GetMapping("/wish/{wishId}")
-    public String wish(@PathVariable int wishId, Model model, HttpSession session){
+    public String wish(@PathVariable int wishId, Model model, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
 
@@ -49,19 +49,19 @@ public class WishController {
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        // Retrieve wishlists form profile
-        List<Wishlist> wishlists = wishlistService.getWishlistsFromProfileUsername(profile.getProfileUsername());
-        profile.setWishlists((ArrayList<Wishlist>) wishlists);
+        if (profile != null) {
+            // Retrieve wishlists form profile
+            List<Wishlist> wishlists = wishlistService.getWishlistsFromProfileUsername(profile.getProfileUsername());
+            profile.setWishlists((ArrayList<Wishlist>) wishlists);
 
-        // Retrieve wish information
-        Wish wish = wishService.getWishFromWishId(wishId);
+            // Retrieve wish information
+            Wish wish = wishService.getWishFromWishId(wishId);
 
 
+            int wishlistId = wish.getWishlistId();
 
-        int wishlistId = wish.getWishlistId();
-
-        if (wish != null) {
-            // Check if the wish belongs to any of the user's wishlists
+            if (wish != null) {
+                // Check if the wish belongs to any of the user's wishlists
           /*  boolean wishBelongsToUser = false;
             for (Wishlist wishlist : profile.getWishlists()) {
                 for (Wish userWish : wishlist.getWishes()) {
@@ -80,16 +80,14 @@ public class WishController {
                 return "redirect:/home/wishlist/" + wishlistId;
             }*/
 
-            model.addAttribute("wish", wish);
+                model.addAttribute("wish", wish);
 
-             return "/home/wish";
-        }
-
-
-        else {
-            // if wish not found go back to wishlist
-            return "redirect:/home/wishlist/" + wishlistId;
-        }
+                return "/home/wish";
+            } else {
+                // if wish not found go back to wishlist
+                return "redirect:/home/wishlist/" + wishlistId;
+            }
+        } else return "redirect:/login";
 
     }
 }

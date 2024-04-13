@@ -42,17 +42,19 @@ public class WishListController {
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
-        model.addAttribute("wishlist", wishlist);
+        if (profile != null) {
+            Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+            model.addAttribute("wishlist", wishlist);
 
 
-        List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
-        wishlist.setWishes((ArrayList<Wish>) wishes);
+            List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
+            wishlist.setWishes((ArrayList<Wish>) wishes);
 
-        model.addAttribute("wishes", wishlist.getWishes());
+            model.addAttribute("wishes", wishlist.getWishes());
 
-        return "home/wishlist";
-
+            return "home/wishlist";
+        }
+        else return "redirect:/login";
     }
 
     @GetMapping("/create_wishlist")

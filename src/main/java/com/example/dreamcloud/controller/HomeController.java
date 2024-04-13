@@ -1,5 +1,5 @@
 package com.example.dreamcloud.controller;
-
+import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
@@ -29,6 +29,8 @@ public class HomeController {
     public String index(Model model, HttpSession session ){
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile); // Add the profile attribute to the model
         return "home/index";
     }
 
