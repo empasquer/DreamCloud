@@ -11,9 +11,14 @@
 <div th:replace="~{home/header :: header}"></div>
 <main>
     <section class="create-profile">
-        <a th:href="@{/}" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
-        <h1 class="profile-heading">Create your profile</h1>
+
+        <div class="back-arrow-container">
+            <a th:href="@{/}" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
+        </div>
+
+        <h1>Create your profile</h1>
         <form id="create_profile" th:action="@{/new_profile}" method="post" enctype="multipart/form-data">
+
             <!-- First row -->
             <div class="form-row">
                 <div class="form-group">
@@ -39,17 +44,16 @@
             </div>
 
             <!-- Upload pic -->
-            <div class="form-group upload">
-                <label for="profilePicture">Upload your profile picture:</label> <br>
-                <input class="picture" type="file" id="profilePicture" name="profilePicture" accept="image/*">
+            <div class="upload">
+                <div class="upload">
+                    <p>Upload your profile picture:</p>
+                    <label for="profilePicture" class="custom-file-upload">Upload</label>
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                </div>
             </div>
 
-            <div class="create-profile-button">
-                <button class="submit-button" type="submit">Submit</button>
-            </div>
-
+            <button class="submit-button" type="submit">Submit</button>
         </form>
-
     </section>
 </main>
 
