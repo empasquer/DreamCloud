@@ -1,6 +1,7 @@
 package com.example.dreamcloud.model;
 
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class Profile {
     private String profileUsername;
@@ -59,5 +60,13 @@ public class Profile {
 
     public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getProfilePictureAsBase64() {
+        if (profilePicture != null) {
+            return Base64.getEncoder().encodeToString(profilePicture);
+        } else {
+            return null;
+        }
     }
 }

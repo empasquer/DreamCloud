@@ -13,7 +13,16 @@
 <main>
     <section>
         <article class="profile-info-wrapper">
-            <img class="profile-picture" src="/assets/default_user.jpg" alt="designed by freepik">
+            <img class="profile-picture"
+                 th:if="${profile.profilePictureAsBase64 != null}"
+                 th:src="'data:image/jpeg;base64,' + ${profile.profilePictureAsBase64}"
+                 alt="Profile Picture">
+
+            <img class="profile-picture"
+                 th:unless="${profile.profilePictureAsBase64 != null}"
+                 src="/assets/default_user.jpg"
+                 alt="Default Profile Picture">
+
             <div class="profile-info">
                 <h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></h1>
                 <p th:text="'@' + ${profile.profileUsername}"></p>

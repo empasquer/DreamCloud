@@ -1,80 +1,118 @@
 /*Create-profile components*/
 .create-profile {
-    width: 60vw;
+    position: relative;
+    width: auto;
     border-radius: 15px;
     background-color: #19A7CE;
-    margin: 80px 100px;
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding: 3%;
+    color: #E1F0F6;
+    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
-.profile-heading {
-    color: white;
+.back-arrow-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.back-arrow {
+    color: #0e3e54;
+}
+
+.back-arrow:hover {
+    color: #FEFF86;
+}
+
+.create-profile h1 {
+    color: #E1F0F6;
+    margin-bottom: 5%;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     color: white;
     font-size: medium;
 }
 
-input {
+.form-group input {
     background-color: #E1F0F6;
-    border-radius: 3px;
-    border-color: #E1F0F6;
+    border-radius: 15px;
     height: 50px;
     width: 290px;
+    padding: 1rem;
+    border-style: none;
 }
 
-input.picture {
-    background-color: #19A7CE;
-}
-
-
-/* Form rows to align groups horizontally */
 .form-row {
     display: flex;
-    justify-content: space-between; /* Distribute space between groups */
+    justify-content: space-between;
     margin-bottom: 30px;
     align-items: center;
 }
 
-/* Form group styling */
 .form-group {
-    flex: 0 0 calc(50% - 10px); /* Each group takes half of the space with margins */
-    padding: 10px;
-    border-radius: 10px;
+    flex: 0 0 calc(50% - 10px);
     align-items: center;
+    padding: 1rem;
+    border-radius: 15px;
+    border-style: none;
 }
 
-/* Add margin between form groups */
 .form-group + .form-group {
     margin-left: 20px;
 }
 
-/* Label styling */
-.form-group > label {
-    margin-bottom: 5px; /* Add space between label and input */
-}
-
-
-.form-group.upload {
-    float: left; /* Align upload field to the right */
-    width: calc(50% - 10px); /* Adjust width for upload field */
-    color: white;
-    background-color: #19A7CE;
-}
-
-.create-profile-button {
-    display: flex; /* Add display flex for centering */
-    justify-content: center; /* Center the button horizontally */
+.upload {
+    position: relative;
+    overflow: hidden;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.upload p {
+    font-size: medium;
+    font-family: Rubik, sans-serif;
+    color: #E1F0F6;
+    margin-bottom: 3px;
+    margin-left: 20px;
+    font-weight: inherit;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #E1F0F6;
+    color: #0e3e54;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    margin-left: 20px;
+
+}
+
+.upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.upload .custom-file-upload:hover {
+    background-color: #FEFF86;
 }
 
 .submit-button {
-    text-align: center;
     text-decoration: none;
-    color: #19A7CE;
     font-size: medium;
     font-family: Rubik, sans-serif;
     width: 120px;
@@ -83,5 +121,14 @@ input.picture {
     border-radius: 15px;
     border: none;
     cursor: pointer;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: #0e3e54;
+}
+
+.submit-button:hover {
+    background-color: #FEFF86;
 }
 /*end create-profile*/
