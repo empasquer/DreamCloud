@@ -1,0 +1,109 @@
+
+
+
+.formular {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding: 3%;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    margin-bottom: 5%;
+    width: auto;
+
+}
+
+
+.formular h1{
+    color: #E1F0F6;
+    margin-bottom: 10%;
+}
+
+.formular form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+
+}
+
+.formular form div > * {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.formular input {
+    padding: 1rem;
+    border-radius: 15px;
+    border-style: none;
+    color: #0e3e54;
+    background-color: white;
+}
+
+.formular button {
+    border-color: #19A7CE;
+    border-width: thin;
+    color: #0e3e54;
+    width: 100px;
+    margin-top: 15%;
+    justify-items: center;
+    align-items: center;
+
+}
+
+
+/*not used v*/
+/* Login*/
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding: 3%;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    margin-bottom: 5%;
+    width: auto;
+
+}
+
+
+.login-form h1{
+    color: #E1F0F6;
+    margin-bottom: 10%;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+
+}
+
+.login-form form div > * {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.login-form input {
+    padding: 1rem;
+    border-radius: 15px;
+    border-style: none;
+}
+
+.login-form button {
+    border-color: #19A7CE;
+    border-width: thin;
+    color: #0e3e54;
+    width: 100px;
+    margin-top: 15%;
+    justify-items: center;
+    align-items: center;
+
+}
+
+/*login end*/

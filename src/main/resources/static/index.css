@@ -1,0 +1,37 @@
+.create-profile-button {
+    display: flex; /* Add display flex for centering */
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 20px;
+}
+
+.index-button-bg {
+    width: 60vw;
+    border-radius: 15px;
+    background-color: #19A7CE;
+    margin: 80px 100px;
+    padding: 40px;
+}
+
+.button-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.button {
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin between buttons */
+}
+.button-link {
+    padding: 10px 20px; /* Adjust padding */
+    border-radius: 15px;
+    background-color: #B0DAFF;
+    border: none;
+    text-decoration: none;
+    color: #146C94;
+    font-weight: bold; /* Optionally make the font bold */
+}
+
+.button-link:hover {
+    background-color: #8BC9FF; /* Change background color on hover */
+}

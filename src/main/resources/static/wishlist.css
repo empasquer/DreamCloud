@@ -1,0 +1,53 @@
+
+/*wishes*/
+
+.wishes-wrapper {
+    color: #0e3e54;
+    padding: 2rem;
+}
+
+.wishes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.wishes a {
+    color: #E1F0F6;
+    text-decoration: none;
+}
+
+.wishes h3 {
+    padding-bottom: 1rem;
+}
+
+.wish {
+    background-color: #146C94;
+    padding: 2rem;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+}
+.wishlist-info-wrapper {
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+
+}
+.h2-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+/*wishes end*/
