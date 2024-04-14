@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class WishController {
@@ -108,5 +111,28 @@ public class WishController {
 
         return "home/create_wish";
     }
+
+
+    @PostMapping("/wishlist/{wishlistId}/create_wish")
+    public String createWish(@PathVariable int wishlistId, @RequestParam String wishName, @RequestParam String wishDescription, @RequestParam double wishPrice,
+                             @RequestParam("wishPicture") MultipartFile wishPicture, HttpSession session){
+
+        byte[] pictureData = null;
+        if (!wishPicture.isEmpty()) {
+            try {
+                pictureData = wishPicture.getBytes();
+            } catch (IOException e) {
+                // Handle IOException if necessary
+            }
+        }
+
+        // Call the createWish method from WishService to create the wish
+        wishService.createWish(wishName, wishDescription, wishPrice, Optional.ofNullable(pictureData), wishlistId);
+
+        // Redirect to the wishlist page after creating the wish
+        return "redirect:/wishlist/" + wishlistId;
+    }
+
+
 }
 
