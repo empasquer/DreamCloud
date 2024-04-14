@@ -114,8 +114,12 @@ public class WishController {
 
 
     @PostMapping("/wishlist/{wishlistId}/create_wish")
-    public String createWish(@PathVariable int wishlistId, @RequestParam String wishName, @RequestParam String wishDescription, @RequestParam double wishPrice,
-                             @RequestParam("wishPicture") MultipartFile wishPicture, HttpSession session){
+    public String createWish(@PathVariable int wishlistId,
+                             @RequestParam String wishName,
+                             @RequestParam String wishDescription,
+                             @RequestParam double wishPrice,
+                             @RequestParam("wishPicture") MultipartFile wishPicture,
+                             HttpSession session) {
 
         byte[] pictureData = null;
         if (!wishPicture.isEmpty()) {
@@ -132,6 +136,7 @@ public class WishController {
         // Redirect to the wishlist page after creating the wish
         return "redirect:/wishlist/" + wishlistId;
     }
+
 
 
 }

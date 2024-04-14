@@ -16,7 +16,7 @@
         <a th:href="@{/wishlist/{wishlist}(wishlist=${wishlist.wishlistId})}" class="button-small"><i class="fas fa-arrow-left"></i></a>
 
         <h1 th:text="'Add new wish to ' + ${wishlist.getWishlistTitle()}"></h1>
-        <form th:action="@{'/wishlist/' + ${wishlistId} + '/create_wish'}" method="post">
+        <form th:action="@{'/wishlist/' + ${wishlistId} + '/create_wish'}" method="post" enctype="multipart/form-data">
             <div>
                 <label for="wishName">Name:</label>
                 <input type="text" id="wishName" name="wishName" required>
@@ -25,7 +25,7 @@
                 <textarea class="description" id="wishDescription" name="wishDescription"></textarea>
 
                 <label for="wishPrice">Price:</label>
-                <input type="number" id="wishPrice" name="wishPrice"  step="0.01" required>
+                <input type="number" id="wishPrice" name="wishPrice" step="0.01" required>
 
                 <label for="wishPicture">Upload a picture:</label> <br>
                 <input type="file" id="wishPicture" name="wishPicture" accept="image/*">
@@ -42,6 +42,5 @@
 </main>
 
 <div th:insert="~{home/footer :: footer}"></div>
-</form>
 </body>
 </html>

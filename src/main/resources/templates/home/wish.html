@@ -33,7 +33,11 @@
         </article>
         <article class="wish-wrapper">
             <div class="wish">
-                <img src="/assets/wish_dummy.png" class="wish-photo">
+                <!-- Check if the wish has a picture -->
+                <img th:if="${wish.wishPicture != null}" th:src="'data:image/png;base64,' + ${wish.wishPicture}" class="wish-photo">
+                <!-- If wish does not have a picture, use a placeholder -->
+                <img th:unless="${wish.wishPicture != null}" src="/assets/default_user.jpg" class="wish-photo">
+
                 <h1 class="wish-name" th:text="${wish.wishName}"></h1>
                 <p class="wish-desc" th:text="${wish.wishDescription}"></p>
                 <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
