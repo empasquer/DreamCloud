@@ -29,7 +29,7 @@ CREATE TABLE wish (
                       wish_name VARCHAR(255) NOT NULL,
                       wish_description VARCHAR(255),
                       wish_price double NOT NULL,
-                      wish_picture BLOB,
+                      wish_picture LONGBLOB,
                       wishlist_id INT,
                       FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id)
 );
@@ -58,5 +58,3 @@ INSERT INTO wish (wish_name, wish_description, wish_price, wishlist_id) VALUES
                                                                             ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
 
 ALTER TABLE profile MODIFY COLUMN profile_picture LONGBLOB;
-
-select * from wishlist where profile_username = 'john_doe';
