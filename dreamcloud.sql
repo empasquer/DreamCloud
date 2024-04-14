@@ -58,3 +58,5 @@ INSERT INTO wish (wish_name, wish_description, wish_price, wishlist_id) VALUES
                                                                             ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
 
 ALTER TABLE profile MODIFY COLUMN profile_picture LONGBLOB;
+
+
