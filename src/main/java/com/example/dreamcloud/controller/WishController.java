@@ -27,19 +27,6 @@ public class WishController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/delete-wish/{wishId}")
-    public String deleteWish(@PathVariable int wishId) {
-
-        // Retrieve wish information
-        Wish wish = wishService.getWishFromWishId(wishId);
-        int wishlistId = wish.getWishlistId();
-
-        wishService.deleteWishFromWishId(wishId);
-        System.out.println("Wish is now deleted");
-
-        return "redirect:/wishlist/" + wishlistId;
-    }
-
     @GetMapping("/wish/{wishId}")
     public String wish(@PathVariable int wishId, Model model, HttpSession session){
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
@@ -91,6 +78,35 @@ public class WishController {
             return "redirect:/home/wishlist/" + wishlistId;
         }
 
+    }
+
+    @PostMapping("/delete-wish/{wishId}")
+    public String deleteWish(@PathVariable int wishId) {
+
+        // Retrieve wish information
+        Wish wish = wishService.getWishFromWishId(wishId);
+        int wishlistId = wish.getWishlistId();
+
+        wishService.deleteWishFromWishId(wishId);
+        System.out.println("Wish is now deleted");
+
+        return "redirect:/wishlist/" + wishlistId;
+    }
+
+
+    @GetMapping("/wishlist/{wishlistId}/create_wish")
+    public String createWish(Model model, HttpSession session, @PathVariable int wishlistId) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
+        // Retrieve profile information
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+
+        //Retrieve wishlist information
+        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+        model.addAttribute("wishlist", wishlist);
+
+        return "home/create_wish";
     }
 }
 

@@ -26,7 +26,8 @@
     <article class="wishes-wrapper">
         <div class="h2-wrapper">
             <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
-              <a th:href="@{/create_wish}">
+            <a th:href="@{'/wishlist/' + ${wishlist.wishlistId} + '/create_wish'}">
+
                 <button class="button small"><i class="fas fa-plus"></i></button>
             </a>
         </div>

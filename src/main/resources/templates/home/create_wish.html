@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Add new wish to ' + ${wishlist.wishlistTitle}"></title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/create_wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:insert="~{home/header :: header}"></div>
+
+<main >
+
+    <section class="formular">
+        <a th:href="@{/wishlist/{wishlist}(wishlist=${wishlist.wishlistId})}" class="button-small"><i class="fas fa-arrow-left"></i></a>
+
+        <h1 th:text="'Add new wish to ' + ${wishlist.getWishlistTitle()}"></h1>
+        <form action="/create_wish" method="post">
+            <div>
+                <label for="wishName">Name:</label>
+                <input type="text" id="wishName" name="wishName" required>
+
+                <label for="wishDescription">Description:</label>
+                <textarea class="description" id="wishDescription" name="wishDescription"></textarea>
+
+                <label for="wishPrice">Price:</label>
+                <input type="number" id="wishPrice" name="wishPrice"  step="0.01" required>
+
+                <label for="wishPicture">Upload a picture:</label> <br>
+                <input type="file" id="wishPicture" name="wishPicture" accept="image/*">
+
+            </div>
+
+            <div>
+                <button class="button" type="submit">Save</button>
+            </div>
+
+        </form>
+    </section>
+
+</main>
+
+<div th:insert="~{home/footer :: footer}"></div>
+</form>
+</body>
+</html>
