@@ -45,6 +45,10 @@
                 </div>
             </div>
 
+            <div th:if="${message}" class="error-message">
+                <p th:text="${message}"></p>
+            </div>
+
             <!-- Upload pic -->
             <div class="upload">
                 <div class="upload">

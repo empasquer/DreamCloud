@@ -76,7 +76,7 @@ footer {
     justify-content: space-between;
     padding: 1rem;
     background-color: #146C94;
-    align-items: end;
+    align-items: center;
     height: 20vh;
 }
 
@@ -87,25 +87,23 @@ footer section {
     align-items: center;
 }
 
-footer img {
+footer a {
     max-height: 20vw;
     height: 100px;
-
 }
 
 footer ul {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-
     width: 50vw;
 }
 
 footer p {
     color: #E1F0F6;
 }
-
 /* Footer end */
+
 
 /* index page */
 main {

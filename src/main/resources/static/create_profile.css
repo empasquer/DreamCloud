@@ -133,4 +133,11 @@
 .submit-button:hover {
     background-color: #FEFF86;
 }
+
+.error-message {
+    text-align: center;
+    margin-top: 10px;
+    color: #FEFF86;
+    font-weight: bold;
+}
 /*end create-profile*/
