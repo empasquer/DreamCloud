@@ -54,7 +54,7 @@
 
     <ul class="wishes">
         <li class="wish" th:each="wish : ${wishes}" >
-            <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(wishlistId = ${wishlistId})/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
+            <a th:href="@{/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}(profileUsername=${profileUsername},wishlistId = ${wishlistId},wishId=${wish.wishId})}">
             <h3 th:text="${wish.wishName}"></h3>
              <p th:text="${wish.wishDescription}"></p>
             </a>

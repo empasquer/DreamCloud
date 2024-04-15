@@ -7,6 +7,7 @@ import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,23 @@ public class WishController {
     @Autowired ProfileService profileService;
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}")
-    public String wish(@PathVariable int wishId, Model model, HttpSession session, @PathVariable String profileUsername,
+    public String wish(@PathVariable int wishId, Model model, HttpSession session,
+                       @PathVariable String profileUsername, HttpServletRequest request,
                        @PathVariable String wishlistId){
-        boolean loggedIn = authenticationService.isUserLoggedIn(session);
-        model.addAttribute("loggedIn", loggedIn);
+
+
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("loggedIn", isLoggedIn);
+
+
+        // CHeck if user is authorized on this page
+        boolean isAuthorized = authenticationService.checkIfAuthorized(request);
+        model.addAttribute("isAuthorized", isAuthorized);
 
         // Retrieve profile information
         Profile profile = authenticationService.getLoggedInUserProfile();
