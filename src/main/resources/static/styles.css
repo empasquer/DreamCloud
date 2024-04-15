@@ -21,12 +21,12 @@ main {
     min-height: calc(50vh);
 }
 
-h1 {
-    font-size: xx-large;
-}
-
 .button:hover {
     background-color: #FEFF86;
+}
+
+h1 {
+    font-size: xx-large;
 }
 
 
@@ -60,12 +60,15 @@ header a {
     padding: 1rem;
     border-radius: 15px;
     background-color: #B0DAFF;
-    border:none;
+    border: none;
     cursor: pointer;
+    font-family: Rubik, sans-serif;
+    font-size: medium;
 }
 
 .button a {
     color: #146C94;
+    text-decoration: none;
 }
 
 /* Header end */
@@ -76,7 +79,7 @@ footer {
     justify-content: space-between;
     padding: 1rem;
     background-color: #146C94;
-    align-items: end;
+    align-items: center;
     height: 20vh;
 }
 
@@ -87,31 +90,29 @@ footer section {
     align-items: center;
 }
 
-footer img {
+footer a {
     max-height: 20vw;
     height: 100px;
-
+    text-decoration: none;
 }
 
 footer ul {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-
     width: 50vw;
 }
 
 footer p {
     color: #E1F0F6;
 }
-
 /* Footer end */
 
-/* index page */
+
+/* index page*/
 main {
     display: flex;
     flex-direction: column;
-/*    justify-content: center;*/
     align-items: center;
     padding : 3rem 0;
 }
@@ -126,11 +127,28 @@ main section {
     padding: .5rem;
 }
 
+
 #confirmDeleteButton, #confirmDeleteMessage {
     display: none;
 }
 
+/*Login because it doesnt work in the login css for some reason*/
+.formular .back-arrow-container {
+    align-self: flex-start;
+    top: 10px;
+    left: 10px;
+    margin-top: -10%;
+    margin-left: -10%;
+    margin-bottom: 10%;
+}
 
+.formular .back-arrow {
+    color: #0e3e54;
+}
+
+.formular .back-arrow:hover {
+    color: #FEFF86;
+}
 
 
 

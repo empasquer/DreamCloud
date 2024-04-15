@@ -40,12 +40,13 @@
     height: 20vw;
     border-radius: 15px;
 }
+
 .profile-picture {
-    width: 150px; /* Adjust the width and height as needed */
+    width: 150px;
     height: 150px;
-    border-radius: 50%; /* Make the image round */
-    object-fit: cover; /* Ensure the image covers the entire container */
-    object-position: center; /* Center the image within the container */
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .h2-wrapper {

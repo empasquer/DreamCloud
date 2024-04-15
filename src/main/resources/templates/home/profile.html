@@ -14,7 +14,16 @@
 <main>
     <section>
         <article class="profile-info-wrapper">
-            <img class="profile-picture" src="/assets/default_user.jpg" alt="designed by freepik">
+            <img class="profile-picture"
+                 th:if="${profile.profilePictureAsBase64 != null}"
+                 th:src="'data:image/jpeg;base64,' + ${profile.profilePictureAsBase64}"
+                 alt="Profile Picture">
+
+            <img class="profile-picture"
+                 th:unless="${profile.profilePictureAsBase64 != null}"
+                 src="/assets/default_user.jpg"
+                 alt="Default Profile Picture">
+
             <div class="profile-info">
                 <h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></h1>
                 <p th:text="'@' + ${profile.profileUsername}"></p>
@@ -25,14 +34,16 @@
         <article class="wishlists-wrapper">
             <div class="h2-wrapper">
                 <h2 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname} + '´s wishlists'"></h2>
-                <a th:href="@{/create_wishlist}">
-                    <button class="button small"><i class="fas fa-plus"></i></button>
-                </a>
+                <th:block th:if="${isAuthorized}">
+                    <a th:href="@{/create_wishlist}">
+                        <button class="button small"><i class="fas fa-plus"></i></button>
+                    </a>
+                </th:block>
             </div>
 
             <ul class="wishlists" >
                 <li class="wishlist" th:each="wishlist : ${wishlists}">
-                    <a th:href="@{/wishlist/{wishlistId}(wishlistId=${wishlist.wishlistId})}">
+                    <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(profileUsername=${profileUsername}, wishlistId=${wishlist.wishlistId})}">
                         <h3 th:text="${wishlist.wishlistTitle}"></h3>
                         <p th:text="${wishlist.wishlistDescription}"></p>
                     </a>

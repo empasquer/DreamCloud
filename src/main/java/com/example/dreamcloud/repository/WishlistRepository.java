@@ -38,4 +38,9 @@ public class WishlistRepository {
         String query = "INSERT INTO wishlist(wishlist_title, wishlist_description, profile_username) VALUES (?,?,?)";
         jdbcTemplate.update(query, title, description, profileUsername);
     }
+
+    public void deleteWishlist(int wishlistId) {
+        String query = "DELETE FROM wishlist WHERE wishlist_id = ?";
+        jdbcTemplate.update(query,wishlistId);
+    }
 }

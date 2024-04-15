@@ -15,10 +15,10 @@
     <section>
         <article class="wish-banner-wrapper">
             <div>
-                <a th:href="@{'/wishlist/' + ${wish.getWishlistId()}}" class="button small"><i
+                <a th:href="@{'/'+${profileUsername} + '/wishlist/' + ${wish.getWishlistId()}}" class="button small"><i
                         class="fas fa-arrow-left"></i></a>
             </div>
-
+            <th:block th:if="${isAuthorized}">
             <div class="wish-forms-wrapper">
                 <form  method="post">
                     <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
@@ -31,6 +31,7 @@
                 </form>
 
             </div>
+            </th:block>
         </article>
         <article class="wish-wrapper">
             <div class="wish">

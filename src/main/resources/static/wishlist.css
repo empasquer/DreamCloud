@@ -1,4 +1,3 @@
-
 /*wishes*/
 
 .wishes-wrapper {
@@ -9,9 +8,6 @@
 .wishes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
-    justify-content: center;
-    align-items: center;
 
 }
 
@@ -31,8 +27,14 @@
     height: 20vw;
     border-radius: 15px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.wish h3 {
+    margin-bottom: 1rem;
+}
+
 .wishlist-info-wrapper {
     background-color: #19A7CE;
     color: #E1F0F6;
@@ -40,9 +42,17 @@
     padding :2rem;
     display: flex;
     gap: 3rem;
-    align-items: center;
+    justify-content: space-between;
 
 }
+.wishlist-forms-wrapper {
+    display: flex;
+}
+.wishlist-forms-wrapper > * {
+    margin: 5px;
+}
+
+
 .h2-wrapper {
     display: flex;
     gap: 1rem;
