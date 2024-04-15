@@ -103,8 +103,8 @@ public class WishController {
     }
 
 
-    @GetMapping("/wishlist/{wishlistId}/create_wish")
-    public String createWish(Model model, HttpSession session, @PathVariable int wishlistId) {
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
+    public String createWish(@PathVariable String profileUsername,Model model, HttpSession session, @PathVariable int wishlistId) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
         // Retrieve profile information
