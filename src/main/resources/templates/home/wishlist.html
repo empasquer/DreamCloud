@@ -17,8 +17,26 @@
 <section>
     <article class="wishlist-info-wrapper">
         <div>
+            <a th:href="@{'/profile/' + ${profile.getProfileUsername()}}" class="button small"><i
+                    class="fas fa-arrow-left"></i></a>
+        </div>
+
+        <div >
             <h1 th:text="${wishlist.wishlistTitle}"></h1>
             <p th:text="${wishlist.wishlistDescription}"></p>
+        </div>
+
+        <div class="wishlist-forms-wrapper">
+            <form  method="post">
+                <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
+            </form>
+
+            <form th:action="@{'/delete-wishlist/' + ${wishlist.getWishlistId()}}" method="post">
+                <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
+                <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
+                <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
+            </form>
+
         </div>
     </article>
 
@@ -26,14 +44,16 @@
     <article class="wishes-wrapper">
         <div class="h2-wrapper">
             <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
+            <th:block th:if="${isAuthorized}">
               <a th:href="@{/create_wish}">
                 <button class="button small"><i class="fas fa-plus"></i></button>
             </a>
+            </th:block>
         </div>
 
     <ul class="wishes">
         <li class="wish" th:each="wish : ${wishes}" >
-            <a th:href="@{/wish/{wishId}(wishId=${wish.wishId})}">
+            <a th:href="@{/{profileUsername}/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
             <h3 th:text="${wish.wishName}"></h3>
              <p th:text="${wish.wishDescription}"></p>
             </a>
@@ -45,5 +65,26 @@
 
 </main>
 <div th:insert="~{home/footer :: footer}"></div>
+
+
+<script>
+    function showDeleteConfirmation() {
+        let confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        let confirmDeleteMessage = document.getElementById("confirmDeleteMessage");
+        let actualDeleteButton = document.getElementById("actualDeleteButton");
+
+        if (confirmDeleteButton.style.display === "none") {
+            confirmDeleteButton.style.display = "inline-block";
+            confirmDeleteMessage.style.display = "inline-block";
+            actualDeleteButton.style.display = "none";
+        } else {
+            confirmDeleteButton.style.display = "none";
+            confirmDeleteMessage.style.display = "none";
+            actualDeleteButton.style.display = "inline-block";
+        }
+    }
+</script>
+
 </body>
+
 </html>
