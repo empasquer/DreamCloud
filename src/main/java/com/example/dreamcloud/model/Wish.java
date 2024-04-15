@@ -1,5 +1,6 @@
 package com.example.dreamcloud.model;
 
+import java.util.Base64;
 import java.util.Optional;
 
 public class Wish {
@@ -60,5 +61,13 @@ public class Wish {
 
     public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
+    }
+
+    public String getWishPictureAsBase64() {
+        if (wishPicture != null) {
+            return Base64.getEncoder().encodeToString(wishPicture);
+        } else {
+            return null;
+        }
     }
 }

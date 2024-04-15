@@ -33,6 +33,7 @@
     object-position: center; /* Center the image within the container */
 }
 .wish-name { grid-area: 1 / 2 / 2 / 3; }
+
 .wish-desc {
     grid-area: 2 / 2 / 3 / 3;
     background-color: #146C94;

@@ -28,13 +28,23 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-bottom: 2rem;
+    justify-content: space-between; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
 }
 
-.wish h3 {
+.wish-name {
+    flex-direction: column;
+    justify-content: space-between; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
     margin-bottom: 1rem;
+
 }
+.wish-description {
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+
 
 .wishlist-info-wrapper {
     background-color: #19A7CE;
@@ -61,4 +71,7 @@
     padding-bottom: 2rem;
 }
 
+.wish-price {
+    font-size: x-large;
+}
 /*wishes end*/

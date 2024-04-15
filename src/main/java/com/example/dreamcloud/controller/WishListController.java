@@ -41,6 +41,7 @@ public class WishListController {
             return "redirect:/login";
         }
 
+        model.addAttribute("profileUsername", profileUsername);
         // Check if the user is authorized
         boolean isAuthorized = authenticationService.checkIfAuthorized(request);
         model.addAttribute("loggedIn", loggedIn);
