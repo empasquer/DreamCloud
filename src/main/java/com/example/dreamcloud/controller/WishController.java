@@ -4,6 +4,7 @@ import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wish;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.AuthenticationService;
+import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
@@ -30,8 +31,11 @@ public class WishController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/wish/{wishId}")
-    public String wish(@PathVariable int wishId, Model model, HttpSession session){
+    @Autowired ProfileService profileService;
+
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}")
+    public String wish(@PathVariable int wishId, Model model, HttpSession session, @PathVariable String profileUsername,
+                       @PathVariable String wishlistId){
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
 
@@ -48,7 +52,7 @@ public class WishController {
 
 
 
-        int wishlistId = wish.getWishlistId();
+        /*int wishlistId = wish.getWishlistId();*/
 
         if (wish != null) {
             // Check if the wish belongs to any of the user's wishlists
@@ -78,13 +82,13 @@ public class WishController {
 
         else {
             // if wish not found go back to wishlist
-            return "redirect:/home/wishlist/" + wishlistId;
+            return "redirect:/home/" + profile.getProfileUsername() + "/wishlist/" + wishlistId;
         }
 
     }
 
     @PostMapping("/delete-wish/{wishId}")
-    public String deleteWish(@PathVariable int wishId) {
+    public String deleteWish(@PathVariable int wishId, HttpSession session) {
 
         // Retrieve wish information
         Wish wish = wishService.getWishFromWishId(wishId);
@@ -93,7 +97,9 @@ public class WishController {
         wishService.deleteWishFromWishId(wishId);
         System.out.println("Wish is now deleted");
 
-        return "redirect:/wishlist/" + wishlistId;
+        String profileUsername = session.getAttribute("username").toString();
+
+        return "redirect:/" + profileUsername +  "/wishlist/" + wishlistId;
     }
 
 
@@ -121,6 +127,9 @@ public class WishController {
                              @RequestParam("wishPicture") MultipartFile wishPicture,
                              HttpSession session) {
 
+        Profile profile = profileService.getProfileFromUsername(session.getAttribute("username").toString());
+
+
         byte[] pictureData = null;
         if (!wishPicture.isEmpty()) {
             try {
@@ -134,7 +143,7 @@ public class WishController {
         wishService.createWish(wishName, wishDescription, wishPrice, Optional.ofNullable(pictureData), wishlistId);
 
         // Redirect to the wishlist page after creating the wish
-        return "redirect:/wishlist/" + wishlistId;
+        return "redirect:/" + profile.getProfileUsername() + "/wishlist/" + wishlistId;
     }
 
 
