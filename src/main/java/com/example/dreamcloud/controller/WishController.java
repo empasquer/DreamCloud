@@ -66,3 +66,18 @@ public class WishController {
         }
 
     }
+
+    /* copy/paste from create-wishlist, just to check that the button works
+    @GetMapping("/create_wish")
+    public String createWishlist(Model model, HttpSession session) {
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        model.addAttribute("loggedIn", loggedIn);
+        // Retrieve profile information
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+        return "home/create_wish";
+    }
+
+}*/
+
+

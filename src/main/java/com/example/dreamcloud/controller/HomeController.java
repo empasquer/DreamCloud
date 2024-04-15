@@ -31,8 +31,7 @@ public class HomeController {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
         Profile profile = authenticationService.getLoggedInUserProfile();
-        model.addAttribute("profile", profile);
-        //
+        model.addAttribute("profile", profile); // Add the profile attribute to the model
         return "home/index";
     }
 

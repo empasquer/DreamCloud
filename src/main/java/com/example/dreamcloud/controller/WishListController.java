@@ -82,4 +82,12 @@ public class WishListController {
         return "redirect:/profile/" + profileUsername;
 }
 
+
+    @PostMapping("/delete-wishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session) {
+        wishlistService.deleteWishlist(wishlistId);
+        String profileUsername = String.valueOf(session.getAttribute("username"));
+        return "redirect:/profile/" + profileUsername;
+    }
+
 }

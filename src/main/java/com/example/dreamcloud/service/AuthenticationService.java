@@ -37,6 +37,12 @@ public class AuthenticationService {
     //               loggedIn is null - returns false. User have not logged in
     // We cast loggedIn as boolean because session can return attributes as Objects.
     public boolean isUserLoggedIn(HttpSession session) {
+        // returns true if session attribute loggedIn is not null and loggedIn == true.
+        // Combinations: loggedIn is not null and true - returns true. User have logged in
+        //               loggedIn is not null and false - returns false. User have logged out
+        //               loggedIn is null - returns false. User have not logged in
+        // We cast loggedIn as boolean because session can return attributes as Objects.
+
         return session.getAttribute("loggedIn") != null && (boolean) session.getAttribute("loggedIn");
     }
 
