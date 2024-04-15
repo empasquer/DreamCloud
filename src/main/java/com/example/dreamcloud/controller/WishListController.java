@@ -85,10 +85,9 @@ public class WishListController {
 }
 
 
-    @PostMapping("/delete-wishlist/{wishlistId}")
-    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session) {
+    @PostMapping("/{profileUsername}/delete-wishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable String profileUsername, @PathVariable int wishlistId, HttpSession session) {
         wishlistService.deleteWishlist(wishlistId);
-        String profileUsername = String.valueOf(session.getAttribute("username"));
         return "redirect:/"+ profileUsername + "/profile";
     }
 
