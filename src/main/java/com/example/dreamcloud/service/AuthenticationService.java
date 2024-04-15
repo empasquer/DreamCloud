@@ -3,13 +3,9 @@ package com.example.dreamcloud.service;
 import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.repository.ProfileRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 
 @Service
 public class AuthenticationService {
@@ -54,14 +50,11 @@ public class AuthenticationService {
     }
 
     //Basically checking if the session username matches the URL username
-    public boolean isAuthorized(HttpServletRequest request) {
-
+    public boolean checkIfAuthorized(HttpServletRequest request) {
             //get username from URL
-            String requestedUsername = getUsernameFromProfileRequest(request);
-        System.out.println(requestedUsername);
+        String requestedUsername = getUsernameFromProfileRequest(request);
             //get username from session
-            String loggedInUsername = (String) session.getAttribute("username");
-        System.out.println(loggedInUsername);
+        String loggedInUsername = (String) session.getAttribute("username");
             if (requestedUsername != null && requestedUsername.equals(loggedInUsername)){
                return true;
             } else {

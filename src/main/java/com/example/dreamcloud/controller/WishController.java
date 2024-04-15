@@ -2,7 +2,6 @@ package com.example.dreamcloud.controller;
 
 import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wish;
-import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
@@ -14,10 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class WishController {
@@ -51,7 +46,7 @@ public class WishController {
             }
 
             // Check if the user is authorized
-            boolean isAuthorized = authenticationService.isAuthorized(request);
+            boolean isAuthorized = authenticationService.checkIfAuthorized(request);
             model.addAttribute("loggedIn", loggedIn);
             model.addAttribute("isAuthorized", isAuthorized);
 

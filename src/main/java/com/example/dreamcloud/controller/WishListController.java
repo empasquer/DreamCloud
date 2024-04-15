@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class WishListController {
@@ -43,7 +42,7 @@ public class WishListController {
         }
 
         // Check if the user is authorized
-        boolean isAuthorized = authenticationService.isAuthorized(request);
+        boolean isAuthorized = authenticationService.checkIfAuthorized(request);
         model.addAttribute("loggedIn", loggedIn);
         model.addAttribute("isAuthorized", isAuthorized);
 

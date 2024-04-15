@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -40,9 +39,10 @@ public class ProfileController {
             return "redirect:/login";
         }
 
-        // Check if the user is authorized
-        boolean isAuthorized = authenticationService.isAuthorized(request);
         model.addAttribute("loggedIn", loggedIn);
+
+        // Check if the user is authorized
+        boolean isAuthorized = authenticationService.checkIfAuthorized(request);
         model.addAttribute("isAuthorized", isAuthorized);
 
         // Get the profile
