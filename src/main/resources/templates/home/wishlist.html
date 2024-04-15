@@ -45,7 +45,8 @@
         <div class="h2-wrapper">
             <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
             <th:block th:if="${isAuthorized}">
-              <a th:href="@{/create_wish}">
+            <a th:href="@{ '/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/create_wish'}">
+
                 <button class="button small"><i class="fas fa-plus"></i></button>
             </a>
             </th:block>
@@ -53,7 +54,7 @@
 
     <ul class="wishes">
         <li class="wish" th:each="wish : ${wishes}" >
-            <a th:href="@{/{profileUsername}/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
+            <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(wishlistId = ${wishlistId})/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
             <h3 th:text="${wish.wishName}"></h3>
              <p th:text="${wish.wishDescription}"></p>
             </a>
@@ -86,5 +87,4 @@
 </script>
 
 </body>
-
 </html>
