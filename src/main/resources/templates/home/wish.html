@@ -35,12 +35,12 @@
         </article>
         <article class="wish-wrapper">
             <div class="wish">
-                <img class="profile-picture"
+                <img class="wish-photo"
                      th:if="${wish.wishPictureAsBase64 != null}"
                      th:src="'data:image/jpeg;base64,' + ${wish.wishPictureAsBase64}"
                      alt="Wish Picture">
 
-                <img class="profile-picture"
+                <img class="wish-photo"
                      th:unless="${wish.wishPictureAsBase64 != null}"
                      src="/assets/wish_dummy.jpg"
                      alt="Default wish Picture">
