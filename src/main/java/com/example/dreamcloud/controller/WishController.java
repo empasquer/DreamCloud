@@ -127,19 +127,20 @@ public class WishController {
                              @RequestParam String wishName,
                              @RequestParam String wishDescription,
                              @RequestParam double wishPrice,
-                             @RequestParam("wishPicture") Optional<MultipartFile> wishPicture,
+                             @RequestParam("wishPicture") MultipartFile wishPicture,
                              HttpSession session) {
 
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
-
-        byte[] pictureData = wishPicture.map(p -> {
+        byte[] pictureData = null;
+        if (!wishPicture.isEmpty()) {
             try {
-                return p.getBytes();
+                pictureData = wishPicture.getBytes();
             } catch (IOException e) {
-                return null;
+                // Handle IOException
+                return "redirect:/error";
             }
-        }).orElse(null);
+        }
 
         // Call the createWish method from WishService to create the wish
         wishService.createWish(wishName, wishDescription, wishPrice, Optional.ofNullable(pictureData), wishlistId);
@@ -147,6 +148,7 @@ public class WishController {
         // Redirect to the wishlist page after creating the wish
         return "redirect:/" + profile.getProfileUsername() + "/wishlist/" + wishlistId;
     }
+
 
 
 
