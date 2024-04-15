@@ -25,19 +25,21 @@
                 <h1 th:text="${wishlist.wishlistTitle}"></h1>
                 <p th:text="${wishlist.wishlistDescription}"></p>
             </div>
-
+            <th:block th:if="${isAuthorized}">
             <div class="wishlist-forms-wrapper">
                 <form  method="post">
                     <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
                 </form>
 
-                <form th:action="@{'/delete-wishlist/' + ${wishlist.getWishlistId()}}" method="post">
+                <form th:action="@{'/' + ${profileUsername} +'/delete-wishlist/' + ${wishlist.getWishlistId()}}" method="post">
                     <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
                     <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
                     <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
                 </form>
 
             </div>
+            </th:block>
+
         </article>
 
         </article>
