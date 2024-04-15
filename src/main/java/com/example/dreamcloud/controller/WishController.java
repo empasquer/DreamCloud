@@ -7,6 +7,7 @@ import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,25 @@ public class WishController {
     @Autowired ProfileService profileService;
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}")
-    public String wish(@PathVariable int wishId, Model model, HttpSession session, @PathVariable String profileUsername,
+
+    public String wish(@PathVariable int wishId, Model model, HttpSession session,
+                       @PathVariable String profileUsername, HttpServletRequest request,
                        @PathVariable String wishlistId){
-        boolean loggedIn = authenticationService.isUserLoggedIn(session);
-        model.addAttribute("loggedIn", loggedIn);
+
+
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("loggedIn", isLoggedIn);
+
+
+        // CHeck if user is authorized on this page
+        boolean isAuthorized = authenticationService.checkIfAuthorized(request);
+        model.addAttribute("isAuthorized", isAuthorized);
+
 
         // Retrieve profile information
         Profile profile = authenticationService.getLoggedInUserProfile();
@@ -104,7 +120,10 @@ public class WishController {
 
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
-    public String createWish(@PathVariable String profileUsername,Model model, HttpSession session, @PathVariable int wishlistId) {
+    public String createWish(Model model, HttpSession session,
+                             @PathVariable int wishlistId,
+                             @PathVariable String profileUsername) {
+
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
         // Retrieve profile information
@@ -119,23 +138,23 @@ public class WishController {
     }
 
 
-    @PostMapping("/wishlist/{wishlistId}/create_wish")
+    @PostMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
     public String createWish(@PathVariable int wishlistId,
+                             @PathVariable String profileUsername,
                              @RequestParam String wishName,
                              @RequestParam String wishDescription,
                              @RequestParam double wishPrice,
                              @RequestParam("wishPicture") MultipartFile wishPicture,
                              HttpSession session) {
-
-        Profile profile = profileService.getProfileFromUsername(session.getAttribute("username").toString());
-
+        Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         byte[] pictureData = null;
         if (!wishPicture.isEmpty()) {
             try {
                 pictureData = wishPicture.getBytes();
             } catch (IOException e) {
-                // Handle IOException if necessary
+                // Handle IOException
+                return "redirect:/error";
             }
         }
 

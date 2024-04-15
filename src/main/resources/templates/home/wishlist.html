@@ -14,69 +14,70 @@
 <div th:insert="~{home/header :: header}"></div>
 
 <main>
-<section>
-    <article class="wishlist-info-wrapper">
-        <div>
-            <a th:href="@{'/' + ${profileUsername}+ '/profile'}" class="button small"><i
-                    class="fas fa-arrow-left"></i></a>
-        </div>
+    <section>
+        <article class="wishlist-info-wrapper">
+            <div>
+                <a th:href="@{'/' + ${profileUsername}+ '/profile'}" class="button small"><i
+                        class="fas fa-arrow-left"></i></a>
+            </div>
 
-        <div >
-            <h1 th:text="${wishlist.wishlistTitle}"></h1>
-            <p th:text="${wishlist.wishlistDescription}"></p>
-        </div>
+            <div >
+                <h1 th:text="${wishlist.wishlistTitle}"></h1>
+                <p th:text="${wishlist.wishlistDescription}"></p>
+            </div>
 
-        <div class="wishlist-forms-wrapper">
-            <form  method="post">
-                <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
-            </form>
+            <div class="wishlist-forms-wrapper">
+                <form  method="post">
+                    <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
+                </form>
 
-            <form th:action="@{'/delete-wishlist/' + ${wishlist.getWishlistId()}}" method="post">
-                <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
-                <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
-                <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
-            </form>
+                <form th:action="@{'/delete-wishlist/' + ${wishlist.getWishlistId()}}" method="post">
+                    <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
+                    <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
+                    <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
+                </form>
 
-        </div>
-    </article>
+            </div>
+        </article>
 
-    </article>
-    <article class="wishes-wrapper">
-        <div class="h2-wrapper">
-            <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
-            <th:block th:if="${isAuthorized}">
-            <a th:href="@{ '/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/create_wish'}">
+        </article>
+        <article class="wishes-wrapper">
+            <div class="h2-wrapper">
+                <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
+                <th:block th:if="${isAuthorized}">
+                    <a th:href="@{ '/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/create_wish'}">
 
-                <button class="button small"><i class="fas fa-plus"></i></button>
-            </a>
-            </th:block>
-        </div>
-
-    <ul class="wishes">
-        <li class="wish" th:each="wish : ${wishes}" >
-            <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(wishlistId = ${wishlistId})/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
-            <h3 class="wish-name" th:text="${wish.wishName}"></h3>
-
-                <!-- Check if wish has a picture, display it if available -->
-                <th:block th:if="${wish.wishPictureAsBase64 != null}">
-                    <img class="wish-picture"
-                         th:src="'data:image/jpeg;base64,' + ${wish.wishPictureAsBase64}"
-                         alt="Wish Picture">
+                        <button class="button small"><i class="fas fa-plus"></i></button>
+                    </a>
                 </th:block>
+            </div>
 
-                <!-- If no picture, display wish description -->
-                <th:block th:unless="${wish.wishPictureAsBase64 != null}">
-                    <p class="wish-description" th:text="${wish.wishDescription}"></p>
-                </th:block>
+            <ul class="wishes">
+                <li class="wish" th:each="wish : ${wishes}" >
 
-                <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
+                    <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(wishlistId = ${wishlistId})/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
+                        <h3 class="wish-name" th:text="${wish.wishName}"></h3>
 
-            </a>
-        </li>
-    </ul>
+                        <!-- Check if wish has a picture, display it if available -->
+                        <th:block th:if="${wish.wishPictureAsBase64 != null}">
+                            <img class="wish-picture"
+                                 th:src="'data:image/jpeg;base64,' + ${wish.wishPictureAsBase64}"
+                                 alt="Wish Picture">
+                        </th:block>
 
-  </article>
-</section>
+                        <!-- If no picture, display wish description -->
+                        <th:block th:unless="${wish.wishPictureAsBase64 != null}">
+                            <p class="wish-description" th:text="${wish.wishDescription}"></p>
+                        </th:block>
+
+                        <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
+
+                    </a>
+                </li>
+            </ul>
+
+        </article>
+    </section>
 
 </main>
 <div th:insert="~{home/footer :: footer}"></div>

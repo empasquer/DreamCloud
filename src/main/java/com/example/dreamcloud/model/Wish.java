@@ -9,7 +9,7 @@ public class Wish {
     private String wishName;
     private String wishDescription;
     private Double wishPrice;
-    private byte[] wishPicture; // Add this field
+    private byte[] wishPicture;
     private int wishlistId;
 
     public Wish() {

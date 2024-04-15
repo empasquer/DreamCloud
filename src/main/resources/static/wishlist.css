@@ -8,6 +8,8 @@
 .wishes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
 
 }
 
@@ -26,17 +28,20 @@
     width: 20vw;
     height: 20vw;
     border-radius: 15px;
+
+}
+.wish a {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Center the content vertically */
     align-items: center; /* Center the content horizontally */
+    height: 100%;
 }
 
 .wish-name {
     flex-direction: column;
     justify-content: space-between; /* Center the content vertically */
     align-items: center; /* Center the content horizontally */
-    margin-bottom: 1rem;
 
 }
 .wish-description {
@@ -44,6 +49,12 @@
     margin-bottom: 5px;
 }
 
+.wish-picture {
+    width: 100%; /* Adjust the width and height as needed */
+    height: 60%;
+    object-fit: cover;
+
+}
 
 
 .wishlist-info-wrapper {

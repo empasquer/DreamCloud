@@ -42,7 +42,7 @@ public class WishRepository {
     public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
         String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
 
-        //Convert the profilePicture to a byte array if exists
+        //Convert the picture to a byte array if exists
         byte[] pictureData = profilePicture.orElse(null);
 
         jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
