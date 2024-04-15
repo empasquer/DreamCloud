@@ -11,7 +11,7 @@ CREATE TABLE profile (
                          profile_firstname VARCHAR(255) NOT NULL,
                          profile_lastname VARCHAR(255) NOT NULL,
                          profile_password VARCHAR(255) NOT NULL,
-                         profile_picture BLOB
+                         profile_picture LONGBLOB
 );
 
 DROP TABLE IF EXISTS wishlist;
@@ -31,7 +31,7 @@ CREATE TABLE wish (
                       wish_price double NOT NULL,
                       wish_picture LONGBLOB,
                       wishlist_id INT,
-                      FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id)
+                      FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id) ON DELETE CASCADE
 );
 
 
@@ -57,6 +57,6 @@ INSERT INTO wish (wish_name, wish_description, wish_price, wishlist_id) VALUES
                                                                             ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, 4),
                                                                             ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
 
-ALTER TABLE profile MODIFY COLUMN profile_picture LONGBLOB;
+
 
 
