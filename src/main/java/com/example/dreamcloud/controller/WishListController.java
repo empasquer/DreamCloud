@@ -7,6 +7,7 @@ import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class WishListController {
@@ -33,28 +33,38 @@ public class WishListController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/wishlist/{wishlistId}")
-    public String wishlist(@PathVariable int wishlistId, Model model, HttpSession session) {
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}")
+    public String wishlist(@PathVariable String profileUsername, @PathVariable int wishlistId, Model model, HttpSession session, HttpServletRequest request) {
+        // Check if user is logged in
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        if (!loggedIn) {
+            return "redirect:/login";
+        }
+
+        // Check if the user is authorized
+        boolean isAuthorized = authenticationService.checkIfAuthorized(request);
         model.addAttribute("loggedIn", loggedIn);
+        model.addAttribute("isAuthorized", isAuthorized);
 
         // Retrieve profile information
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
+        // Retrieve wishlist information
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
-        model.addAttribute("wishlist", wishlist);
+        if (wishlist == null) {
+            return "redirect:/login";
+        }
 
-
+        // Retrieve wishes for the wishlist
         List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
         wishlist.setWishes((ArrayList<Wish>) wishes);
 
+        model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishes", wishlist.getWishes());
 
         return "home/wishlist";
-
     }
-
     @GetMapping("/create_wishlist")
     public String createWishlist(Model model, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
@@ -69,7 +79,15 @@ public class WishListController {
     public String createWishlist(@RequestParam String title, @RequestParam String description, HttpSession session){
         String profileUsername = String.valueOf(session.getAttribute("username"));
         wishlistService.createWishlist(title,description, profileUsername);
-        return "redirect:/profile/" + profileUsername;
+        return "redirect:/"+ profileUsername + "/profile";
 }
+
+
+    @PostMapping("/delete-wishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session) {
+        wishlistService.deleteWishlist(wishlistId);
+        String profileUsername = String.valueOf(session.getAttribute("username"));
+        return "redirect:/"+ profileUsername + "/profile";
+    }
 
 }

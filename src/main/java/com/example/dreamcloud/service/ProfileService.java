@@ -11,17 +11,27 @@ import java.util.Optional;
 @Service
 public class ProfileService {
     @Autowired
-    ProfileRepository profileRespository;
+    private ProfileRepository profileRepository;
 
     public List<Profile> getProfiles() {
-        return profileRespository.getProfiles();
+        return profileRepository.getProfiles();
     }
 
     public Profile getProfileFromUsername(String profileUsername) {
-        return profileRespository.getProfileFromUsername(profileUsername);
+        return profileRepository.getProfileFromUsername(profileUsername);
     }
 
-    public void createProfile(String profileUsername, String profileFirstname, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
-        profileRespository.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, profilePicture);
+    public String createProfile(String profileUsername, String profileFirstname, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        // Check if a profile with the given username already exists
+        Profile existingProfile = profileRepository.getProfileFromUsername(profileUsername);
+
+        if (existingProfile != null) {
+            // Username is taken, return a message indicating so
+            return "Username taken";
+        } else {
+            // Proceed with creating the new profile
+            profileRepository.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, profilePicture);
+            return "Profile created successfully";
+        }
     }
 }
