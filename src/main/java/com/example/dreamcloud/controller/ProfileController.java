@@ -76,24 +76,22 @@ public class ProfileController {
 
     @PostMapping("/new_profile")
 
-    public String createProfile(Model model, @RequestParam String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") Optional<MultipartFile> profilePicture) {
+    public String createProfile(Model model, @RequestParam String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") MultipartFile profilePicture) {
         // Check if the username exists in the database
         Profile existingProfile = profileService.getProfileFromUsername(profileUsername);
         if (existingProfile != null) {
-            // Username is taken, return a message to the client
+            // Username taken
             model.addAttribute("message", "This username is taken");
-            return "home/create_profile"; // Return the same page with the message
+            return "home/create_profile"; // Returns same page with the message
         } else {
-            // Proceed with creating the new profile
-            // Convert profilePicture to byte array if present
-            byte[] pictureData = profilePicture.map(p -> {
+            byte[] pictureData = null;
+            if (!profilePicture.isEmpty()) {
                 try {
-                    return p.getBytes();
+                    pictureData = profilePicture.getBytes();
                 } catch (IOException e) {
-                    return null;
+                    return "redirect:/error";
                 }
-            }).orElse(null);
-
+            }
             profileService.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, Optional.ofNullable(pictureData));
             return "redirect:/login" ;
         }
