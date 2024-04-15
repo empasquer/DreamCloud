@@ -13,10 +13,10 @@
 <main >
 
     <section class="formular">
-        <a th:href="@{/wishlist/{wishlist}(wishlist=${wishlist.wishlistId})}" class="button-small"><i class="fas fa-arrow-left"></i></a>
+        <a th:href="@{/{profileUsername}(profileUsername = ${profile.profileUsername})/wishlist/{wishlist}(wishlist=${wishlist.wishlistId})}" class="button-small"><i class="fas fa-arrow-left"></i></a>
 
         <h1 th:text="'Add new wish to ' + ${wishlist.getWishlistTitle()}"></h1>
-        <form th:action="@{'/wishlist/' + ${wishlistId} + '/create_wish'}" method="post" enctype="multipart/form-data">
+        <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/create_wish'}" method="post" enctype="multipart/form-data">
             <div>
                 <label for="wishName">Name:</label>
                 <input type="text" id="wishName" name="wishName" required>

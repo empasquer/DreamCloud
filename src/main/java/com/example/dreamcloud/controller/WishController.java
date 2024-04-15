@@ -103,8 +103,10 @@ public class WishController {
     }
 
 
-    @GetMapping("/wishlist/{wishlistId}/create_wish")
-    public String createWish(Model model, HttpSession session, @PathVariable int wishlistId) {
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
+    public String createWish(Model model, HttpSession session,
+                             @PathVariable int wishlistId,
+                             @PathVariable String profileUsername) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
         // Retrieve profile information
@@ -119,25 +121,25 @@ public class WishController {
     }
 
 
-    @PostMapping("/wishlist/{wishlistId}/create_wish")
+    @PostMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
     public String createWish(@PathVariable int wishlistId,
+                             @PathVariable String profileUsername,
                              @RequestParam String wishName,
                              @RequestParam String wishDescription,
                              @RequestParam double wishPrice,
-                             @RequestParam("wishPicture") MultipartFile wishPicture,
+                             @RequestParam("wishPicture") Optional<MultipartFile> wishPicture,
                              HttpSession session) {
 
-        Profile profile = profileService.getProfileFromUsername(session.getAttribute("username").toString());
+        Profile profile = profileService.getProfileFromUsername(profileUsername);
 
 
-        byte[] pictureData = null;
-        if (!wishPicture.isEmpty()) {
+        byte[] pictureData = wishPicture.map(p -> {
             try {
-                pictureData = wishPicture.getBytes();
+                return p.getBytes();
             } catch (IOException e) {
-                // Handle IOException if necessary
+                return null;
             }
-        }
+        }).orElse(null);
 
         // Call the createWish method from WishService to create the wish
         wishService.createWish(wishName, wishDescription, wishPrice, Optional.ofNullable(pictureData), wishlistId);
