@@ -1,5 +1,4 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 .formular {
     display: flex;
@@ -10,10 +9,10 @@
     background-color: #19A7CE;
     color: #E1F0F6;
     margin-bottom: 5%;
+    margin-top: 5%;
     width: auto;
-
+    position: relative;
 }
-
 
 .formular h1{
     color: #E1F0F6;
@@ -25,8 +24,6 @@
     flex-direction: column;
     align-items: center;
     justify-items: center;
-
-
 }
 
 .formular form div > * {
@@ -50,12 +47,17 @@
     margin-top: 15%;
     justify-items: center;
     align-items: center;
-
+    font-family: Rubik, sans-serif;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
 /*not used v*/
-/* Login*/
+/* Login
 .login-form {
     display: flex;
     flex-direction: column;
@@ -65,10 +67,10 @@
     background-color: #19A7CE;
     color: #E1F0F6;
     margin-bottom: 5%;
+    margin-top: 5%;
     width: auto;
-
+    position: relative;
 }
-
 
 .login-form h1{
     color: #E1F0F6;
@@ -80,8 +82,6 @@
     flex-direction: column;
     align-items: center;
     justify-items: center;
-
-
 }
 
 .login-form form div > * {
@@ -103,6 +103,13 @@
     margin-top: 15%;
     justify-items: center;
     align-items: center;
+    font-family: Rubik, sans-serif;
+    font-size: medium;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 
 }
 

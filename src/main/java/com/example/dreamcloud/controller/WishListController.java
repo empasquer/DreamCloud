@@ -79,7 +79,7 @@ public class WishListController {
     public String createWishlist(@RequestParam String title, @RequestParam String description, HttpSession session){
         String profileUsername = String.valueOf(session.getAttribute("username"));
         wishlistService.createWishlist(title,description, profileUsername);
-        return "redirect:/profile/" + profileUsername;
+        return "redirect:/"+ profileUsername + "/profile";
 }
 
 
@@ -87,7 +87,7 @@ public class WishListController {
     public String deleteWishlist(@PathVariable int wishlistId, HttpSession session) {
         wishlistService.deleteWishlist(wishlistId);
         String profileUsername = String.valueOf(session.getAttribute("username"));
-        return "redirect:/profile/" + profileUsername;
+        return "redirect:/"+ profileUsername + "/profile";
     }
 
 }

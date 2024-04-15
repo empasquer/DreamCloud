@@ -1,37 +1,66 @@
-.create-profile-button {
-    display: flex; /* Add display flex for centering */
-    justify-content: center; /* Center the button horizontally */
-    margin-top: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-direction: row;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-.index-button-bg {
-    width: 60vw;
-    border-radius: 15px;
+.section {
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    color: #E1F0F6;
     background-color: #19A7CE;
-    margin: 80px 100px;
-    padding: 40px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    width: 40%;
+    height: 300px;
 }
 
-.button-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.section h1 {
+    color: #FEFF86;
+    margin-bottom: 20px;
 }
 
-.button {
-    display: inline-block;
-    margin-right: 10px; /* Adjust margin between buttons */
+.section p {
+    font-size: large;
 }
-.button-link {
-    padding: 10px 20px; /* Adjust padding */
+
+.heading-section,
+.button-section {
+    padding: 20px;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    height: 100%;
+}
+
+.button-section a {
+    padding: 10px 20px;
     border-radius: 15px;
     background-color: #B0DAFF;
-    border: none;
+    width: 140px;
+    height: 70px;
+    color: #0e3e54;
+    cursor: pointer;
+    font-size: large;
+    font-family: Rubik, sans-serif !important;
     text-decoration: none;
-    color: #146C94;
-    font-weight: bold; /* Optionally make the font bold */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.button-link:hover {
-    background-color: #8BC9FF; /* Change background color on hover */
+.button-section a:hover {
+    background-color: #FEFF86;
 }
