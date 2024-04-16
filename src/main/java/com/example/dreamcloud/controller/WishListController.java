@@ -40,10 +40,12 @@ public class WishListController {
         if (!loggedIn) {
             return "redirect:/login";
         }
+        model.addAttribute("loggedIn", loggedIn);
+        model.addAttribute("profileUsername", profileUsername);
 
+        model.addAttribute("profileUsername", profileUsername);
         // Check if the user is authorized
         boolean isAuthorized = authenticationService.checkIfAuthorized(request);
-        model.addAttribute("loggedIn", loggedIn);
         model.addAttribute("isAuthorized", isAuthorized);
 
         // Retrieve profile information
@@ -83,10 +85,9 @@ public class WishListController {
 }
 
 
-    @PostMapping("/delete-wishlist/{wishlistId}")
-    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session) {
+    @PostMapping("/{profileUsername}/delete-wishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable String profileUsername, @PathVariable int wishlistId, HttpSession session) {
         wishlistService.deleteWishlist(wishlistId);
-        String profileUsername = String.valueOf(session.getAttribute("username"));
         return "redirect:/"+ profileUsername + "/profile";
     }
 

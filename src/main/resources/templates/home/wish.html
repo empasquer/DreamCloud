@@ -35,9 +35,22 @@
         </article>
         <article class="wish-wrapper">
             <div class="wish">
-                <img src="/assets/wish_dummy.png" class="wish-photo">
+                <img class="wish-photo"
+                     th:if="${wish.wishPictureAsBase64 != null}"
+                     th:src="'data:image/jpeg;base64,' + ${wish.wishPictureAsBase64}"
+                     alt="Wish Picture">
+
+                <img class="wish-photo"
+                     th:unless="${wish.wishPictureAsBase64 != null}"
+                     src="/assets/wish_dummy.jpg"
+                     alt="Default wish Picture">
+
                 <h1 class="wish-name" th:text="${wish.wishName}"></h1>
-                <p class="wish-desc" th:text="${wish.wishDescription}"></p>
+
+                <th:block th:if="${!wish.wishDescription.isEmpty()}" >
+                    <p class="wish-desc" th:text="${wish.wishDescription}"></p>
+                </th:block>
+
                 <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
 
             </div>

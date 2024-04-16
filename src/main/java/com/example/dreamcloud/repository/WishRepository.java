@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class WishRepository {
@@ -38,4 +39,21 @@ public class WishRepository {
     }
 
 
+    public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
+
+        //Convert the picture to a byte array if exists
+        byte[] pictureData = profilePicture.orElse(null);
+
+        jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
+    }
+
+    public void createWish(String name, String description, double price, Optional<byte[]> wishPicture, int wishlistId) {
+        String query = "INSERT INTO wish(wish_name, wish_description, wish_price, wish_picture, wishlist_id) VALUES (?,?,?,?,?);";
+
+        // Convert the wishPicture to a byte array if exists
+        byte[] pictureData = wishPicture.orElse(null);
+
+        jdbcTemplate.update(query, name, description, price, pictureData, wishlistId);
+    }
 }

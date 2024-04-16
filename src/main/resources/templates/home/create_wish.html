@@ -2,11 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title th:text="'Add new wish to ' + ${wishlist.wishlistTitle}"></title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/create_profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        textarea {
+            width: 100%;
+            height: 100px; /* Adjust the height as needed */
+            overflow-y: auto;
+            resize: none; /* Prevent resizing */
+            padding: 1rem;
+            border-radius: 15px;
+            border-style: none;
+            color: #0e3e54;
+            background-color: #E1F0F6;
+        }
+    </style>
+
 </head>
 <body>
+
 <div th:insert="~{home/header :: header}"></div>
+
+<main>
+
+    <section class="create-profile">
+
+        <div class="back-arrow-container">
+        <a class="back-arrow" th:href="@{/{profileUsername}/wishlist/{wishlist}(wishlist=${wishlist.wishlistId}, profileUsername = ${profileUsername})}"><i class="fas fa-arrow-left"></i></a>
+        </div>
+
+        <h1 th:text="'Add new wish to ' + ${wishlist.getWishlistTitle()}"></h1>
+        <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/create_wish'}" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="wishName">Name:</label>
+                    <input type="text" id="wishName" name="wishName" required>
+                </div>
+                <div class="form-group">
+                    <label for="wishPrice">Price:</label>
+                    <input type="number" id="wishPrice" name="wishPrice" step="0.01" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="wishDescription">Description:</label>
+                    <textarea class="description" id="wishDescription" name="wishDescription"></textarea>
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="upload">
+                    <p>Upload your wish picture:</p>
+                    <label for="wishPicture" class="custom-file-upload">Upload</label>
+                    <input type="file" id="wishPicture" name="wishPicture" accept="image/*">
+                </div>
+            </div>
+
+            <div>
+                <button class="submit-button" type="submit">Save</button>
+            </div>
+
+        </form>
+    </section>
+
+</main>
+
 <div th:insert="~{home/footer :: footer}"></div>
 </body>
 </html>
