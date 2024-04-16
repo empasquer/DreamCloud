@@ -15,7 +15,7 @@ input {
 
 .share-banner-wrapper {
     display : flex;
-    justify-content: space-between;
+    gap: 2rem;
     background-color: #19A7CE;
     color: #E1F0F6;
     border-radius: 15px 15px 0 0 ;

@@ -102,12 +102,14 @@ public class WishListController {
         return "/home/share-popup";
     }
 
+/*
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/close")
     public String closePopup(@PathVariable String profileUsername, @PathVariable int wishlistId) {
 
         // Redirect back to the original wishlist page
         return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
     }
+*/
 
 
     @GetMapping("/create_wishlist")

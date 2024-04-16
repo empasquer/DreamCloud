@@ -20,14 +20,14 @@
                         class="fas fa-arrow-left"></i></a>
             </div>
             <h1 th:text="'Share '+ ${wishlist.wishlistTitle}"></h1>
-            <div class="share-forms-wrapper">
+            <!--<div class="share-forms-wrapper">
                 <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/close'}" method="get">
                     <input type="hidden" name="profileUsername" th:value="${profileUsername}">
                     <input type="hidden" name="wishlistId" th:value="${wishlistId}">
 
                     <button type="submit"  class="button small"><i class="fas fa-times"></i></button>
                 </form>
-            </div>
+            </div>-->
         </article>
         <article class="share">
             <p>Here is the link to the wishlist you want to share:</p>

@@ -30,7 +30,7 @@
     <section class="create-profile">
 
         <div class="back-arrow-container">
-        <a class="back-arrow" th:href="@{/{profileUsername}/wishlist/{wishlist}(wishlist=${wishlist.wishlistId}, profileUsername = ${profileUsername})}"><i class="fas fa-arrow-left"></i></a>
+        <a class="small button" th:href="@{/{profileUsername}/wishlist/{wishlist}(wishlist=${wishlist.wishlistId}, profileUsername = ${profileUsername})}"><i class="fas fa-arrow-left"></i></a>
         </div>
 
         <h1 th:text="'Add new wish to ' + ${wishlist.getWishlistTitle()}"></h1>
