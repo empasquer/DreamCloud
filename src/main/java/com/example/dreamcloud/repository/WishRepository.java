@@ -56,4 +56,14 @@ public class WishRepository {
 
         jdbcTemplate.update(query, name, description, price, pictureData, wishlistId);
     }
+
+    public void editWish(int wishId, String name, String description, double price, Optional<byte[]> wishPicture) {
+        String query = "UPDATE wish SET wish_name = ?, wish_description = ?, wish_price = ?, wish_picture = ? WHERE wish_id = ?";
+
+        // Convert the wishPicture to a byte array if it exists
+        byte[] pictureData = wishPicture.orElse(null);
+
+        jdbcTemplate.update(query, name, description, price, pictureData, wishId);
+    }
+
 }

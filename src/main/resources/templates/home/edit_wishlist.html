@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CreateWishlist</title>
+    <title>EditWishlist</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="stylesheet" type="text/css" href="/create_wishlist.css">
     <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
@@ -19,7 +19,6 @@
 
         <h1>Edit your wishlist</h1>
         <form th:action="@{'/' + ${profileUsername} + '/edit-wishlist/' + ${wishlistId}}" method="post">
-            <input type="hidden" name="profileUsername" th:value="${profile.profileUsername}">
             <div>
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" th:value="${wishlist.wishlistTitle}" required>

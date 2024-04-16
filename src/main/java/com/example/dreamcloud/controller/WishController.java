@@ -165,6 +165,61 @@ public class WishController {
         return "redirect:/" + profile.getProfileUsername() + "/wishlist/" + wishlistId;
     }
 
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}/edit_wish")
+    public String showExistingWish(@PathVariable int wishId, @PathVariable int wishlistId, Model model, HttpSession session) {
+        // Check if the user is logged in
+        if (!authenticationService.isUserLoggedIn(session)) {
+            return "redirect:/login";
+        }
+
+        // Retrieve the logged-in user's profile
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+
+        //Retrieve wishlist information
+        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+        model.addAttribute("wishlist", wishlist);
+
+        // Retrieve the wishlist to be edited
+        Wish wish = wishService.getWishFromWishId(wishId);
+        model.addAttribute("wish", wish);
+
+        return "home/edit_wish";
+    }
+
+    @PostMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}/edit_wish")
+    public String editWish(@PathVariable int wishlistId,
+                           @PathVariable int wishId,
+                           @RequestParam String wishName,
+                           @RequestParam String wishDescription,
+                           @RequestParam double wishPrice,
+                           @RequestParam("wishPicture") MultipartFile wishPicture,
+                           HttpSession session) {
+        // Check if the user is logged in
+        if (!authenticationService.isUserLoggedIn(session)) {
+            return "redirect:/login";
+        }
+
+        // Retrieve the existing wish to get its picture data
+        Wish existingWish = wishService.getWishFromWishId(wishId);
+        byte[] existingPictureData = existingWish.getWishPicture();
+
+        byte[] pictureData = existingPictureData; // Initialize with existing picture data
+
+        if (!wishPicture.isEmpty()) {
+            try {
+                pictureData = wishPicture.getBytes(); // Update picture data if new picture is uploaded
+            } catch (IOException e) {
+                return "redirect:/error";
+            }
+        }
+
+        // Update wishlist
+        wishService.editWish(wishId, wishName, wishDescription, wishPrice, Optional.of(pictureData));
+        String profileUsername = (String) session.getAttribute("username");
+        return "redirect:/" + profileUsername + "/wishlist/" + wishlistId + "/wish/" + wishId;
+    }
+
 
 
 }
