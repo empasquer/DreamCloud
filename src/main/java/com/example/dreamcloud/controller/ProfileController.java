@@ -1,6 +1,7 @@
 package com.example.dreamcloud.controller;
 
 import com.example.dreamcloud.model.Profile;
+import com.example.dreamcloud.model.Wish;
 import com.example.dreamcloud.model.Wishlist;
 import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -63,6 +65,13 @@ public class ProfileController {
         return "home/profile";
     }
 
+    @PostMapping("/{profileUsername}/delete_profile")
+    public String deleteProfile(@PathVariable String profileUsername, HttpSession session) {
+        profileService.deleteProfile(profileUsername);
+        session.invalidate();
+        return "redirect:/";
+    }
+
 
     @GetMapping("/create_profile")
     public String newProfile(Model model, HttpSession session) {
@@ -96,5 +105,49 @@ public class ProfileController {
             return "redirect:/login" ;
         }
     }
+
+    @GetMapping("/{profileUsername}/edit_profile")
+    public String showExistingProfile(@PathVariable String profileUsername, Model model, HttpSession session) {
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        Profile loggedInProfile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", loggedInProfile);
+
+        return "home/edit_profile";
+    }
+
+    @PostMapping("/{profileUsername}/edit_profile")
+    public String editProfile(@PathVariable String profileUsername, @RequestParam String profileFirstname, @RequestParam String profileLastName, @RequestParam String profilePassword, @RequestParam("profilePicture") MultipartFile profilePicture, HttpSession session) {
+        // Check if user is logged in
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        //Basically checks if there is a picture uploaded or not, if not it is just null
+        Profile existingProfile = profileService.getProfileFromUsername(profileUsername);
+        byte[] pictureData = existingProfile.getProfilePicture();
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            try {
+                pictureData = profilePicture.getBytes();
+            } catch (IOException e) {
+                return "redirect:/error";
+            }
+        }
+
+        Optional<byte[]> pictureOptional;
+        if (pictureData != null) {
+            pictureOptional = Optional.of(pictureData);
+        } else {
+            pictureOptional = Optional.empty();
+        }
+
+        profileService.editProfile(profileUsername, profileFirstname, profileLastName, profilePassword, pictureOptional);
+        return "redirect:/" + profileUsername + "/profile";
+    }
+
 
 }

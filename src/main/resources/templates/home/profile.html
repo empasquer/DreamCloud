@@ -14,20 +14,36 @@
 <main>
     <section>
         <article class="profile-info-wrapper">
-            <img class="profile-picture"
-                 th:if="${profile.profilePictureAsBase64 != null}"
-                 th:src="'data:image/jpeg;base64,' + ${profile.profilePictureAsBase64}"
-                 alt="Profile Picture">
-
-            <img class="profile-picture"
-                 th:unless="${profile.profilePictureAsBase64 != null}"
-                 src="/assets/default_user.jpg"
-                 alt="Default Profile Picture">
-
             <div class="profile-info">
-                <h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></h1>
-                <p th:text="'@' + ${profile.profileUsername}"></p>
+                <img class="profile-picture"
+                     th:if="${profile.profilePictureAsBase64 != null}"
+                     th:src="'data:image/jpeg;base64,' + ${profile.profilePictureAsBase64}"
+                     alt="Profile Picture">
+
+                <img class="profile-picture"
+                     th:unless="${profile.profilePictureAsBase64 != null}"
+                     src="/assets/default_user.jpg"
+                     alt="Default Profile Picture">
+
+                <div>
+                    <h1 th:text="${profile.profileFirstname} + ' ' + ${profile.profileLastname}"></h1>
+                    <p th:text="'@' + ${profile.profileUsername}"></p>
+                </div>
             </div>
+
+            <th:block th:if="${isAuthorized}">
+                <div class="profile-forms-wrapper">
+                    <form th:action="@{'/' + ${profileUsername} + '/edit_profile'}" method="get">
+                        <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
+                    </form>
+
+                    <form th:action="@{'/' + ${profileUsername} + '/delete_profile'}"  method="post">
+                        <button type="button" id="actualDeleteButton" class="button small" onclick="showDeleteConfirmation()"><i class="fas fa-trash"></i></button>
+                        <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
+                        <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
+                    </form>
+                </div>
+            </th:block>
 
 
         </article>
@@ -56,5 +72,24 @@
 </main>
 
 <div th:insert="~{home/footer :: footer}"></div>
+
+<script>
+    function showDeleteConfirmation() {
+        let confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        let confirmDeleteMessage = document.getElementById("confirmDeleteMessage");
+        let actualDeleteButton = document.getElementById("actualDeleteButton");
+
+        if (confirmDeleteButton.style.display === "none") {
+            confirmDeleteButton.style.display = "inline-block";
+            confirmDeleteMessage.style.display = "inline-block";
+            actualDeleteButton.style.display = "none";
+        } else {
+            confirmDeleteButton.style.display = "none";
+            confirmDeleteMessage.style.display = "none";
+            actualDeleteButton.style.display = "inline-block";
+        }
+    }
+</script>
+
 </body>
 </html>

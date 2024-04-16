@@ -167,20 +167,17 @@ public class WishController {
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}/edit_wish")
     public String showExistingWish(@PathVariable int wishId, @PathVariable int wishlistId, Model model, HttpSession session) {
-        // Check if the user is logged in
+
         if (!authenticationService.isUserLoggedIn(session)) {
             return "redirect:/login";
         }
 
-        // Retrieve the logged-in user's profile
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        //Retrieve wishlist information
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
         model.addAttribute("wishlist", wishlist);
 
-        // Retrieve the wishlist to be edited
         Wish wish = wishService.getWishFromWishId(wishId);
         model.addAttribute("wish", wish);
 
@@ -195,27 +192,30 @@ public class WishController {
                            @RequestParam double wishPrice,
                            @RequestParam("wishPicture") MultipartFile wishPicture,
                            HttpSession session) {
-        // Check if the user is logged in
+
         if (!authenticationService.isUserLoggedIn(session)) {
             return "redirect:/login";
         }
 
-        // Retrieve the existing wish to get its picture data
+        //Basically checks if there is a picture uploaded or not, if not it is just null
         Wish existingWish = wishService.getWishFromWishId(wishId);
-        byte[] existingPictureData = existingWish.getWishPicture();
-
-        byte[] pictureData = existingPictureData; // Initialize with existing picture data
-
-        if (!wishPicture.isEmpty()) {
+        byte[] pictureData = existingWish.getWishPicture();
+        if (wishPicture != null && !wishPicture.isEmpty()) {
             try {
-                pictureData = wishPicture.getBytes(); // Update picture data if new picture is uploaded
+                pictureData = wishPicture.getBytes();
             } catch (IOException e) {
                 return "redirect:/error";
             }
         }
+        Optional<byte[]> pictureOptional;
+        if (pictureData != null) {
+            pictureOptional = Optional.of(pictureData);
+        } else {
+            pictureOptional = Optional.empty();
+        }
 
-        // Update wishlist
-        wishService.editWish(wishId, wishName, wishDescription, wishPrice, Optional.of(pictureData));
+
+        wishService.editWish(wishId, wishName, wishDescription, wishPrice, pictureOptional);
         String profileUsername = (String) session.getAttribute("username");
         return "redirect:/" + profileUsername + "/wishlist/" + wishlistId + "/wish/" + wishId;
     }

@@ -42,4 +42,19 @@ public class ProfileRepository {
         }
     }
 
+    public void deleteProfile(String profileUsername) {
+        String query = "DELETE FROM profile WHERE profile_username = ?";
+        jdbcTemplate.update(query,profileUsername);
+    }
+
+    public void editProfile(String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        String query = "UPDATE profile SET profile_firstname=?, profile_lastname=?, profile_password=?, profile_picture=? WHERE profile_username=?";
+
+        //Convert the profilePicture to a byte array if exists
+        byte[] pictureData = profilePicture.orElse(null);
+        jdbcTemplate.update(query, profileFirstName, profileLastName, profilePassword, pictureData, profileUsername);
+    }
+
+
+
 }

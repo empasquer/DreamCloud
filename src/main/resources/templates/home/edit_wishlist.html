@@ -15,8 +15,6 @@
 <main >
 
     <section class="formular">
-        <a th:href="@{'/' + ${profileUsername}+ '/profile'}" class="button-small"><i class="fas fa-arrow-left"></i></a>
-
         <h1>Edit your wishlist</h1>
         <form th:action="@{'/' + ${profileUsername} + '/edit-wishlist/' + ${wishlistId}}" method="post">
             <div>

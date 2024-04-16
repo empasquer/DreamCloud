@@ -123,8 +123,9 @@ public class WishListController {
     }
 
     @PostMapping("/create_wishlist")
-    public String createWishlist(@RequestParam String title, @RequestParam String description, HttpSession session){
+    public String createWishlist(Model model, @RequestParam String title, @RequestParam String description, HttpSession session){
         String profileUsername = String.valueOf(session.getAttribute("username"));
+        /*model.addAttribute(profileUsername);*/
         wishlistService.createWishlist(title,description, profileUsername);
         return "redirect:/"+ profileUsername + "/profile";
 }
@@ -138,17 +139,14 @@ public class WishListController {
 
     @GetMapping("/{profileUsername}/edit-wishlist/{wishlistId}")
     public String showExistingWishlist(@PathVariable int wishlistId, Model model, HttpSession session) {
-        // Check if the user is logged in
         boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
         if (!isLoggedIn) {
             return "redirect:/login";
         }
 
-        // Retrieve the logged-in user's profile
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        // Retrieve the wishlist to be edited
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
         model.addAttribute("wishlist", wishlist);
 
@@ -160,7 +158,6 @@ public class WishListController {
     public String editWishlist(@PathVariable int wishlistId,
                                @RequestParam String title, @RequestParam String description,
                                HttpSession session) {
-        //Check if user is logged in
         boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
         if (!isLoggedIn) {
             return "redirect:/login";
@@ -172,7 +169,6 @@ public class WishListController {
             return "redirect:/login";
         }
 
-        //Update wishlist
         wishlistService.editWishlist(profileUsername, wishlistId, title, description);
         return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
     }

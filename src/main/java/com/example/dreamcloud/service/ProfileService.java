@@ -34,4 +34,13 @@ public class ProfileService {
             return "Profile created successfully";
         }
     }
+
+    public void deleteProfile(String profileUsername) {
+        profileRepository.deleteProfile(profileUsername);
+    }
+
+    public void editProfile(String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
+        profileRepository.editProfile(profileUsername, profileFirstName, profileLastName, profilePassword, profilePicture);
+    }
+
 }

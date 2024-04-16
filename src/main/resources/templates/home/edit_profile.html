@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create profile</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/create_profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+</head>
+<body>
+
+<div th:replace="~{home/header :: header}"></div>
+<main>
+    <section class="create-profile">
+
+        <h1>Edit your profile</h1>
+
+        <form id="edit_profile" th:action="@{'/' + ${profileUsername} + '/edit_profile'}" method="post" enctype="multipart/form-data">
+
+            <!-- First row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstname">First name:</label> <br>
+                    <input type="text" id="firstname" name="profileFirstname" th:value="${profile.profileFirstname}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Last name:</label> <br>
+                    <input type="text" id="lastname" name="profileLastName" th:value="${profile.profileLastname}" required>
+                </div>
+            </div>
+
+            <!-- Second row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="username">Username:</label> <br>
+                    <input type="text" id="username" name="profileUsername" th:value="${profile.profileUsername}" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label> <br>
+                    <input type="password" id="password" name="profilePassword" th:value="${profile.profilePassword}" required>
+                </div>
+            </div>
+
+            <div th:if="${message}" class="error-message">
+                <p th:text="${message}"></p>
+            </div>
+
+            <!-- Upload pic -->
+            <div class="upload">
+                <div class="upload">
+                    <p>Upload your profile picture:</p>
+                    <label for="profilePicture" class="custom-file-upload">Upload</label>
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*" th:value="${profile.profilePicture}">
+                </div>
+            </div>
+
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+    </section>
+</main>
+
+<div th:insert="~{home/footer :: footer}"></div>
+</body>
+</html>

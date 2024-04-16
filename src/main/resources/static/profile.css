@@ -5,11 +5,23 @@
     border-radius: 15px 15px 0 0 ;
     padding :2rem;
     display: flex;
-    /*    justify-content: space-evenly;*/
-    gap: 3rem;
+    justify-content: space-between;
+    /*gap: 3rem;*/
     align-items: center;
 
 }
+
+.profile-forms-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
 
 .wishlists-wrapper {
     color: #0e3e54;

@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>CreateWishlist</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="create_wishlist.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/create_wishlist.css">
     <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
 
 <div th:insert="~{home/header :: header}"></div>
 
-<main >
+<main>
+    <section class=formular>
 
-    <section class="formular">
-        <a th:href="@{/profile/{username}(username=${profile.profileUsername})}" class="button-small"><i class="fas fa-arrow-left"></i></a>
+        <div class="back-arrow-container">
+            <a th:href="@{/{profileUsername}/profile (profileUsername = ${profile.profileUsername})}" class="small button">
+                <i class="fas fa-arrow-left"></i></a>
+        </div>
 
-        <h1>Create your wishlist</h1>
-        <form action="/create_wishlist" method="post">
+        <h1>Create a wishlist</h1>
+
+        <form id="formular" action="/create_wishlist" method="post">
             <div>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
@@ -29,7 +34,7 @@
             </div>
 
             <div>
-            <button class="button" type="submit">Save</button>
+                <button class="button" type="submit">Save</button>
             </div>
 
         </form>
