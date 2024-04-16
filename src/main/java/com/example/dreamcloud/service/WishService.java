@@ -34,4 +34,8 @@ public class WishService {
     public void createWish(String name, String description, double price, Optional<byte[]> wishPicture, int wishlistId) {
         wishRepository.createWish(name, description, price, wishPicture, wishlistId);
     }
+
+    public void editWish(int wishId, String name, String description, double price, Optional<byte[]> wishPicture) {
+        wishRepository.editWish(wishId, name, description, price, wishPicture);
+    }
 }

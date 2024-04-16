@@ -136,4 +136,51 @@ public class WishListController {
         return "redirect:/"+ profileUsername + "/profile";
     }
 
+    @GetMapping("/{profileUsername}/edit-wishlist/{wishlistId}")
+    public String showExistingWishlist(@PathVariable int wishlistId, Model model, HttpSession session) {
+        // Check if the user is logged in
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        // Retrieve the logged-in user's profile
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+
+        // Retrieve the wishlist to be edited
+        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+        model.addAttribute("wishlist", wishlist);
+
+        return "home/edit_wishlist";
+    }
+
+
+    @PostMapping("/{profileUsername}/edit-wishlist/{wishlistId}")
+    public String editWishlist(@PathVariable int wishlistId,
+                               @RequestParam String title, @RequestParam String description,
+                               HttpSession session) {
+        //Check if user is logged in
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        //Bliver nødt til at gøre det sådan da den eller sætter username til null
+        String profileUsername = (String) session.getAttribute("username");
+        if (profileUsername == null) {
+            return "redirect:/login";
+        }
+
+        //Update wishlist
+        wishlistService.editWishlist(profileUsername, wishlistId, title, description);
+        return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
+    }
+
+
+
+
+
+
+
 }
