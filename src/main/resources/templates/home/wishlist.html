@@ -27,7 +27,7 @@
             </div>
             <th:block th:if="${isAuthorized}">
             <div class="wishlist-forms-wrapper">
-                <form  method="post">
+                <form  th:action="@{'/' + ${profileUsername} +'/edit-wishlist/' + ${wishlist.getWishlistId()}}" method="get">
                     <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
                 </form>
 

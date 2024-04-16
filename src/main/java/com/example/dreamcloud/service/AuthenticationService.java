@@ -21,6 +21,7 @@ public class AuthenticationService {
         if (profile != null) {
             if (password.equals(profile.getProfilePassword())) {
                 session.setAttribute("loggedIn", true); // Set "loggedIn" attribute in session
+                session.setAttribute("username", username); // Set "username" attribute in session
                 return true; // Authentication successful
             } else {
                 return false; // Password mismatch

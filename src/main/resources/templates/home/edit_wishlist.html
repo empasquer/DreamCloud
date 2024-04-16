@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CreateWishlist</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/create_wishlist.css">
+    <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+
+</head>
+<body>
+
+<div th:insert="~{home/header :: header}"></div>
+
+<main >
+
+    <section class="formular">
+        <a th:href="@{'/' + ${profileUsername}+ '/profile'}" class="button-small"><i class="fas fa-arrow-left"></i></a>
+
+        <h1>Edit your wishlist</h1>
+        <form th:action="@{'/' + ${profileUsername} + '/edit-wishlist/' + ${wishlistId}}" method="post">
+            <input type="hidden" name="profileUsername" th:value="${profile.profileUsername}">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" th:value="${wishlist.wishlistTitle}" required>
+
+                <label for="description">Description:</label>
+                <textarea class="description" id="description" name="description" th:text="${wishlist.wishlistDescription}"></textarea>
+
+            </div>
+
+            <div>
+                <button class="button" type="submit">Save</button>
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<div th:insert="~{home/footer :: footer}"></div>
+</body>
+</html>
