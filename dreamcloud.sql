@@ -30,12 +30,17 @@ CREATE TABLE wish (
                       wish_description VARCHAR(255),
                       wish_price double NOT NULL,
                       wish_picture LONGBLOB,
-                      wish_is_reserved boolean,
-                      wish_reserved_by_username VARCHAR(255),
                       wishlist_id INT,
                       FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id) ON DELETE CASCADE
 );
 
+CREATE TABLE reservation (
+                             reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+                             wish_id INT,
+                             profile_username VARCHAR(255),
+                             FOREIGN KEY (wish_id) REFERENCES wish(wish_id) ON DELETE CASCADE,
+                             FOREIGN KEY (profile_username) REFERENCES profile(profile_username)
+);
 
 INSERT INTO profile (profile_firstname, profile_lastname, profile_username, profile_password) VALUES
                                                                                                   ('John', 'Doe', 'john_doe', 'password123'),
@@ -48,19 +53,25 @@ INSERT INTO wishlist (wishlist_title, wishlist_description, profile_username) VA
                                                                                   ('Gift Ideas', 'Ideas for gifts to buy for friends', 'alice_smith'),
                                                                                   ('Home Improvement', 'Items to improve my home', 'alice_smith');
 
-
-INSERT INTO wish (wish_name, wish_description, wish_price, wish_is_reserved, wish_reserved_by_username,  wishlist_id) VALUES
-                                                                                                                          ('Smartphone', 'iPhone 12 Pro', 6666.63, false, null,  1),
-                                                                                                                          ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, true, 'alice_smith', 1),
-                                                                                                                          ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, false, null, 2),
-                                                                                                                          ('Portable Charger', 'Anker PowerCore 10000', 209.93, true, 'alice_smith',  2),
-                                                                                                                          ('Books', 'Bestsellers for reading', 333.25, false, null, 3),
-                                                                                                                          ('Perfume', 'Chanel No. 5', 666.63, true, 'john_doe', 3),
-                                                                                                                          ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, false, null,  4),
-                                                                                                                          ('Indoor Plants', 'Assorted indoor plants', 225.00, true, 'john_doe',  4);
-
-
+INSERT INTO wish (wish_name, wish_description, wish_price,  wishlist_id)
+VALUES
+    ('Smartphone', 'iPhone 12 Pro', 6666.63, 1),
+    ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, 1),
+    ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, 2),
+    ('Portable Charger', 'Anker PowerCore 10000', 209.93, 2),
+    ('Books', 'Bestsellers for reading', 333.25, 3),
+    ('Perfume', 'Chanel No. 5', 666.63, 3),
+    ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, 4),
+    ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
 
 
-SELECT * FROM wish where wish_is_reserved = true;
+INSERT INTO reservation (wish_id, profile_username)
+VALUES
+    (2, 'alice_smith'),
+    (4, 'alice_smith'),
+    (6, 'john_doe'),
+    (8, 'john_doe');
+
+
+
 

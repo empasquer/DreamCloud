@@ -1,5 +1,6 @@
 package com.example.dreamcloud.repository;
 
+import com.example.dreamcloud.model.Profile;
 import com.example.dreamcloud.model.Wish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,11 +28,39 @@ public class WishRepository {
         return jdbcTemplate.query(query, rowMapper, wishlistId);
     }
 
+
     public Wish getWishFromWishId(int wishId) {
-        String query = "SELECT * FROM wish WHERE wish_id = ?;";
-        RowMapper<Wish> rowMapper = new BeanPropertyRowMapper<>(Wish.class);
-        return jdbcTemplate.queryForObject(query, rowMapper, wishId);
+        String query = "SELECT * FROM wish w\n" +
+                "LEFT JOIN reservation r ON w.wish_id = r.wish_id\n" +
+                "left JOIN profile p ON r.profile_username = p.profile_username" +
+                " where w.wish_id=?";
+
+        return jdbcTemplate.queryForObject(query, new Object[]{wishId}, (rs, rowNum) -> {
+            Wish wish = new Wish();
+            wish.setWishId(rs.getInt("wish_id"));
+            wish.setWishName(rs.getString("wish_name"));
+            wish.setWishDescription(rs.getString("wish_description"));
+            wish.setWishPrice(rs.getDouble("wish_price"));
+            wish.setWishPicture(rs.getBytes("wish_picture"));
+            wish.setWishlistId(rs.getInt("wishlist_id"));
+
+
+            // Check if there is a profile associated with the wish
+            String profileUsername = rs.getString("profile_username");
+            if (profileUsername != null) {
+                Profile profile = new Profile();
+                profile.setProfileUsername(profileUsername);
+                wish.setWishReservedBy(profile);
+                wish.setWishIsReserved(true);
+            } else {
+                // No profile associated with the wish
+                wish.setWishIsReserved(false);
+            }
+
+            return wish;
+        });
     }
+
 
     public void deleteWishFromWishId(int wishId) {
         String query = "DELETE FROM wish WHERE wish_id = ?;";
@@ -58,12 +87,14 @@ public class WishRepository {
     }
 
     public void reserveWish(String reservedByUsername, int wishId) {
-        String query = "UPDATE wish set wish_is_reserved = ?,  wish_reserved_by_username = ? where wish_id = ?";
-        jdbcTemplate.update(query,true, reservedByUsername, wishId);
+        String query = "INSERT INTO reservation (wish_id, profile_username) VALUES (?, ?)";
+        jdbcTemplate.update(query, wishId, reservedByUsername);
     }
+
+
     public void unReserveWish( int wishId) {
-        String query = "UPDATE wish set wish_is_reserved = ?,  wish_reserved_by_username = ? where wish_id = ?";
-        jdbcTemplate.update(query,false, null, wishId);
+        String query = "DELETE FROM reservation where wish_id  =?";
+        jdbcTemplate.update(query, wishId);
     }
 
 

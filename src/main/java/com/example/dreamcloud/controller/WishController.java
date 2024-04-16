@@ -69,8 +69,8 @@ public class WishController {
         // Retrieve wish information
         Wish wish = wishService.getWishFromWishId(wishId);
         System.out.println(session.getAttribute("username"));
-        System.out.println(wish.getWishReservedByUsername());
-        System.out.println(String.valueOf(session.getAttribute("username")).equals(wish.getWishReservedByUsername()));
+        System.out.println(wish.getWishReservedBy());
+        System.out.println(String.valueOf(session.getAttribute("username")).equals(wish.getWishReservedBy()));
 
         /*int wishlistId = wish.getWishlistId();*/
 

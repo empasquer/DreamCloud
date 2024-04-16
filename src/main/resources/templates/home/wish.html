@@ -53,7 +53,7 @@
                     <th:block th:if="${wish.wishIsReserved}">
 
                         <!-- Only allowed to unReserve if the session username is equal to the reservation username-->
-                        <th:block th:if="${wish.wishReservedByUsername == sessionUser}">
+                        <th:block th:if="${wish.getWishReservedBy().profileUsername == sessionUser}">
                         <form method="post" th:action="@{'/' + ${profileUsername} + '/unReserve-wish/wishlist/' + ${wishlistId} + '/wish/' + ${wish.wishId}}">
                            <input type="hidden" name="profileUsername" th:value="${profileUsername}">
                             <button type="submit" class="button small">
@@ -65,7 +65,7 @@
 
 
                         <!-- If wish reserved by another user display reserved-->
-                        <th:block th:unless="${wish.wishReservedByUsername == sessionUser}">
+                        <th:block th:unless="${wish.getWishReservedBy().profileUsername == sessionUser}">
                             <p class="button small">Reserved</p>
                         </th:block>
 
