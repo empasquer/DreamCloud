@@ -135,11 +135,12 @@ main section {
 /*Login because it doesnt work in the login css for some reason*/
 .formular .back-arrow-container {
     align-self: flex-start;
-    top: 10px;
-    left: 10px;
-    margin-top: -10%;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+/*    margin-top: -10%;
     margin-left: -10%;
-    margin-bottom: 10%;
+    margin-bottom: 10%;*/
 }
 
 .formular .back-arrow {
