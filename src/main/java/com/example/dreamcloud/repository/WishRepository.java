@@ -49,17 +49,21 @@ public class WishRepository {
     }
 
     public void createWish(String name, String description, double price, Optional<byte[]> wishPicture, int wishlistId) {
-        String query = "INSERT INTO wish(wish_name, wish_description, wish_price, wish_picture, wish_is_reserved, wishlist_id) VALUES (?,?,?,?,false,?);";
+        String query = "INSERT INTO wish(wish_name, wish_description, wish_price, wish_picture, wish_is_reserved, wishlist_id) VALUES (?,?,?,?,?,?);";
 
         // Convert the wishPicture to a byte array if exists
         byte[] pictureData = wishPicture.orElse(null);
 
-        jdbcTemplate.update(query, name, description, price, pictureData, wishlistId);
+        jdbcTemplate.update(query, name, description, price, pictureData, false, wishlistId);
     }
 
-    public void reserveWish(int wishId, boolean reserve) {
-        String query = "UPDATE wish set wish_is_reserved = ? where wish_id = ?";
-        jdbcTemplate.update(query,reserve,wishId);
+    public void reserveWish(String reservedByUsername, int wishId) {
+        String query = "UPDATE wish set wish_is_reserved = ?,  wish_reserved_by_username = ? where wish_id = ?";
+        jdbcTemplate.update(query,true, reservedByUsername, wishId);
+    }
+    public void unReserveWish( int wishId) {
+        String query = "UPDATE wish set wish_is_reserved = ?,  wish_reserved_by_username = ? where wish_id = ?";
+        jdbcTemplate.update(query,false, null, wishId);
     }
 
 

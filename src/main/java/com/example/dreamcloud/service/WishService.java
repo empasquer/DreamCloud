@@ -35,8 +35,11 @@ public class WishService {
         wishRepository.createWish(name, description, price, wishPicture, wishlistId);
     }
 
-    public void reserveWish(int wishId,boolean reserve) {
-        wishRepository.reserveWish(wishId, reserve);
+    public void reserveWish(String reservedByUsername, int wishId) {
+        wishRepository.reserveWish(reservedByUsername, wishId);
     }
 
+    public void unReserveWish( int wishId) {
+        wishRepository.unReserveWish(wishId);
+    }
 }

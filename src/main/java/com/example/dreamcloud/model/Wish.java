@@ -11,6 +11,7 @@ public class Wish {
     private byte[] wishPicture;
     private int wishlistId;
     private boolean wishIsReserved;
+    private String wishReservedByUsername;
 
     public Wish() {
     }
@@ -77,5 +78,13 @@ public class Wish {
 
     public void setWishIsReserved(boolean wishIsReserved) {
         this.wishIsReserved = wishIsReserved;
+    }
+
+    public String getWishReservedByUsername() {
+        return wishReservedByUsername;
+    }
+
+    public void setWishReservedByUsername(String wishReservedByUsername) {
+        this.wishReservedByUsername = wishReservedByUsername;
     }
 }

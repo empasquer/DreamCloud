@@ -31,6 +31,7 @@ CREATE TABLE wish (
                       wish_price double NOT NULL,
                       wish_picture LONGBLOB,
                       wish_is_reserved boolean,
+                      wish_reserved_by_username VARCHAR(255),
                       wishlist_id INT,
                       FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id) ON DELETE CASCADE
 );
@@ -48,16 +49,18 @@ INSERT INTO wishlist (wishlist_title, wishlist_description, profile_username) VA
                                                                                   ('Home Improvement', 'Items to improve my home', 'alice_smith');
 
 
-INSERT INTO wish (wish_name, wish_description, wish_price, wish_is_reserved, wishlist_id) VALUES
-                                                                                              ('Smartphone', 'iPhone 12 Pro', 6666.63, false,  1),
-                                                                                              ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, true, 1),
-                                                                                              ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, false, 2),
-                                                                                              ('Portable Charger', 'Anker PowerCore 10000', 209.93, true,  2),
-                                                                                              ('Books', 'Bestsellers for reading', 333.25, false, 3),
-                                                                                              ('Perfume', 'Chanel No. 5', 666.63, true, 3),
-                                                                                              ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, false, 4),
-                                                                                              ('Indoor Plants', 'Assorted indoor plants', 225.00, true,  4);
+INSERT INTO wish (wish_name, wish_description, wish_price, wish_is_reserved, wish_reserved_by_username,  wishlist_id) VALUES
+                                                                                                                          ('Smartphone', 'iPhone 12 Pro', 6666.63, false, null,  1),
+                                                                                                                          ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, true, 'alice_smith', 1),
+                                                                                                                          ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, false, null, 2),
+                                                                                                                          ('Portable Charger', 'Anker PowerCore 10000', 209.93, true, 'alice_smith',  2),
+                                                                                                                          ('Books', 'Bestsellers for reading', 333.25, false, null, 3),
+                                                                                                                          ('Perfume', 'Chanel No. 5', 666.63, true, 'john_doe', 3),
+                                                                                                                          ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, false, null,  4),
+                                                                                                                          ('Indoor Plants', 'Assorted indoor plants', 225.00, true, 'john_doe',  4);
 
 
 
+
+SELECT * FROM wish where wish_is_reserved = true;
 

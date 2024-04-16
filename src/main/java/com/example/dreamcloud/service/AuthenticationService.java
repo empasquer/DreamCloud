@@ -76,8 +76,6 @@ public class AuthenticationService {
         // Get an array of all the individually segments of the path:
         String[] segments = url.split("/");
 
-        System.out.println(segments[3]);
-
         // The username will always be the third segment
             return segments[3];
 
