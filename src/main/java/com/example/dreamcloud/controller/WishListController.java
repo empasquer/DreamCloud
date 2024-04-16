@@ -7,6 +7,7 @@ import com.example.dreamcloud.service.AuthenticationService;
 import com.example.dreamcloud.service.ProfileService;
 import com.example.dreamcloud.service.WishService;
 import com.example.dreamcloud.service.WishlistService;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,53 @@ public class WishListController {
         List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
         wishlist.setWishes((ArrayList<Wish>) wishes);
 
+
+
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishes", wishlist.getWishes());
 
         return "home/wishlist";
     }
+
+
+    @PostMapping("/{profileUsername}/wishlist/{wishlistId}/share")
+    public String openPopup(HttpSession session, HttpServletRequest request, Model model, @PathVariable String profileUsername, @PathVariable String wishlistId) {
+
+
+        // Check if user is logged in
+        boolean loggedIn = authenticationService.isUserLoggedIn(session);
+        if (!loggedIn) {
+            return "redirect:/login";
+        }
+
+
+        model.addAttribute(profileUsername);
+        model.addAttribute(wishlistId);
+        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(Integer.parseInt(wishlistId));
+        model.addAttribute(wishlist);
+
+
+        // Find link to share
+        String domain = request.getRequestURL().toString().split("/", 4)[2];
+        System.out.println(domain);
+        String shareLink = domain + "/" + profileUsername + "/wishlist/" + wishlistId;
+        System.out.println(shareLink);
+
+
+        model.addAttribute("shareLink", shareLink);
+
+
+        return "/home/share-popup";
+    }
+
+    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/close")
+    public String closePopup(@PathVariable String profileUsername, @PathVariable int wishlistId) {
+
+        // Redirect back to the original wishlist page
+        return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
+    }
+
+
     @GetMapping("/create_wishlist")
     public String createWishlist(Model model, HttpSession session) {
         boolean loggedIn = authenticationService.isUserLoggedIn(session);

@@ -1,0 +1,50 @@
+input {
+    background-color: #146C94;
+    color: #E1F0F6;
+    border-radius: 15px;
+    height: 50px;
+    width: 80%;
+    padding: 1rem;
+    border-style: none;
+}
+
+.wishlist-share {
+    font-size: x-large;
+}
+
+
+.share-banner-wrapper {
+    display : flex;
+    justify-content: space-between;
+    background-color: #19A7CE;
+    color: #E1F0F6;
+    border-radius: 15px 15px 0 0 ;
+    padding :2rem;
+}
+
+.share-wrapper {
+    color: #0e3e54;
+    padding: 2rem;
+}
+
+.share-forms-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.share {
+    min-height:20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    text-align: center;
+    padding: 3rem;
+}
+
+.share p {
+    padding-bottom: 2rem;
+}
+
+
+

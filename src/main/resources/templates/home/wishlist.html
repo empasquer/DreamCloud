@@ -37,6 +37,11 @@
                     <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
                 </form>
 
+
+                <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/share'}" method="post">
+                    <button type="submit" class="button small"><i class="fas fa-share"></i></button>
+                </form>
+
             </div>
             </th:block>
 

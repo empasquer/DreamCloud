@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Share '+ ${wishlist.wishlistTitle}"></title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/wish.css">
+    <link rel="stylesheet" href="/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+</head>
+<body>
+<div th:insert="~{home/header :: header}"></div>
+
+<main>
+    <section>
+        <article class="share-banner-wrapper">
+            <div>
+                <a th:href="@{'/'+${profileUsername} + '/wishlist/' + ${wishlist.wishlistId}}" class="button small"><i
+                        class="fas fa-arrow-left"></i></a>
+            </div>
+            <h1 th:text="'Share '+ ${wishlist.wishlistTitle}"></h1>
+            <div class="share-forms-wrapper">
+                <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/close'}" method="get">
+                    <input type="hidden" name="profileUsername" th:value="${profileUsername}">
+                    <input type="hidden" name="wishlistId" th:value="${wishlistId}">
+
+                    <button type="submit"  class="button small"><i class="fas fa-times"></i></button>
+                </form>
+            </div>
+        </article>
+        <article class="share">
+            <p>Here is the link to the wishlist you want to share:</p>
+                <input class="wishlist-share" type="text" th:value="${shareLink}">
+        </article>
+    </section>
+
+</main>
+<div th:insert="~{home/footer :: footer}"></div>
+
+
+</body>
+</html>
+
