@@ -30,6 +30,7 @@ CREATE TABLE wish (
                       wish_description VARCHAR(255),
                       wish_price double NOT NULL,
                       wish_picture LONGBLOB,
+                      wish_is_reserved boolean,
                       wishlist_id INT,
                       FOREIGN KEY (wishlist_id) REFERENCES wishlist(wishlist_id) ON DELETE CASCADE
 );
@@ -47,15 +48,15 @@ INSERT INTO wishlist (wishlist_title, wishlist_description, profile_username) VA
                                                                                   ('Home Improvement', 'Items to improve my home', 'alice_smith');
 
 
-INSERT INTO wish (wish_name, wish_description, wish_price, wishlist_id) VALUES
-                                                                            ('Smartphone', 'iPhone 12 Pro', 6666.63, 1),
-                                                                            ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, 1),
-                                                                            ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, 2),
-                                                                            ('Portable Charger', 'Anker PowerCore 10000', 209.93, 2),
-                                                                            ('Books', 'Bestsellers for reading', 333.25, 3),
-                                                                            ('Perfume', 'Chanel No. 5', 666.63, 3),
-                                                                            ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, 4),
-                                                                            ('Indoor Plants', 'Assorted indoor plants', 225.00, 4);
+INSERT INTO wish (wish_name, wish_description, wish_price, wish_is_reserved, wishlist_id) VALUES
+                                                                                              ('Smartphone', 'iPhone 12 Pro', 6666.63, false,  1),
+                                                                                              ('Wireless Headphones', 'Sony WH-1000XM4', 2449.34, true, 1),
+                                                                                              ('Travel Backpack', 'Osprey Farpoint 40', 1115.92, false, 2),
+                                                                                              ('Portable Charger', 'Anker PowerCore 10000', 209.93, true,  2),
+                                                                                              ('Books', 'Bestsellers for reading', 333.25, false, 3),
+                                                                                              ('Perfume', 'Chanel No. 5', 666.63, true, 3),
+                                                                                              ('Tool Set', 'Stanley 65 Piece Tool Kit', 599.92, false, 4),
+                                                                                              ('Indoor Plants', 'Assorted indoor plants', 225.00, true,  4);
 
 
 
