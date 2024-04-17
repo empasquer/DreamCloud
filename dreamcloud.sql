@@ -39,7 +39,7 @@ CREATE TABLE reservation (
                              wish_id INT,
                              profile_username VARCHAR(255),
                              FOREIGN KEY (wish_id) REFERENCES wish(wish_id) ON DELETE CASCADE,
-                             FOREIGN KEY (profile_username) REFERENCES profile(profile_username)
+                             FOREIGN KEY (profile_username) REFERENCES profile(profile_username) ON DELETE CASCADE
 );
 
 INSERT INTO profile (profile_firstname, profile_lastname, profile_username, profile_password) VALUES
