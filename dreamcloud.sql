@@ -1,9 +1,9 @@
-CREATE DATABASE IF NOT EXISTS dreamcloud;
-USE dreamcloud;
+CREATE DATABASE IF NOT EXISTS legendarydreamcloud;
+USE legendarydreamcloud;
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin123';
 GRANT USAGE ON *.* TO `admin`@`localhost`;
-GRANT SELECT, INSERT, UPDATE, DELETE ON dreamcloud.* TO 'admin'@`localhost`;
+GRANT SELECT, INSERT, UPDATE, DELETE ON legendarydreamcloud.* TO 'admin'@`localhost`;
 
 DROP TABLE IF EXISTS profile;
 CREATE TABLE profile (
