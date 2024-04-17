@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="stylesheet" type="text/css" href="/create_wishlist.css">
     <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
@@ -15,6 +16,12 @@
 <main >
 
     <section class="formular">
+
+        <div class="back-arrow-container">
+            <a th:href="@{'/'+${profile.profileUsername}+'/wishlist/'+${wishlist.wishlistId}}" class="small button">
+                <i class="fas fa-arrow-left"></i></a>
+        </div>
+
         <h1>Edit your wishlist</h1>
         <form th:action="@{'/' + ${profileUsername} + '/edit-wishlist/' + ${wishlistId}}" method="post">
             <div>
