@@ -90,9 +90,9 @@ public class WishListController {
 
 
         // Find link to share
-        String domain = request.getRequestURL().toString().split("/", 4)[2];
+        String domain = request.getServerName();
         System.out.println(domain);
-        String shareLink = domain + "/" + profileUsername + "/wishlist/" + wishlistId;
+        String shareLink = "http://" + domain + ":8080/" + profileUsername + "/wishlist/" + wishlistId;
         System.out.println(shareLink);
 
 
