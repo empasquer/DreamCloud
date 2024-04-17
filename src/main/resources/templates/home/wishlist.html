@@ -21,10 +21,13 @@
                         class="fas fa-arrow-left"></i></a>
             </div>
 
-            <div >
+            <div class="wishlist-title">
                 <h1 th:text="${wishlist.wishlistTitle}"></h1>
                 <p th:text="${wishlist.wishlistDescription}"></p>
             </div>
+
+            <!--Only allowed to edit or delete wishlist if you own the profile -->
+
             <th:block th:if="${isAuthorized}">
             <div class="wishlist-forms-wrapper">
                 <form  th:action="@{'/' + ${profileUsername} +'/edit-wishlist/' + ${wishlist.getWishlistId()}}" method="get">
@@ -62,8 +65,7 @@
             <ul class="wishes">
                 <li class="wish" th:each="wish : ${wishes}" >
 
-                    <a th:href="@{/{profileUsername}/wishlist/{wishlistId}(wishlistId = ${wishlistId})/wish/{wishId}(profileUsername=${profileUsername},wishId=${wish.wishId})}">
-                        <h3 class="wish-name" th:text="${wish.wishName}"></h3>
+                    <a th:href="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/wish/' + ${wish.wishId}}">      <h3 class="wish-name" th:text="${wish.wishName}"></h3>
 
                         <!-- Check if wish has a picture, display it if available -->
                         <th:block th:if="${wish.wishPictureAsBase64 != null}">

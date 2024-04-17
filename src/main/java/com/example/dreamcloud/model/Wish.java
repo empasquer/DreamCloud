@@ -1,7 +1,6 @@
 package com.example.dreamcloud.model;
 
 import java.util.Base64;
-import java.util.Optional;
 
 public class Wish {
 
@@ -11,6 +10,8 @@ public class Wish {
     private Double wishPrice;
     private byte[] wishPicture;
     private int wishlistId;
+    private boolean wishIsReserved;
+    private Profile wishReservedBy;
 
     public Wish() {
     }
@@ -69,5 +70,21 @@ public class Wish {
         } else {
             return null;
         }
+    }
+
+    public boolean isWishIsReserved() {
+        return wishIsReserved;
+    }
+
+    public void setWishIsReserved(boolean wishIsReserved) {
+        this.wishIsReserved = wishIsReserved;
+    }
+
+    public Profile getWishReservedBy() {
+        return wishReservedBy;
+    }
+
+    public void setWishReservedBy(Profile wishReservedBy) {
+        this.wishReservedBy = wishReservedBy;
     }
 }

@@ -69,9 +69,12 @@
 }
 .wishlist-forms-wrapper {
     display: flex;
+    margin-left: -5%;
+
 }
 .wishlist-forms-wrapper > * {
     margin: 5px;
+
 }
 
 
@@ -85,4 +88,12 @@
 .wish-price {
     font-size: x-large;
 }
-/*wishes end*/
+.wishlist-title {
+    flex-grow: 1; /* Allow title to grow */
+    flex-shrink: 1; /* Allow title to shrink */
+    text-align: center; /* Center the title */
+    margin-left: -3%;
+}
+
+
+
