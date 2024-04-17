@@ -20,7 +20,7 @@ CREATE TABLE wishlist (
                           wishlist_title VARCHAR(255) NOT NULL,
                           wishlist_description VARCHAR(255),
                           profile_username VARCHAR(255),
-                          FOREIGN KEY (profile_username) REFERENCES profile(profile_username)
+                          FOREIGN KEY (profile_username) REFERENCES profile(profile_username) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS wish;
