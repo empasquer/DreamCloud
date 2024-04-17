@@ -99,7 +99,7 @@ public class WishListController {
         model.addAttribute("shareLink", shareLink);
 
 
-        return "/home/share-popup";
+        return "home/share-popup";
     }
 
 /*
