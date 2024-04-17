@@ -96,10 +96,10 @@ public class WishController {
 
             model.addAttribute("wish", wish);
 
-            return "/home/wish";
+            return "home/wish";
         } else {
             // if wish not found go back to wishlist
-            return "redirect:/home/" + profileUsername + "/wishlist/" + wishlistId;
+            return "redirect:home/" + profileUsername + "/wishlist/" + wishlistId;
         }
 
     }
