@@ -103,6 +103,11 @@ footer ul {
     width: 50vw;
 }
 
+.footer-link {
+   color: #E1F0F6;
+    text-decoration: underline;
+}
+
 footer p {
     color: #E1F0F6;
 }
