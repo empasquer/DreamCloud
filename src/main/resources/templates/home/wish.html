@@ -18,9 +18,11 @@
                 <a th:href="@{'/'+${profileUsername} + '/wishlist/' + ${wish.getWishlistId()}}" class="button small"><i
                         class="fas fa-arrow-left"></i></a>
             </div>
+
+            <!--Only allowed to edit or delete if you own the profile -->
             <th:block th:if="${isAuthorized}">
             <div class="wish-forms-wrapper">
-                <form  method="post">
+                <form  th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wish.wishlistId} + '/wish/' + ${wish.wishId} + '/edit_wish'}" method="get">
                     <button type="submit" class="button small"><i class="fas fa-pen"></i></button>
                 </form>
 
@@ -29,9 +31,48 @@
                     <p id="confirmDeleteMessage">Are you sure? Click on the red button to confirm.</p>
                     <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
                 </form>
-
             </div>
             </th:block>
+
+            <!--Only allowed to reserve a wish if you don't own the profile-->
+            <th:block th:unless="${isAuthorized}">
+                <div class="wish-forms-wrapper">
+
+                    <!--Display reserve if wish is not reserved  and set wishIsReserved to true-->
+                    <th:block th:unless="${wish.wishIsReserved}">
+                    <form method="post" th:action="@{'/' + ${profileUsername} + '/reserve-wish/wishlist/' + ${wishlistId} + '/wish/' + ${wish.wishId}}">
+                        <input type="hidden" name="profileUsername" th:value="${profileUsername}">
+                        <button type="submit" class="button small">
+                            <i class="fas fa-check"></i>
+                            Reserve
+                        </button>
+                    </form>
+                    </th:block>
+
+                    <!--Display Cancel reservation if wish is  reserved, and set wishIsReserved to false-->
+                    <th:block th:if="${wish.wishIsReserved}">
+
+                        <!-- Only allowed to unReserve if the session username is equal to the reservation username-->
+                        <th:block th:if="${wish.getWishReservedBy().profileUsername == sessionUser}">
+                        <form method="post" th:action="@{'/' + ${profileUsername} + '/unReserve-wish/wishlist/' + ${wishlistId} + '/wish/' + ${wish.wishId}}">
+                           <input type="hidden" name="profileUsername" th:value="${profileUsername}">
+                            <button type="submit" class="button small">
+                                <i class="fas fa-check"></i>
+                                Cancel reservation
+                            </button>
+                        </form>
+                    </th:block>
+
+
+                        <!-- If wish reserved by another user display reserved-->
+                        <th:block th:unless="${wish.getWishReservedBy().profileUsername == sessionUser}">
+                            <p class="button small">Reserved</p>
+                        </th:block>
+
+                    </th:block>
+                </div>
+            </th:block>
+
         </article>
         <article class="wish-wrapper">
             <div class="wish">

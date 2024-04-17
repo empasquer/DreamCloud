@@ -123,8 +123,9 @@ public class WishListController {
     }
 
     @PostMapping("/create_wishlist")
-    public String createWishlist(@RequestParam String title, @RequestParam String description, HttpSession session){
+    public String createWishlist(Model model, @RequestParam String title, @RequestParam String description, HttpSession session){
         String profileUsername = String.valueOf(session.getAttribute("username"));
+        /*model.addAttribute(profileUsername);*/
         wishlistService.createWishlist(title,description, profileUsername);
         return "redirect:/"+ profileUsername + "/profile";
 }
@@ -135,5 +136,47 @@ public class WishListController {
         wishlistService.deleteWishlist(wishlistId);
         return "redirect:/"+ profileUsername + "/profile";
     }
+
+    @GetMapping("/{profileUsername}/edit-wishlist/{wishlistId}")
+    public String showExistingWishlist(@PathVariable int wishlistId, Model model, HttpSession session) {
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        Profile profile = authenticationService.getLoggedInUserProfile();
+        model.addAttribute("profile", profile);
+
+        Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
+        model.addAttribute("wishlist", wishlist);
+
+        return "home/edit_wishlist";
+    }
+
+
+    @PostMapping("/{profileUsername}/edit-wishlist/{wishlistId}")
+    public String editWishlist(@PathVariable int wishlistId,
+                               @RequestParam String title, @RequestParam String description,
+                               HttpSession session) {
+        boolean isLoggedIn = authenticationService.isUserLoggedIn(session);
+        if (!isLoggedIn) {
+            return "redirect:/login";
+        }
+
+        //Bliver nødt til at gøre det sådan da den eller sætter username til null
+        String profileUsername = (String) session.getAttribute("username");
+        if (profileUsername == null) {
+            return "redirect:/login";
+        }
+
+        wishlistService.editWishlist(profileUsername, wishlistId, title, description);
+        return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
+    }
+
+
+
+
+
+
 
 }

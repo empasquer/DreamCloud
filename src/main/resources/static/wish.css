@@ -31,6 +31,7 @@
     height: 300px;
     object-fit: cover; /* Ensure the image covers the entire container */
     object-position: center; /* Center the image within the container */
+    border-radius: 15px;
 }
 .wish-name { grid-area: 1 / 2 / 2 / 3; }
 
@@ -49,6 +50,14 @@
 .wish-forms-wrapper {
     display: flex;
     gap: 1rem;
+
+}
+.wish-forms-wrapper button {
+    font-family:  Rubik, sans-serif;
+    color:  #0e3e54 ;
+}
+.reserved {
+    background-color: gray;
 }
 
 

@@ -21,6 +21,7 @@ public class AuthenticationService {
         if (profile != null) {
             if (password.equals(profile.getProfilePassword())) {
                 session.setAttribute("loggedIn", true); // Set "loggedIn" attribute in session
+                session.setAttribute("username", username); // Set "username" attribute in session
                 return true; // Authentication successful
             } else {
                 return false; // Password mismatch
@@ -75,8 +76,6 @@ public class AuthenticationService {
 
         // Get an array of all the individually segments of the path:
         String[] segments = url.split("/");
-
-        System.out.println(segments[3]);
 
         // The username will always be the third segment
             return segments[3];

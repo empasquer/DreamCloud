@@ -32,4 +32,8 @@ public class WishlistService {
     public void deleteWishlist(int wishlistId) {
          wishlistRepository.deleteWishlist(wishlistId);
     }
+
+    public void editWishlist( String profileUsername, int wishlistId, String title, String description) {
+        wishlistRepository.editWishlist(profileUsername, wishlistId, title, description);
+    }
 }

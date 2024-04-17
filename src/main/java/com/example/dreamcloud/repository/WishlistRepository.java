@@ -43,4 +43,11 @@ public class WishlistRepository {
         String query = "DELETE FROM wishlist WHERE wishlist_id = ?";
         jdbcTemplate.update(query,wishlistId);
     }
+
+    public void editWishlist(String profileUsername, int wishlistId, String title, String description) {
+        String query = "UPDATE wishlist SET wishlist_title = ?, wishlist_description = ? WHERE wishlist_id = ? AND profile_username = ?";
+        jdbcTemplate.update(query, title, description, wishlistId, profileUsername);
+    }
+
+
 }
