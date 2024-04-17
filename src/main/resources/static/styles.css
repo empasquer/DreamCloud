@@ -22,7 +22,6 @@ ul {
 }
 
 main {
-/*height is all height minus height header*/
     min-height: calc(50vh);
 }
 
