@@ -78,12 +78,12 @@ public class WishRepository {
     }
 
     public void createWish(String name, String description, double price, Optional<byte[]> wishPicture, int wishlistId) {
-        String query = "INSERT INTO wish(wish_name, wish_description, wish_price, wish_picture, wish_is_reserved, wishlist_id) VALUES (?,?,?,?,?,?);";
+        String query = "INSERT INTO wish(wish_name, wish_description, wish_price, wish_picture, wishlist_id) VALUES (?,?,?,?,?);";
 
         // Convert the wishPicture to a byte array if exists
         byte[] pictureData = wishPicture.orElse(null);
 
-        jdbcTemplate.update(query, name, description, price, pictureData, false, wishlistId);
+        jdbcTemplate.update(query, name, description, price, pictureData, wishlistId);
     }
 
     public void reserveWish(String reservedByUsername, int wishId) {
