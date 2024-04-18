@@ -1,6 +1,4 @@
-
 /* wish page */
-
 .wish-banner-wrapper {
     display : flex;
     justify-content: space-between;
@@ -52,10 +50,7 @@
     gap: 1rem;
 
 }
-.wish-forms-wrapper button {
-    font-family:  Rubik, sans-serif;
-    color:  #0e3e54 ;
-}
+
 .reserved {
     background-color: gray;
 }

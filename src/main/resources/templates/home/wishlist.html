@@ -27,7 +27,6 @@
             </div>
 
             <!--Only allowed to edit or delete wishlist if you own the profile -->
-
             <th:block th:if="${isAuthorized}">
             <div class="wishlist-forms-wrapper">
                 <form  th:action="@{'/' + ${profileUsername} +'/edit-wishlist/' + ${wishlist.getWishlistId()}}" method="get">
@@ -40,23 +39,18 @@
                     <button type="submit" id="confirmDeleteButton" class="button small" style="background-color: red; display: none;"><i class="fas fa-trash"></i></button>
                 </form>
 
-
                 <form th:action="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlistId} + '/share'}" method="post">
                     <button type="submit" class="button small"><i class="fas fa-share"></i></button>
                 </form>
-
             </div>
             </th:block>
-
         </article>
 
-        </article>
         <article class="wishes-wrapper">
             <div class="h2-wrapper">
                 <h2 th:text="${wishlist.wishlistTitle} +  '´s wishes'"></h2>
                 <th:block th:if="${isAuthorized}">
                     <a th:href="@{ '/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/create_wish'}">
-
                         <button class="button small"><i class="fas fa-plus"></i></button>
                     </a>
                 </th:block>
@@ -64,7 +58,6 @@
 
             <ul class="wishes">
                 <li class="wish" th:each="wish : ${wishes}" >
-
                     <a th:href="@{'/' + ${profileUsername} + '/wishlist/' + ${wishlist.wishlistId} + '/wish/' + ${wish.wishId}}">      <h3 class="wish-name" th:text="${wish.wishName}"></h3>
 
                         <!-- Check if wish has a picture, display it if available -->
@@ -80,11 +73,9 @@
                         </th:block>
 
                         <p class="wish-price" th:text="${wish.wishPrice} + ',- DKK'"></p>
-
                     </a>
                 </li>
             </ul>
-
         </article>
     </section>
 

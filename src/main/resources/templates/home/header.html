@@ -8,6 +8,7 @@
     <ul>
       <li><a href="https://github.com/empasquer/DreamCloud" target="_blank">See project source</a></li>
       <li><a href="https://www.ikea.com/" target="_blank">Get inspired</a></li>
+
       <!-- Conditional : if profile is not null, and if profile is null -->
       <li class="button" th:if="${loggedIn}">
         <a th:href="@{/{username}/profile(username=${profile.profileUsername})}" th:text="Profile">Profile</a>
@@ -15,6 +16,7 @@
       <li class="button" th:unless="${profile}">
         <a th:href="@{/create_profile}">Profile</a>
       </li>
+
       <!-- Login/Logout button -->
       <li class="button" >
         <span th:if="${loggedIn}" action="/logout" method="post">

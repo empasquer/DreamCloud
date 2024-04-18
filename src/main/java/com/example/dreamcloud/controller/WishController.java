@@ -27,8 +27,10 @@ import java.util.Optional;
 public class WishController {
     @Autowired
     WishlistService wishlistService;
+
     @Autowired
     WishService wishService;
+
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -36,7 +38,6 @@ public class WishController {
     ProfileService profileService;
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}")
-
     public String wish(@PathVariable int wishId, Model model, HttpSession session,
                        @PathVariable String profileUsername, HttpServletRequest request,
                        @PathVariable String wishlistId) {
@@ -47,73 +48,40 @@ public class WishController {
         if (!isLoggedIn) {
             return "redirect:/login";
         }
-
         model.addAttribute("loggedIn", isLoggedIn);
         model.addAttribute("sessionUser", session.getAttribute("username"));
 
-
-        // CHeck if user is authorized on this page
         boolean isAuthorized = authenticationService.checkIfAuthorized(request);
         model.addAttribute("isAuthorized", isAuthorized);
 
-
-        // Retrieve profile information
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        // Retrieve wishlists form profile
         List<Wishlist> wishlists = wishlistService.getWishlistsFromProfileUsername(profile.getProfileUsername());
         profile.setWishlists((ArrayList<Wishlist>) wishlists);
 
-
-        // Retrieve wish information
+        //Retrieve wish information
         Wish wish = wishService.getWishFromWishId(wishId);
         System.out.println(session.getAttribute("username"));
         System.out.println(wish.getWishReservedBy());
         System.out.println(String.valueOf(session.getAttribute("username")).equals(wish.getWishReservedBy()));
 
-        /*int wishlistId = wish.getWishlistId();*/
-
         if (wish != null) {
-            // Check if the wish belongs to any of the user's wishlists
-          /*  boolean wishBelongsToUser = false;
-            for (Wishlist wishlist : profile.getWishlists()) {
-                for (Wish userWish : wishlist.getWishes()) {
-                    if (userWish.getWishId() == wishId) {
-                        System.out.println("Wish belongs to user in one of the wishlists");
-                        wishlistId = wishlist.getWishlistId();
-                        wishBelongsToUser = true;
-                        break;
-                    }
-                }
-            }
-            if (wishBelongsToUser) {
-                model.addAttribute("wish", wish);
-                return "/home/wish"; // Return the name of your wish details template
-            } else {
-                return "redirect:/home/wishlist/" + wishlistId;
-            }*/
-
             model.addAttribute("wish", wish);
-
             return "home/wish";
         } else {
-            // if wish not found go back to wishlist
             return "redirect:home/" + profileUsername + "/wishlist/" + wishlistId;
         }
-
     }
 
     @PostMapping("/delete-wish/{wishId}")
     public String deleteWish(@PathVariable int wishId, HttpSession session) {
-
-        // Retrieve wish information
+        //Retrieve wish information
         Wish wish = wishService.getWishFromWishId(wishId);
         int wishlistId = wish.getWishlistId();
 
         wishService.deleteWishFromWishId(wishId);
         System.out.println("Wish is now deleted");
-
         String profileUsername = session.getAttribute("username").toString();
 
         return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
@@ -127,26 +95,19 @@ public class WishController {
 
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
-        // Retrieve profile information
         Profile profile = authenticationService.getLoggedInUserProfile();
         model.addAttribute("profile", profile);
 
-        //Retrieve wishlist information
         Wishlist wishlist = wishlistService.getWishlistFromWishlistId(wishlistId);
         model.addAttribute("wishlist", wishlist);
 
         return "home/create_wish";
     }
 
-
     @PostMapping("/{profileUsername}/wishlist/{wishlistId}/create_wish")
-    public String createWish(@PathVariable int wishlistId,
-                             @PathVariable String profileUsername,
-                             @RequestParam String wishName,
-                             @RequestParam String wishDescription,
-                             @RequestParam double wishPrice,
-                             @RequestParam("wishPicture") MultipartFile wishPicture,
-                             HttpSession session) {
+    public String createWish(@PathVariable int wishlistId, @PathVariable String profileUsername,
+                             @RequestParam String wishName, @RequestParam String wishDescription,
+                             @RequestParam double wishPrice, @RequestParam("wishPicture") MultipartFile wishPicture) {
         Profile profile = profileService.getProfileFromUsername(profileUsername);
 
         byte[] pictureData = null;
@@ -154,20 +115,17 @@ public class WishController {
             try {
                 pictureData = wishPicture.getBytes();
             } catch (IOException e) {
-                // Handle IOException
                 return "redirect:/error";
             }
         }
 
-        // Call the createWish method from WishService to create the wish
         wishService.createWish(wishName, wishDescription, wishPrice, Optional.ofNullable(pictureData), wishlistId);
-
-        // Redirect to the wishlist page after creating the wish
         return "redirect:/" + profile.getProfileUsername() + "/wishlist/" + wishlistId;
     }
 
     @PostMapping("/{profileUsername}/reserve-wish/wishlist/{wishlistId}/wish/{wishId}")
-    public String reserveWish(@PathVariable String profileUsername, @PathVariable String wishlistId, @PathVariable String wishId, boolean reserve, HttpSession session) {
+    public String reserveWish(@PathVariable String profileUsername, @PathVariable String wishlistId,
+                              @PathVariable String wishId, HttpSession session) {
         int wishIdInt = Integer.parseInt(wishId); // Convert wishId to integer
         String reversedByUsername = String.valueOf(session.getAttribute("username"));
         System.out.println("session: " + reversedByUsername);
@@ -177,14 +135,16 @@ public class WishController {
     }
 
     @PostMapping("/{profileUsername}/unReserve-wish/wishlist/{wishlistId}/wish/{wishId}")
-    public String unReserveWish(@PathVariable String profileUsername, @PathVariable String wishlistId, @PathVariable String wishId, boolean reserve, HttpSession session) {
+    public String unReserveWish(@PathVariable String profileUsername, @PathVariable String wishlistId,
+                                @PathVariable String wishId) {
         int wishIdInt = Integer.parseInt(wishId);
         wishService.unReserveWish(wishIdInt);
         return "redirect:/" + profileUsername + "/wishlist/" + wishlistId + "/wish/" + wishId;
     }
 
     @GetMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}/edit_wish")
-    public String showExistingWish(@PathVariable int wishId, @PathVariable int wishlistId, Model model, HttpSession session) {
+    public String showExistingWish(@PathVariable int wishId, @PathVariable int wishlistId,
+                                   Model model, HttpSession session) {
 
         if (!authenticationService.isUserLoggedIn(session)) {
             return "redirect:/login";
@@ -203,13 +163,9 @@ public class WishController {
     }
 
     @PostMapping("/{profileUsername}/wishlist/{wishlistId}/wish/{wishId}/edit_wish")
-    public String editWish(@PathVariable int wishlistId,
-                           @PathVariable int wishId,
-                           @RequestParam String wishName,
-                           @RequestParam String wishDescription,
-                           @RequestParam double wishPrice,
-                           @RequestParam("wishPicture") MultipartFile wishPicture,
-                           HttpSession session) {
+    public String editWish(@PathVariable int wishlistId, @PathVariable int wishId, @RequestParam String wishName,
+                           @RequestParam String wishDescription, @RequestParam double wishPrice,
+                           @RequestParam("wishPicture") MultipartFile wishPicture, HttpSession session) {
 
         if (!authenticationService.isUserLoggedIn(session)) {
             return "redirect:/login";

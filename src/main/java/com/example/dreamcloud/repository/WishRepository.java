@@ -28,7 +28,6 @@ public class WishRepository {
         return jdbcTemplate.query(query, rowMapper, wishlistId);
     }
 
-
     public Wish getWishFromWishId(int wishId) {
         String query = "SELECT * FROM wish w\n" +
                 "LEFT JOIN reservation r ON w.wish_id = r.wish_id\n" +
@@ -61,20 +60,9 @@ public class WishRepository {
         });
     }
 
-
     public void deleteWishFromWishId(int wishId) {
         String query = "DELETE FROM wish WHERE wish_id = ?;";
         jdbcTemplate.update(query, wishId);
-    }
-
-// is this being used?
-    public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
-        String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
-
-        //Convert the picture to a byte array if exists
-        byte[] pictureData = profilePicture.orElse(null);
-
-        jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
     }
 
     public void createWish(String name, String description, double price, Optional<byte[]> wishPicture, int wishlistId) {
@@ -91,13 +79,10 @@ public class WishRepository {
         jdbcTemplate.update(query, wishId, reservedByUsername);
     }
 
-
     public void unReserveWish( int wishId) {
         String query = "DELETE FROM reservation where wish_id  =?";
         jdbcTemplate.update(query, wishId);
     }
-
-
 
     public void editWish(int wishId, String name, String description, double price, Optional<byte[]> wishPicture) {
         String query = "UPDATE wish SET wish_name = ?, wish_description = ?, wish_price = ?, wish_picture = ? WHERE wish_id = ?";

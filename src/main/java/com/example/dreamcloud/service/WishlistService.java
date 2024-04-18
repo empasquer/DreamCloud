@@ -13,10 +13,6 @@ public class WishlistService {
     @Autowired
     WishlistRepository wishlistRepository;
 
-    public List<Wishlist> getWishlists() {
-        return wishlistRepository.getWishlists();
-    }
-
     public Wishlist getWishlistFromWishlistId(int wishlistId) {
         return wishlistRepository.getWishlistFromWishlistId(wishlistId);
     }
