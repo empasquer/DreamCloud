@@ -63,8 +63,6 @@ public class WishListController {
         List<Wish> wishes = wishService.getWishesFromWishListId(wishlistId);
         wishlist.setWishes((ArrayList<Wish>) wishes);
 
-
-
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishes", wishlist.getWishes());
 
@@ -74,8 +72,6 @@ public class WishListController {
 
     @PostMapping("/{profileUsername}/wishlist/{wishlistId}/share")
     public String openPopup(HttpSession session, HttpServletRequest request, Model model, @PathVariable String profileUsername, @PathVariable String wishlistId) {
-
-
         // Check if user is logged in
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         if (!loggedIn) {
@@ -101,16 +97,6 @@ public class WishListController {
 
         return "home/share-popup";
     }
-
-/*
-    @GetMapping("/{profileUsername}/wishlist/{wishlistId}/close")
-    public String closePopup(@PathVariable String profileUsername, @PathVariable int wishlistId) {
-
-        // Redirect back to the original wishlist page
-        return "redirect:/" + profileUsername + "/wishlist/" + wishlistId;
-    }
-*/
-
 
     @GetMapping("/create_wishlist")
     public String createWishlist(Model model, HttpSession session) {

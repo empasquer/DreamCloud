@@ -14,11 +14,6 @@ public class WishService {
     @Autowired
     WishRepository wishRepository;
 
-
-    public List<Wish> getWishes() {
-        return wishRepository.getWishes();
-    }
-
     public List<Wish> getWishesFromWishListId(int wishlistId) {
         return wishRepository.getWishesFromWishlistId(wishlistId);
     }

@@ -27,26 +27,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model, HttpSession session ){
-        //for the header
         boolean loggedIn = authenticationService.isUserLoggedIn(session);
         model.addAttribute("loggedIn", loggedIn);
         Profile profile = authenticationService.getLoggedInUserProfile();
-        model.addAttribute("profile", profile); // Add the profile attribute to the model
+        model.addAttribute("profile", profile);
         return "home/index";
     }
-
-
-    /* Testing page */
-    @GetMapping("/tests")
-    public String tests(Model model) {
-        model.addAttribute("profiles", profileService.getProfiles());
-        model.addAttribute("wishlists", wishlistService.getWishlists());
-        model.addAttribute("wishes", wishService.getWishes());
-
-
-        return "home/tests";
-    }
-
-
 
 }

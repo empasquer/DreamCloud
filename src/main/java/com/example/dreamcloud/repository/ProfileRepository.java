@@ -16,12 +16,6 @@ public class ProfileRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<Profile> getProfiles() {
-        String query = "SELECT * FROM profile;";
-        RowMapper<Profile> rowMapper = new BeanPropertyRowMapper<>(Profile.class);
-        return jdbcTemplate.query(query, rowMapper);
-    }
-
     public void createProfile( String profileUsername, String profileFirstName, String profileLastName, String profilePassword, Optional<byte[]> profilePicture) {
         String query = "INSERT INTO profile(profile_username, profile_firstname, profile_lastname, profile_password, profile_picture) VALUES (?,?,?,?,?)";
 
@@ -30,7 +24,6 @@ public class ProfileRepository {
 
         jdbcTemplate.update(query, profileUsername, profileFirstName, profileLastName, profilePassword, pictureData);
     }
-
 
     public Profile getProfileFromUsername(String profileUsername) {
         String query = "SELECT * FROM profile WHERE profile_username = ?";
@@ -54,7 +47,5 @@ public class ProfileRepository {
         byte[] pictureData = profilePicture.orElse(null);
         jdbcTemplate.update(query, profileFirstName, profileLastName, profilePassword, pictureData, profileUsername);
     }
-
-
 
 }

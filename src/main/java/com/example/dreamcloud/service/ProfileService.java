@@ -13,10 +13,6 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public List<Profile> getProfiles() {
-        return profileRepository.getProfiles();
-    }
-
     public Profile getProfileFromUsername(String profileUsername) {
         return profileRepository.getProfileFromUsername(profileUsername);
     }
@@ -26,10 +22,8 @@ public class ProfileService {
         Profile existingProfile = profileRepository.getProfileFromUsername(profileUsername);
 
         if (existingProfile != null) {
-            // Username is taken, return a message indicating so
             return "Username taken";
         } else {
-            // Proceed with creating the new profile
             profileRepository.createProfile(profileUsername, profileFirstname, profileLastName, profilePassword, profilePicture);
             return "Profile created successfully";
         }

@@ -13,11 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LogoutController {
 
     @GetMapping
-    public String logout(HttpServletRequest request, SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
-        request.getSession().invalidate(); // Invalidate the session
+    public String logout(HttpServletRequest request, SessionStatus sessionStatus,
+                         RedirectAttributes redirectAttributes) {
+        request.getSession().invalidate();
         sessionStatus.setComplete();
+
         //I know why this isn't shown anywhere, I haven't called it in the HTML
         redirectAttributes.addFlashAttribute("logoutMessage", "You have been logged out.");
-        return "redirect:/login"; // Redirect to the login page
+        return "redirect:/login";
     }
 }

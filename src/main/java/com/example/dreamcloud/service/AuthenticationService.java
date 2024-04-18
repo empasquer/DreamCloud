@@ -15,7 +15,7 @@ public class AuthenticationService {
     @Autowired
     private HttpSession session;
 
-    // basically just checks if the info matches the database
+    //basically just checks if the info matches the database
     public boolean authenticateUser(String username, String password) {
         Profile profile = profileRepository.getProfileFromUsername(username);
         if (profile != null) {
